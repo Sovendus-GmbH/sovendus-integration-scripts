@@ -26,6 +26,14 @@ To run linting and tests, use:
 yarn lint
 ```
 
+## Developer preview
+
+To test your changes in a real environment, you can use the `dev` script. This will run the nextjs based preview server and watch for changes in the source code.
+
+```bash
+yarn dev
+```
+
 ## Publishing
 
 1. Open a pull request to the main repository
