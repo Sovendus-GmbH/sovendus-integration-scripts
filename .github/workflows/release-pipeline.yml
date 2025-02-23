@@ -1,17 +1,19 @@
-name: Release Pipeline
+name: Build and Release Pipeline
 
 on:
   push:
     branches:
       - main
-      - dev
   pull_request:
     branches:
       - main
-      - dev
+  create:
+    tags:
+      - "*"
 
 jobs:
-  ts_test:
+  test:
+    if: "!startsWith(github.ref, 'refs/tags/')"
     runs-on: ubuntu-latest
 
     steps:
@@ -24,16 +26,17 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: yarn setup
-        working-directory: ./ts
+        run: yarn install
+
 
       - name: Run linter
         run: yarn lint
-        working-directory: ./ts
+
+      # - name: Run tests
+      #   run: yarn test
 
       - name: Build package
         run: yarn build
-        working-directory: ./ts
 
   publish-npm:
     if: startsWith(github.ref, 'refs/tags/')
@@ -50,100 +53,26 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
-        working-directory: ./ts
         run: yarn install
 
+      - name: Run linter
+        run: yarn lint
+
+      # - name: Run tests
+      #   run: yarn test
+
+      - name: Build package
+        run: yarn build
+
       - name: Install Snyk CLI
-        working-directory: ./ts
         run: npm install -g snyk
 
-      - name: Snyk Monitor Multiple Lock Files
-        working-directory: ./ts
-        run: |
-          # Monitor root yarn.lock
-          snyk monitor --org=${{ secrets.SNYK_ORG_KEY }} --project-name="/github/${{ github.repository }}/root" --file=yarn.lock || true
-
-          # Monitor lock files in subdirectories
-          find . -name "yarn.lock" -not -path "./node_modules/*" -exec dirname {} \; | while read dir; do
-            snyk monitor --org=${{ secrets.SNYK_ORG_KEY }} \
-              --project-name="/github/${{ github.repository }}${dir#.}" \
-              --file="$dir/yarn.lock" || true
-          done
+      - name: Run Snyk
+        run: snyk monitor --org=${{ secrets.SNYK_ORG_KEY }} --project-name="/github/${{ github.repository }}" --file=yarn.lock
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-      # - name: Publish integration-page-scripts to npm
-      #   working-directory: ./ts/integration-page-scripts
-      #   run: npm publish
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Publish integration-settings-ui to npm
-        working-directory: ./ts/integration-settings-ui
+      - name: Publish to npm
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Publish integration-types to npm
-        working-directory: ./ts/integration-types
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-  php_checks:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "7.4"
-          tools: composer, phpcs, phpstan
-          coverage: none
-
-      - name: Install PHPCompatibility and PHP_CodeSniffer
-        working-directory: ./php
-        run: |
-          composer global require "squizlabs/php_codesniffer"
-          composer global require "phpcompatibility/php-compatibility"
-
-          # Find PHPCS path
-          PHPCS_PATH=$(composer global config bin-dir --absolute)/phpcs
-
-          # Find PHPCompatibility path
-          PHP_COMPATIBILITY_PATH=$(composer global config home)/vendor/phpcompatibility/php-compatibility
-
-          # Register PHPCompatibility with PHPCS
-          $PHPCS_PATH --config-set installed_paths $PHP_COMPATIBILITY_PATH
-
-          # Verify installation
-          $PHPCS_PATH -i
-
-      - name: Run PHP 7.0 Compatibility Check
-        working-directory: ./php
-        run: |
-          ~/.composer/vendor/bin/phpcs --standard=PHPCompatibility --runtime-set testVersion 7.0-7.0 . || exit 1
-
-      - name: Lint PHP Files
-        working-directory: ./php
-        run: |
-          find . -name "*.php" -print0 | xargs -0 -n1 php -l
-        continue-on-error: false
-
-      - name: Install PHPStan for Static Analysis
-        working-directory: ./php
-        run: |
-          composer require --dev phpstan/phpstan
-          vendor/bin/phpstan analyse -c phpstan.neon || exit 1
-
-      - name: Upload PHPCompatibility Report if issues exist
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: PHPCompatibility-Report
-          path: phpcs.xml
