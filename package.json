@@ -1,6 +1,6 @@
 {
   "name": "sovendus-integration-scripts",
-  "version": "3.3.21",
+  "version": "3.3.22",
   "license": "GPL-3.0-only",
   "private": false,
   "description": "Sovendus Integration Scripts - checkout the docs at developer-hub.sovendus.com",
@@ -20,8 +20,9 @@
     "./dist/*": "./dist/*"
   },
   "scripts": {
+    "dev": "next dev",
     "build": "rm -rf ./dist && tsc --project ./tsconfig.json",
-    "lint": "cd .. && yarn lint:types",
+    "lint": "eslint src --fix",
     "release": "yarn install && yarn lint && yarn build && npm publish"
   },
   "repository": {
@@ -46,10 +47,30 @@
     }
   ],
   "dependencies": {
-    "sovendus-integration-types": "3.3.17"
+    "sovendus-integration-types": "3.3.21"
   },
   "devDependencies": {
-    "tsc": "^2.0.4",
-    "typescript": "^5.7.3"
+    "@types/eslint": "9.6.1",
+    "@types/node": "22.13.5",
+    "@types/react": "19.0.10",
+    "@typescript-eslint/eslint-plugin": "8.24.1",
+    "@typescript-eslint/parser": "8.24.1",
+    "eslint": "9.21.0",
+    "eslint-config-prettier": "10.0.1",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-prettier": "5.2.3",
+    "eslint-plugin-react-compiler": "19.0.0-beta-21e868a-20250216",
+    "eslint-plugin-react-hooks": "5.1.0",
+    "eslint-plugin-simple-import-sort": "12.1.1",
+    "eslint-plugin-unused-imports": "4.1.4",
+    "next": "^15.1.7",
+    "prettier": "3.5.2",
+    "prettier-eslint": "16.3.0",
+    "prettier-plugin-sort-json": "^4.1.1",
+    "react": "19.0.0",
+    "react-dom": "^19.0.0",
+    "sovendus-integration-settings-ui": "3.4.7",
+    "tsc": "2.0.4",
+    "typescript": "5.7.3"
   }
 }

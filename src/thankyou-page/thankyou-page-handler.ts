@@ -455,6 +455,10 @@ export class SovendusThankyouPage {
       getCountryFromPagePath()
     );
   }
+
+  unmount(): void {
+    // TODO
+  }
 }
 
 interface ThankYouWindow extends Window {

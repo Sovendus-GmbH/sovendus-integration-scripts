@@ -7,7 +7,7 @@ import type {
 import { CountryCodes } from "sovendus-integration-types";
 import { sovendusPageApis } from "sovendus-integration-types";
 
-import { integrationScriptVersion } from "../constants.js";
+import { integrationScriptVersion } from "../constants";
 import {
   getCountryCodeFromHtmlTag,
   getCountryFromDomain,
@@ -15,7 +15,7 @@ import {
   getOptimizeId,
   loggerError,
   throwErrorOnSSR,
-} from "../shared-utils.js";
+} from "../shared-utils";
 
 export class SovendusPage {
   // Standard implementation of the Sovendus page script
@@ -199,6 +199,8 @@ export class SovendusPage {
     sovPageStatus.status.loadedOptimize = true;
   }
 
+  optimizeScriptId = "sovendus-optimize-script";
+
   handleOptimizeScript(
     optimizeId: string,
     _sovPageConfig: SovendusPageConfig,
@@ -211,6 +213,7 @@ export class SovendusPage {
     });
     const script = document.createElement("script");
     script.async = true;
+    script.id = this.optimizeScriptId;
     script.type = "application/javascript";
     script.src = `${sovendusPageApis.optimize}${optimizeId}`;
     document.head.appendChild(script);
@@ -252,5 +255,9 @@ export class SovendusPage {
       getCountryFromDomain() ||
       getCountryFromPagePath()
     );
+  }
+
+  unmount(): void {
+    document.getElementById(this.optimizeScriptId)?.remove();
   }
 }

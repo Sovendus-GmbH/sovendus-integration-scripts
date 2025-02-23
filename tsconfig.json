@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "preserve",
     "target": "ESNext",
     "module": "Preserve",
     // "moduleResolution": "classic",
     "skipLibCheck": true,
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "outDir": "dist",
     "noEmitOnError": true,
     "removeComments": true,
@@ -37,8 +39,29 @@
     "suppressImplicitAnyIndexErrors": false,
     "noStrictGenericChecks": false,
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "noEmit": true,
+    "incremental": true,
+    "isolatedModules": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/index.ts"],
-  "exclude": ["./node_modules", "./dist"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/index.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "./node_modules",
+    "./dist"
+  ]
 }
