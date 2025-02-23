@@ -20,10 +20,12 @@ export default function SovendusLandingPage(): JSX.Element {
       integrationType: "sovendus-integration-scripts-preview",
       country: undefined,
     };
+    // eslint-disable-next-line no-console
     console.log("started page with sovPageConfig", window.sovPageConfig);
     const OnDone = ({ sovPageStatus }: Partial<SovendusPageData>): void => {
       // used for debugging with the testing app
       if (sovPageStatus) {
+        // eslint-disable-next-line no-console
         console.log("Page done: ", {
           sovPageStatus,
           sovPageConfig: window.sovPageConfig,

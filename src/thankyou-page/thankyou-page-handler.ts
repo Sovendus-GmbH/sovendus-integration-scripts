@@ -1,11 +1,11 @@
 import type {
-  IntegrationDataType,
+  IntegrationData,
   LanguageCodes,
-  SovendusConsumerType,
+  SovendusConsumerData,
   SovendusPageUrlParams,
   SovendusThankYouPageConfig,
   SovendusThankyouPageData,
-  SovendusVNConversionsType,
+  SovendusVNConversion,
   VoucherNetworkLanguage,
 } from "sovendus-integration-types";
 import {
@@ -59,7 +59,7 @@ export class SovendusThankyouPage {
 
   async processConfig(
     sovThankyouConfig: SovendusThankYouPageConfig,
-    sovThankyouStatus: IntegrationDataType,
+    sovThankyouStatus: IntegrationData,
   ): Promise<void> {
     await this.handleVoucherCode(sovThankyouConfig);
     this.handleStreet(sovThankyouConfig);
@@ -68,7 +68,7 @@ export class SovendusThankyouPage {
 
   handleCountryCode(
     sovThankyouConfig: SovendusThankYouPageConfig,
-    sovThankyouStatus: IntegrationDataType,
+    sovThankyouStatus: IntegrationData,
   ): void {
     // using string literal "UK" intentionally despite type mismatch as some systems might return UK instead of GB
     if (sovThankyouConfig.customerData.consumerCountry === "UK") {
@@ -84,7 +84,7 @@ export class SovendusThankyouPage {
 
   async handleOptimizeConversion(
     sovThankyouConfig: SovendusThankYouPageConfig,
-    sovThankyouStatus: IntegrationDataType,
+    sovThankyouStatus: IntegrationData,
   ): Promise<void> {
     const optimizeId = getOptimizeId(
       sovThankyouConfig.settings,
@@ -109,7 +109,7 @@ export class SovendusThankyouPage {
     optimizeId: string,
     couponCode: string | undefined,
     sovThankyouConfig: SovendusThankYouPageConfig,
-    sovThankyouStatus: IntegrationDataType,
+    sovThankyouStatus: IntegrationData,
   ): Promise<void> {
     throwErrorOnSSR({
       methodName: "handleOptimizeConversionScript",
@@ -173,8 +173,8 @@ export class SovendusThankyouPage {
     }
   }
 
-  initializeStatus(): IntegrationDataType {
-    const sovThankyouStatus: IntegrationDataType = {
+  initializeStatus(): IntegrationData {
+    const sovThankyouStatus: IntegrationData = {
       integrationScriptVersion,
       status: {
         sovThankyouConfigFound: false,
@@ -207,7 +207,7 @@ export class SovendusThankyouPage {
 
   handleVoucherNetwork(
     sovThankyouConfig: SovendusThankYouPageConfig,
-    sovThankyouStatus: IntegrationDataType,
+    sovThankyouStatus: IntegrationData,
   ): void {
     throwErrorOnSSR({
       methodName: "handleSovendusVoucherNetworkDivContainer",
@@ -268,7 +268,7 @@ export class SovendusThankyouPage {
 
   handleSovendusVoucherNetworkDivContainer(
     voucherNetworkConfig: VoucherNetworkLanguage,
-    sovThankyouStatus: IntegrationDataType,
+    sovThankyouStatus: IntegrationData,
   ): string {
     throwErrorOnSSR({
       methodName: "handleSovendusVoucherNetworkDivContainer",
@@ -317,7 +317,7 @@ export class SovendusThankyouPage {
 
   async handleCheckoutProductsConversion(
     sovThankyouConfig: SovendusThankYouPageConfig,
-    sovThankyouStatus: IntegrationDataType,
+    sovThankyouStatus: IntegrationData,
   ): Promise<boolean> {
     const { checkoutProducts } = sovThankyouConfig.settings;
     if (checkoutProducts) {
@@ -462,7 +462,7 @@ export class SovendusThankyouPage {
 }
 
 interface ThankYouWindow extends Window {
-  sovIframes: SovendusVNConversionsType[];
-  sovConsumer: SovendusConsumerType;
+  sovIframes: SovendusVNConversion[];
+  sovConsumer: SovendusConsumerData;
 }
 declare let window: ThankYouWindow;

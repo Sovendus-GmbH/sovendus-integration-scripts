@@ -36,6 +36,7 @@ export function SovendusThankyou({
       // used for debugging with the testing app
       if (sovThankyouStatus) {
         window.sovThankyouStatus = sovThankyouStatus;
+        // eslint-disable-next-line no-console
         console.log("Page done: ", {
           sovThankyouStatus,
           sovPageConfig: window.sovThankyouConfig,
