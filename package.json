@@ -1,0 +1,55 @@
+{
+  "name": "sovendus-integration-scripts",
+  "version": "3.3.21",
+  "license": "GPL-3.0-only",
+  "private": false,
+  "description": "Sovendus Integration Scripts - checkout the docs at developer-hub.sovendus.com",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    },
+    "./src/*": "./src/*",
+    "./dist/*": "./dist/*"
+  },
+  "scripts": {
+    "build": "rm -rf ./dist && tsc --project ./tsconfig.json",
+    "lint": "cd .. && yarn lint:types",
+    "release": "yarn install && yarn lint && yarn build && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sovendus-GmbH/sovendus-plugins-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sovendus-GmbH/sovendus-plugins-core/issues"
+  },
+  "homepage": "https://github.com/Sovendus-GmbH/sovendus-plugins-core#readme",
+  "keywords": [
+    "sovendus",
+    "integration",
+    "types",
+    "typescript"
+  ],
+  "author": "Marcus Brandstaetter <techsupport@sovendus.com>",
+  "contributors": [
+    {
+      "name": "Marcus Brandstaetter - Sovendus GmbH",
+      "email": "techsupport@sovendus.com"
+    }
+  ],
+  "dependencies": {
+    "sovendus-integration-types": "3.3.17"
+  },
+  "devDependencies": {
+    "tsc": "^2.0.4",
+    "typescript": "^5.7.3"
+  }
+}
