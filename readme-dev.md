@@ -36,5 +36,12 @@ yarn dev
 
 ## Publishing
 
-1. Open a pull request to the main repository
-2. After the pull request is merged, a new version will be published. We bump the version, create a new tag and push it to the repository, then our pipeline will publish the new version to npm.
+1. If you have no access to the repository, fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Commit your changes and push your branch to your fork.
+4. Create a pull request to the main repository.
+5. If you have access to the repository, you can publish a new version by running:
+
+    ```bash
+    yarn pub
+    ```

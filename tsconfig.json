@@ -58,7 +58,8 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/index.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "sov_release.config.ts"
   ],
   "exclude": [
     "./node_modules",

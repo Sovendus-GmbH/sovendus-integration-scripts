@@ -23,7 +23,7 @@
     "dev": "next dev",
     "build": "vite build",
     "lint": "eslint src --fix",
-    "release": "yarn install && yarn lint && yarn build && npm publish"
+    "pub": "sovendus-release-tool"
   },
   "repository": {
     "type": "git",
@@ -70,6 +70,7 @@
     "react": "19.0.0",
     "react-dom": "^19.0.0",
     "sovendus-integration-settings-ui": "3.4.7",
+    "sovendus-release-tool": "^1.0.21",
     "tsc": "2.0.4",
     "typescript": "5.7.3",
     "vite": "^6.1.1",
