@@ -1,6 +1,6 @@
 {
   "name": "sovendus-integration-scripts",
-  "version": "3.3.23",
+  "version": "3.3.24",
   "license": "GPL-3.0-only",
   "private": false,
   "description": "Sovendus Integration Scripts - checkout the docs at developer-hub.sovendus.com",
@@ -21,7 +21,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "rm -rf ./dist && tsc --project ./tsconfig.json",
+    "build": "vite build",
     "lint": "eslint src --fix",
     "release": "yarn install && yarn lint && yarn build && npm publish"
   },
@@ -59,7 +59,7 @@
     "eslint-config-prettier": "10.0.1",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-prettier": "5.2.3",
-    "eslint-plugin-react-compiler": "19.0.0-beta-21e868a-20250216",
+    "eslint-plugin-react-compiler": "19.0.0-beta-e1e972c-20250221",
     "eslint-plugin-react-hooks": "5.1.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-plugin-unused-imports": "4.1.4",
@@ -71,6 +71,8 @@
     "react-dom": "^19.0.0",
     "sovendus-integration-settings-ui": "3.4.7",
     "tsc": "2.0.4",
-    "typescript": "5.7.3"
+    "typescript": "5.7.3",
+    "vite": "^6.1.1",
+    "vite-plugin-dts": "^4.5.0"
   }
 }
