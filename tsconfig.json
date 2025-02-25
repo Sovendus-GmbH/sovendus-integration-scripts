@@ -2,8 +2,8 @@
   "compilerOptions": {
     "jsx": "preserve",
     "target": "ESNext",
-    "module": "Preserve",
-    // "moduleResolution": "classic",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "skipLibCheck": true,
     "types": [
       "node"
