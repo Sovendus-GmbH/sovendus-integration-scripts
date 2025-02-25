@@ -70,7 +70,7 @@
     "react": "19.0.0",
     "react-dom": "^19.0.0",
     "sovendus-integration-settings-ui": "3.4.7",
-    "sovendus-release-tool": "^1.0.22",
+    "sovendus-release-tool": "^1.0.23",
     "tsc": "2.0.4",
     "typescript": "5.7.3",
     "vite": "^6.1.1",
