@@ -47,7 +47,7 @@
     }
   ],
   "dependencies": {
-    "sovendus-integration-types": "3.3.26"
+    "sovendus-integration-types": "3.3.22"
   },
   "devDependencies": {
     "@types/eslint": "9.6.1",

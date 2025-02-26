@@ -8,10 +8,10 @@ const releaseConfig: ReleaseConfig = {
       version: "3.3.26",
       release: true,
       releaseOptions: {
-        foldersToScanAndBumpThisPackage: [
-          // scan whole dev env
-          { folder: "../../../../" },
-        ],
+        // foldersToScanAndBumpThisPackage: [
+        //   // scan whole dev env
+        //   { folder: "../../../../" },
+        // ],
       },
     },
   ],
