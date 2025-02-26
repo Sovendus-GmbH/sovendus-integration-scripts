@@ -47,16 +47,16 @@
     }
   ],
   "dependencies": {
-    "sovendus-integration-types": "3.3.21"
+    "sovendus-integration-types": "3.3.22"
   },
   "devDependencies": {
     "@types/eslint": "9.6.1",
     "@types/node": "22.13.5",
     "@types/react": "19.0.10",
-    "@typescript-eslint/eslint-plugin": "8.24.1",
-    "@typescript-eslint/parser": "8.24.1",
+    "@typescript-eslint/eslint-plugin": "8.25.0",
+    "@typescript-eslint/parser": "8.25.0",
     "eslint": "9.21.0",
-    "eslint-config-prettier": "10.0.1",
+    "eslint-config-prettier": "10.0.2",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-prettier": "5.2.3",
     "eslint-plugin-react-compiler": "19.0.0-beta-e1e972c-20250221",
@@ -69,11 +69,11 @@
     "prettier-plugin-sort-json": "^4.1.1",
     "react": "19.0.0",
     "react-dom": "^19.0.0",
-    "sovendus-integration-settings-ui": "3.4.7",
-    "sovendus-release-tool": "^1.0.23",
+    "sovendus-integration-settings-ui": "3.5.0",
+    "sovendus-release-tool": "^1.0.25",
     "tsc": "2.0.4",
     "typescript": "5.7.3",
-    "vite": "^6.1.1",
+    "vite": "^6.2.0",
     "vite-plugin-dts": "^4.5.0"
   }
 }
