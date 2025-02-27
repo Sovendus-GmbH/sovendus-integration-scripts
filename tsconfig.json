@@ -59,7 +59,8 @@
     "src/**/*.tsx",
     "src/index.ts",
     ".next/types/**/*.ts",
-    "sov_release.config.ts"
+    "sov_release.config.ts",
+    "vite.config.ts"
   ],
   "exclude": [
     "./node_modules",
