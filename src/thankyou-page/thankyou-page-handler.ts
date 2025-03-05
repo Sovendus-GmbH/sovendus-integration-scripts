@@ -30,7 +30,7 @@ export class SovendusThankyouPage {
     onDone: ({
       sovThankyouConfig,
       sovThankyouStatus,
-    }: Partial<SovendusThankyouPageData>) => void,
+    }: SovendusThankyouPageData) => void,
   ): Promise<void> {
     const sovThankyouStatus = this.initializeStatus();
     try {

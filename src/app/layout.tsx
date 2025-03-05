@@ -1,7 +1,9 @@
+import "sovendus-integration-settings-ui/src/components/app.css";
+
 import type { JSX, ReactNode } from "react";
 import React from "react";
 
-import NavBar from "./components/NavBar";
+import NavBar from "./components/nav-bar";
 import { IntegrationTester } from "./components/SelfTester";
 
 export const metadata = {
@@ -18,8 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         style={{
-          color: "#ededed",
-          background: "#171717",
+          background: "#ccc",
         }}
       >
         <IntegrationTester />

@@ -80,7 +80,7 @@ export function getCountryCodeFromHtmlTag(): CountryCodes | undefined {
   });
   const lang = document.documentElement.lang;
   const countryCode = lang.split("-")[1];
-  return countryCode ? (countryCode.toUpperCase() as CountryCodes) : undefined;
+  return countryCode ? castToCountry(countryCode.toUpperCase()) : undefined;
 }
 
 export function getCountryFromDomain(): CountryCodes | undefined {
@@ -130,5 +130,13 @@ export function getCountryFromPagePath(): CountryCodes | undefined {
   const path = window.location.pathname;
   const pathParts = path.split("/");
   const country = pathParts[1];
-  return country?.toUpperCase() as CountryCodes | undefined;
+  return castToCountry(country?.toUpperCase());
+}
+
+function castToCountry(value: string | undefined): CountryCodes | undefined {
+  // Check if the provided value exists in the enum's values
+  if (value && Object.values(CountryCodes).includes(value as CountryCodes)) {
+    return value as CountryCodes;
+  }
+  return undefined;
 }

@@ -41,10 +41,7 @@ export class SovendusPage {
   // eslint-disable-next-line @typescript-eslint/require-await
   async main(
     sovPageConfig: SovendusPageConfig,
-    onDone: ({
-      sovPageConfig,
-      sovPageStatus,
-    }: Partial<SovendusPageData>) => void,
+    onDone: ({ sovPageConfig, sovPageStatus }: SovendusPageData) => void,
   ): Promise<void> {
     const sovPageStatus = this.initializeStatus();
     this.processConfig(sovPageConfig, sovPageStatus);
@@ -52,7 +49,7 @@ export class SovendusPage {
     try {
       if (!sovPageConfig) {
         sovPageStatus.status.sovPageConfigFound = true;
-        onDone({ sovPageStatus });
+        onDone({ sovPageStatus, sovPageConfig });
         loggerError("sovPageConfig is not defined", "LandingPage");
         return;
       }

@@ -2,15 +2,15 @@
 
 import type { JSX } from "react";
 import { useEffect } from "react";
+import { getSettings } from "sovendus-integration-settings-ui/demo";
 import type {
   SovendusPageData,
   SovendusPageWindow,
 } from "sovendus-integration-types";
 
 import { SovendusPage } from "../../landing-page/sovendus-page-handler";
-import { getSettings } from "../settings/settings-util";
 
-export default function SovendusLandingPage(): JSX.Element {
+export default function SovendusLandingPageDemoScript(): JSX.Element {
   useEffect(() => {
     if (typeof window === "undefined") {
       return;

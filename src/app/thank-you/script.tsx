@@ -2,6 +2,7 @@
 
 import type { JSX } from "react";
 import { useEffect } from "react";
+import { getSettings } from "sovendus-integration-settings-ui/demo";
 import type {
   SovendusThankyouPageData,
   SovendusThankyouWindow,
@@ -12,9 +13,8 @@ import type {
 } from "sovendus-integration-types/src";
 
 import { SovendusThankyouPage } from "../../thankyou-page/thankyou-page-handler";
-import { getSettings } from "../settings/settings-util";
 
-export function SovendusThankyou({
+export function SovendusThankyouPageDemoScript({
   config,
 }: {
   config: {

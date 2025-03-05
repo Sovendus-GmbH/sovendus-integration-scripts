@@ -1,16 +1,16 @@
 import type { JSX } from "react";
 
-import PageForm from "./PageForm";
-import SovendusLandingPage from "./SovendusLanding";
+import SovendusLandingPageDemoForm from "./demo-form";
+import SovendusLandingPageDemoScript from "./script";
 
-export default function Home(): JSX.Element {
+export default function SovendusLandingPageDemo(): JSX.Element {
   return (
     <div>
       <h1 style={{ paddingBottom: "40px" }}>This is a example landing page</h1>
       <div>
-        <PageForm />
+        <SovendusLandingPageDemoForm />
       </div>
-      <SovendusLandingPage />
+      <SovendusLandingPageDemoScript />
     </div>
   );
 }

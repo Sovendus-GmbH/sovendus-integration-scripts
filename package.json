@@ -4,25 +4,31 @@
   "license": "GPL-3.0-only",
   "private": false,
   "description": "Sovendus Integration Scripts - checkout the docs at developer-hub.sovendus.com",
-  "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "files": [
-    "dist",
-    "src"
+    "dist/**/*",
+    "src/**/*"
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./demo": {
+      "types": "./dist/demo-index.d.ts",
+      "import": "./dist/demo-index.mjs",
+      "require": "./dist/demo-index.cjs"
     },
     "./src/*": "./src/*",
     "./dist/*": "./dist/*"
   },
   "scripts": {
     "dev": "next dev",
-    "build": "vite build",
-    "lint": "eslint src --fix",
+    "build": "sovendus-builder build",
+    "lint": "eslint --fix",
     "pub": "sovendus-release-tool"
   },
   "repository": {
@@ -47,11 +53,12 @@
     }
   ],
   "dependencies": {
+    "sovendus-builder": "1.2.2",
     "sovendus-integration-types": "3.3.22"
   },
   "devDependencies": {
     "@types/eslint": "9.6.1",
-    "@types/node": "22.13.5",
+    "@types/node": "22.13.8",
     "@types/react": "19.0.10",
     "@typescript-eslint/eslint-plugin": "8.25.0",
     "@typescript-eslint/parser": "8.25.0",
@@ -60,20 +67,20 @@
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-prettier": "5.2.3",
     "eslint-plugin-react-compiler": "19.0.0-beta-e1e972c-20250221",
-    "eslint-plugin-react-hooks": "5.1.0",
+    "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-plugin-unused-imports": "4.1.4",
-    "next": "^15.2.0",
-    "prettier": "3.5.2",
+    "next": "15.2.0",
+    "prettier": "3.5.3",
     "prettier-eslint": "16.3.0",
-    "prettier-plugin-sort-json": "^4.1.1",
+    "prettier-plugin-sort-json": "4.1.1",
     "react": "19.0.0",
-    "react-dom": "^19.0.0",
-    "sovendus-integration-settings-ui": "3.5.0",
-    "sovendus-release-tool": "^1.0.26",
+    "react-dom": "19.0.0",
+    "sovendus-integration-settings-ui": "3.6.3",
+    "sovendus-release-tool": "1.0.26",
     "tsc": "2.0.4",
-    "typescript": "5.7.3",
-    "vite": "^6.2.0",
-    "vite-plugin-dts": "^4.5.0"
+    "typescript": "5.8.2",
+    "vite": "6.2.0",
+    "vite-plugin-dts": "4.5.3"
   }
 }

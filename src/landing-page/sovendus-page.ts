@@ -7,7 +7,7 @@ import { SovendusPage } from "./sovendus-page-handler";
 
 declare const window: SovendusPageWindow;
 
-const OnDone = ({ sovPageStatus }: Partial<SovendusPageData>): void => {
+const OnDone = ({ sovPageStatus }: SovendusPageData): void => {
   // just used for debugging with the testing app
   if (sovPageStatus) {
     window.sovPageStatus = sovPageStatus;

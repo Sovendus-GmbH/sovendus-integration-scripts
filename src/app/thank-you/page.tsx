@@ -8,8 +8,8 @@ import type {
   SovendusConversionsData,
 } from "sovendus-integration-types/src";
 
-import { SovendusThankyou } from "./SovendusThankYou";
-import { ThankyouPageForm } from "./ThankYouPageForm";
+import { SovendusThankyouPageDemoForm } from "./demo-form";
+import { SovendusThankyouPageDemoScript } from "./script";
 
 const defaultConfig: {
   orderData: SovendusConversionsData;
@@ -38,7 +38,7 @@ const defaultConfig: {
   },
 };
 
-export default function ThankYou(): JSX.Element {
+export default function SovendusThankYouPageDemo(): JSX.Element {
   const [config, setConfig] = useState<{
     orderData: SovendusConversionsData;
     customerData: SovendusConsumerData;
@@ -67,8 +67,8 @@ export default function ThankYou(): JSX.Element {
   return (
     <div>
       <h1>This is a thank you page</h1>
-      <ThankyouPageForm config={config} setConfig={setConfig} />
-      <SovendusThankyou config={config} />
+      <SovendusThankyouPageDemoForm config={config} setConfig={setConfig} />
+      <SovendusThankyouPageDemoScript config={config} />
     </div>
   );
 }

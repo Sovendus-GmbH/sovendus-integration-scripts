@@ -52,7 +52,8 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "resolveJsonModule": true
   },
   "include": [
     "src/**/*.ts",
@@ -60,7 +61,8 @@
     "src/index.ts",
     ".next/types/**/*.ts",
     "sov_release.config.ts",
-    "vite.config.ts"
+    "vite.config.ts",
+    "next-env.d.ts"
   ],
   "exclude": [
     "./node_modules",
