@@ -62,7 +62,8 @@
     ".next/types/**/*.ts",
     "sov_release.config.ts",
     "vite.config.ts",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    "sov_build.config.ts"
   ],
   "exclude": [
     "./node_modules",
