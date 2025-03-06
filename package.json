@@ -53,7 +53,7 @@
     }
   ],
   "dependencies": {
-    "sovendus-builder": "1.2.2",
+    "sovendus-builder": "1.2.4",
     "sovendus-integration-types": "3.3.22"
   },
   "devDependencies": {
@@ -76,8 +76,8 @@
     "prettier-plugin-sort-json": "4.1.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "sovendus-integration-settings-ui": "3.7.1",
-    "sovendus-release-tool": "1.1.1",
+    "sovendus-integration-settings-ui": "3.7.3",
+    "sovendus-release-tool": "1.1.2",
     "tsc": "2.0.4",
     "typescript": "5.8.2",
     "vite": "6.2.0",
