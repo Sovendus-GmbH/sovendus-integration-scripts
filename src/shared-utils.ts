@@ -134,7 +134,6 @@ export function getCountryFromPagePath(): CountryCodes | undefined {
 }
 
 function castToCountry(value: string | undefined): CountryCodes | undefined {
-  // Check if the provided value exists in the enum's values
   if (value && Object.values(CountryCodes).includes(value as CountryCodes)) {
     return value as CountryCodes;
   }

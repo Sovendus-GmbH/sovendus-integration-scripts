@@ -79,6 +79,8 @@ export class SovendusThankyouPage {
       sovThankyouConfig.customerData.consumerCountry =
         sovThankyouConfig.customerData.consumerCountry ||
         this.detectCountryCode();
+    } else {
+      sovThankyouStatus.status.countryCodePassedOnByPlugin = true;
     }
   }
 
