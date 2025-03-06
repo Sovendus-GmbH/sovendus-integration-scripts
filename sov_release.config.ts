@@ -12,8 +12,8 @@ const releaseConfig: ReleaseConfig = {
       versionBumper: {
         jsVars: [
           {
-            filePath: "wordpress-plugin/wc-sovendus.php",
-            varName: "SOVENDUS_VERSION",
+            filePath: "src/constants.ts",
+            varName: "integrationScriptVersion",
           },
         ],
       },
