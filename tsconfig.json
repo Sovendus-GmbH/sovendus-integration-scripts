@@ -58,7 +58,7 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/index.ts",
+    "src/scripts/index.ts",
     ".next/types/**/*.ts",
     "sov_release.config.ts",
     "vite.config.ts",

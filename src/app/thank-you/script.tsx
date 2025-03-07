@@ -12,7 +12,7 @@ import type {
   SovendusConversionsData,
 } from "sovendus-integration-types/src";
 
-import { SovendusThankyouPage } from "../../thankyou-page/thankyou-page-handler";
+import { SovendusThankyouPage } from "../../scripts/thankyou-page/thankyou-page-handler";
 
 export function SovendusThankyouPageDemoScript({
   config,

@@ -8,7 +8,7 @@ import type {
   SovendusPageWindow,
 } from "sovendus-integration-types";
 
-import { SovendusPage } from "../../landing-page/sovendus-page-handler";
+import { SovendusPage } from "../../scripts/landing-page/sovendus-page-handler";
 
 export default function SovendusLandingPageDemoScript(): JSX.Element {
   useEffect(() => {

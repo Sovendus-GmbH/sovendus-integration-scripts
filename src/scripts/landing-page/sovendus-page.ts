@@ -7,11 +7,9 @@ import { SovendusPage } from "./sovendus-page-handler";
 
 declare const window: SovendusPageWindow;
 
-const OnDone = ({ sovPageStatus }: SovendusPageData): void => {
+const onDone = ({ sovPageStatus }: SovendusPageData): void => {
   // just used for debugging with the testing app
-  if (sovPageStatus) {
-    window.sovPageStatus = sovPageStatus;
-  }
+  window.sovPageStatus = sovPageStatus;
 };
 
-void new SovendusPage().main(window.sovPageConfig, OnDone);
+void new SovendusPage().main(window.sovPageConfig, onDone);

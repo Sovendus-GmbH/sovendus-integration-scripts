@@ -4,11 +4,15 @@ const buildConfig: BuildConfig = {
   foldersToClean: ["dist"],
   filesToCompile: [
     {
-      input: "src/index.ts",
+      input: "src/scripts/index.ts",
       output: "dist/index",
       options: {
         type: "vanilla",
-        isPackage: true,
+        packageConfig: {
+          isPackage: true,
+          dtsEntryRoot: "src/scripts",
+          dtsInclude: ["src/scripts/**/*"],
+        },
       },
     },
     {
@@ -16,7 +20,11 @@ const buildConfig: BuildConfig = {
       output: "dist/demo-index",
       options: {
         type: "react-tailwind",
-        isPackage: true,
+        packageConfig: {
+          isPackage: true,
+          dtsEntryRoot: "src/app",
+          dtsInclude: ["src/app/**/*"],
+        },
       },
     },
   ],
