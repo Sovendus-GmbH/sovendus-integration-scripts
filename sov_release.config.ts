@@ -12,7 +12,7 @@ const releaseConfig: ReleaseConfig = {
       versionBumper: {
         jsVars: [
           {
-            filePath: "src/constants.ts",
+            filePath: "src/scripts/constants.ts",
             varName: "integrationScriptVersion",
           },
         ],
