@@ -3744,10 +3744,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-lucide-react@0.477.0:
-  version "0.477.0"
-  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.477.0.tgz#41aff9cf8447a1abbeb1e28de9caefafc8340cf6"
-  integrity sha512-yCf7aYxerFZAbd8jHJxjwe1j7jEMPptjnaOqdYeirFnEy85cNR3/L+o0I875CYFYya+eEVzZSbNuRk8BZPDpVw==
+lucide-react@0.478.0:
+  version "0.478.0"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.478.0.tgz#21be1a58cc421a7ccf3ccf09bd062775783d90e9"
+  integrity sha512-aO8e1ZQEjh/0LcEjm08VyBAPtRSfGG/rJEUTph6/Bfi4GrosZKOawUoc0+JBGSslM04bRWaOTkCCzq+pVrUCnQ==
 
 magic-string@^0.30.17:
   version "0.30.17"
@@ -4586,15 +4586,16 @@ source-map@~0.6.1:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
-sovendus-builder@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/sovendus-builder/-/sovendus-builder-1.3.0.tgz#86ee7183417b12701c606899e970104da0bc4d82"
-  integrity sha512-OrqY9ojMSYq2OwO4Ye4zobXFxb6IZ3+vFUB6nnTfa84YevWc/CHD8Eq0KDEjtDK/P1MYN4jcz3VuNFOkwf2I7A==
+sovendus-builder@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/sovendus-builder/-/sovendus-builder-1.3.1.tgz#e11170b453627c1646a39ef92624a171418f5652"
+  integrity sha512-YUZ+fCutZYJfg4ZJwC6W5uJjbixnIjiUgTxsLek17RSARR66d0BJnBuiOKclkM2ai4RXKuOy4cizEHYkVVyX3A==
   dependencies:
     archiver "^7.0.1"
     commander "^13.1.0"
     fs-extra "^11.3.0"
     vite "^6.2.1"
+    vite-plugin-dts "4.5.3"
   optionalDependencies:
     "@tailwindcss/vite" "4.0.11"
     "@vitejs/plugin-react" "4.3.4"
@@ -4604,12 +4605,11 @@ sovendus-builder@1.3.0:
     react-dom "19.0.0"
     tailwindcss "4.0.11"
     vite-plugin-css-injected-by-js "3.5.2"
-    vite-plugin-dts "4.5.3"
 
-sovendus-integration-settings-ui@3.7.12:
-  version "3.7.12"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-3.7.12.tgz#61a9e7bc4fbf40e8e415656857ab25fdccd153b5"
-  integrity sha512-5va//jKF7vYTxUfY48RA5dhz1z9BdPbb2wasrUePrZ+rKqr7Scj4j2YKF7yfc13i235EFWDD2ALe+4YD3kV3QA==
+sovendus-integration-settings-ui@3.7.16:
+  version "3.7.16"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-3.7.16.tgz#e6c184bbae3e6a2abfb98a13f19d4be098e3a537"
+  integrity sha512-ms+TrDA/1GLKdHiHeChmI9Fj4YV2vKcMq/NwrbYWp7bh/6BSAfYUvgJMXCJkt6tP+VcA15mDtD7p5uE7h6AJWg==
   dependencies:
     "@radix-ui/react-accordion" "1.2.3"
     "@radix-ui/react-checkbox" "1.1.4"
@@ -4624,19 +4624,14 @@ sovendus-integration-settings-ui@3.7.12:
     class-variance-authority "0.7.1"
     clsx "2.1.1"
     framer-motion "12.4.10"
-    lucide-react "0.477.0"
+    lucide-react "0.478.0"
     postcss "8.5.3"
     react "19.0.0"
     react-dom "19.0.0"
-    sovendus-integration-types "3.3.22"
+    sovendus-integration-types "3.3.24"
     tailwind-merge "3.0.2"
-    tailwindcss "4.0.11"
+    tailwindcss "4.0.12"
     tailwindcss-animate "1.0.7"
-
-sovendus-integration-types@3.3.22:
-  version "3.3.22"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-types/-/sovendus-integration-types-3.3.22.tgz#07aa3d5aab6c0bc132c3318074e2c1e0eae4dd87"
-  integrity sha512-TX80WEjZk9A77ByeLb0iES8iTh2FRTiplVsnwgHe5xBCnv2l1WTm+z7hR8mjfxssfJdN/oYiLjrRMyDYoXTJZg==
 
 sovendus-integration-types@3.3.24:
   version "3.3.24"
@@ -4843,6 +4838,11 @@ tailwindcss@4.0.11:
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-4.0.11.tgz#cb00fb696d7346f115682bbe909d87a87afb664e"
   integrity sha512-GZ6+tNwieqvpFLZfx2tkZpfOMAK7iumbOJOLmd6v8AcYuHbjUb+cmDRu6l+rFkIqarh5FfLbCSRJhegcVdoPng==
 
+tailwindcss@4.0.12:
+  version "4.0.12"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-4.0.12.tgz#71ab22c78810303b1156354bcc561a747169b5bd"
+  integrity sha512-bT0hJo91FtncsAMSsMzUkoo/iEU0Xs5xgFgVC9XmdM9bw5MhZuQFjPNl6wxAE0SiQF/YTZJa+PndGWYSDtuxAg==
+
 tapable@^2.2.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-2.2.1.tgz#1967a73ef4060a82f12ab96af86d52fdb76eeca0"
@@ -4892,11 +4892,6 @@ ts-api-utils@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ts-api-utils/-/ts-api-utils-2.0.1.tgz#660729385b625b939aaa58054f45c058f33f10cd"
   integrity sha512-dnlgjFSVetynI8nzgJ+qF62efpglpWRk8isUEWZGWlJYySCTD6aKvbUDu+zbPeDakk3bg5H4XpitHukgfL1m9w==
-
-tsc@2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/tsc/-/tsc-2.0.4.tgz#5f6499146abea5dca4420b451fa4f2f9345238f5"
-  integrity sha512-fzoSieZI5KKJVBYGvwbVZs/J5za84f2lSTLPYf6AGiIf43tZ3GNrI1QzTLcjtyDDP4aLxd46RTZq1nQxe7+k5Q==
 
 tsconfig-paths@^3.15.0:
   version "3.15.0"

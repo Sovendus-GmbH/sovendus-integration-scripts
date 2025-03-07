@@ -16,17 +16,20 @@ import { SovendusThankyouPage } from "../../scripts/thankyou-page/thankyou-page-
 
 export function SovendusThankyouPageDemoScript({
   config,
+  containerId,
 }: {
   config: {
     orderData: SovendusConversionsData;
     customerData: SovendusConsumerData;
   };
+  containerId: string;
 }): JSX.Element {
   useEffect(() => {
     window.sovThankyouConfig = {
       settings: getSettings(),
       integrationType: "sovendus-integration-scripts-preview",
       sovDebugLevel: "debug",
+      iframeContainerId: containerId,
       orderData: config.orderData,
       customerData: config.customerData,
     };
@@ -49,7 +52,7 @@ export function SovendusThankyouPageDemoScript({
     return (): void => {
       sovendusPage.unmount();
     };
-  }, [config.customerData, config.orderData]);
+  }, [config.customerData, config.orderData, containerId]);
   return <></>;
 }
 

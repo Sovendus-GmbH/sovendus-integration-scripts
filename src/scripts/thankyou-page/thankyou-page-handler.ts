@@ -228,6 +228,7 @@ export class SovendusThankyouPage {
     ) {
       const iframeContainerId = this.handleSovendusVoucherNetworkDivContainer(
         voucherNetworkConfig,
+        sovThankyouConfig,
         sovThankyouStatus,
       );
       window.sovIframes = window.sovIframes || [];
@@ -270,6 +271,7 @@ export class SovendusThankyouPage {
 
   handleSovendusVoucherNetworkDivContainer(
     voucherNetworkConfig: VoucherNetworkLanguage,
+    sovThankyouConfig: SovendusThankYouPageConfig,
     sovThankyouStatus: IntegrationData,
   ): string {
     throwErrorOnSSR({
@@ -278,7 +280,8 @@ export class SovendusThankyouPage {
       requiresDocument: true,
       requiresWindow: true,
     });
-    const iframeContainerId = defaultIframeContainerId;
+    const iframeContainerId =
+      sovThankyouConfig.iframeContainerId || defaultIframeContainerId;
     const rootElement =
       iframeContainerId && document.getElementById(iframeContainerId);
     if (!rootElement) {

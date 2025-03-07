@@ -63,12 +63,17 @@ export default function SovendusThankYouPageDemo(): JSX.Element {
   useEffect(() => {
     localStorage.setItem("thankyouConfig", JSON.stringify(config));
   }, [config]);
-
+  const containerId = "sovendus-thankyou-container";
   return (
     <div>
       <h1>This is a thank you page</h1>
       <SovendusThankyouPageDemoForm config={config} setConfig={setConfig} />
-      <SovendusThankyouPageDemoScript config={config} />
+      <SovendusThankyouPageDemoScript
+        config={config}
+        containerId={containerId}
+      />
+      <h2>Here should be the inline integration</h2>
+      <div id={containerId} />
     </div>
   );
 }
