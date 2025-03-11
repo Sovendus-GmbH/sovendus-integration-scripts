@@ -33,7 +33,7 @@ export function getOptimizeId(
   return undefined;
 }
 
-export function throwErrorOnSSR({
+export function throwErrorInNonBrowserContext({
   methodName,
   requiresWindow,
   requiresDocument,
@@ -73,7 +73,7 @@ export function loggerInfo(
 }
 
 export function getCountryCodeFromHtmlTag(): CountryCodes | undefined {
-  throwErrorOnSSR({
+  throwErrorInNonBrowserContext({
     methodName: "getCountryCodeFromHtmlTag",
     pageType: "LandingPage",
     requiresDocument: true,
@@ -84,7 +84,7 @@ export function getCountryCodeFromHtmlTag(): CountryCodes | undefined {
 }
 
 export function getCountryFromDomain(): CountryCodes | undefined {
-  throwErrorOnSSR({
+  throwErrorInNonBrowserContext({
     methodName: "getCountryFromDomain",
     pageType: "LandingPage",
     requiresWindow: true,
@@ -122,7 +122,7 @@ export function getCountryFromDomain(): CountryCodes | undefined {
 }
 
 export function getCountryFromPagePath(): CountryCodes | undefined {
-  throwErrorOnSSR({
+  throwErrorInNonBrowserContext({
     methodName: "getCountryFromDomain",
     pageType: "LandingPage",
     requiresWindow: true,

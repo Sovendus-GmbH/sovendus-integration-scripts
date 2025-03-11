@@ -14,7 +14,7 @@ import {
   getCountryFromPagePath,
   getOptimizeId,
   loggerError,
-  throwErrorOnSSR,
+  throwErrorInNonBrowserContext,
 } from "../shared-utils";
 
 export class SovendusPage {
@@ -25,7 +25,9 @@ export class SovendusPage {
 
   UrlParamAndCookieKeys = [
     // These are the keys that Sovendus uses to store the url params as cookies
-    // Without these url params the Sovendus cookies will not be set
+    // for simplicity we store all supported url params as cookies
+    // as without the url params the cookies would not be set anyway
+    // each url param requires separate opt in on Sovendus side, so this is safe to use
     //
     // key only passed on in Switzerland Voucher Network
     "puid",
@@ -87,7 +89,7 @@ export class SovendusPage {
   }
 
   getSearchParams(): URLSearchParams {
-    throwErrorOnSSR({
+    throwErrorInNonBrowserContext({
       methodName: "getSearchParams",
       pageType: "LandingPage",
       requiresWindow: true,
@@ -96,7 +98,7 @@ export class SovendusPage {
   }
 
   getScriptParams(): URLSearchParams | undefined {
-    throwErrorOnSSR({
+    throwErrorInNonBrowserContext({
       methodName: "getScriptParams",
       pageType: "LandingPage",
       requiresDocument: true,
@@ -137,8 +139,9 @@ export class SovendusPage {
       Object.entries(pageViewData).forEach(([cookieKey, cookieValue]) => {
         if (cookieValue) {
           // for simplicity we store all supported url params as cookies
-          // as without the url params the cookies would not be set
-          // you can add your custom logic here if you limit to certain url params
+          // as without the url params the cookies would not be set anyway
+          // each url param requires separate opt in on Sovendus side, so this is safe to use
+          // you can add your custom logic here if you want to limit to certain url params
           this.setCookie(cookieKey, cookieValue);
           sovPageStatus.status.storedCookies = true;
         }
@@ -167,7 +170,7 @@ export class SovendusPage {
   }
 
   setCookie(cookieName: string, value: string): void {
-    throwErrorOnSSR({
+    throwErrorInNonBrowserContext({
       methodName: "setCookie",
       pageType: "LandingPage",
       requiresDocument: true,
@@ -203,7 +206,7 @@ export class SovendusPage {
     _sovPageConfig: SovendusPageConfig,
     _sovPageStatus: SovPageStatus,
   ): void {
-    throwErrorOnSSR({
+    throwErrorInNonBrowserContext({
       methodName: "sovendusOptimize",
       pageType: "LandingPage",
       requiresDocument: true,
@@ -238,7 +241,7 @@ export class SovendusPage {
   }
 
   getPerformanceTime(): number {
-    throwErrorOnSSR({
+    throwErrorInNonBrowserContext({
       methodName: "getPerformanceTime",
       pageType: "LandingPage",
       requiresWindow: true,

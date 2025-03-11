@@ -21,10 +21,14 @@ import {
   getCountryFromPagePath,
   getOptimizeId,
   loggerError,
-  throwErrorOnSSR,
+  throwErrorInNonBrowserContext,
 } from "../shared-utils";
 
 export class SovendusThankyouPage {
+  // Standard implementation of the Sovendus thankyou page script
+  // You can extend this class and override the methods to customize the behavior
+  // You can find example overrides in any of our Sovendus plugins
+  // Also make sure to check out our docs for more information
   async main(
     sovThankyouConfig: SovendusThankYouPageConfig,
     onDone: ({
@@ -113,7 +117,7 @@ export class SovendusThankyouPage {
     sovThankyouConfig: SovendusThankYouPageConfig,
     sovThankyouStatus: IntegrationData,
   ): Promise<void> {
-    throwErrorOnSSR({
+    throwErrorInNonBrowserContext({
       methodName: "handleOptimizeConversionScript",
       pageType: "ThankyouPage",
       requiresDocument: true,
@@ -211,7 +215,7 @@ export class SovendusThankyouPage {
     sovThankyouConfig: SovendusThankYouPageConfig,
     sovThankyouStatus: IntegrationData,
   ): void {
-    throwErrorOnSSR({
+    throwErrorInNonBrowserContext({
       methodName: "handleSovendusVoucherNetworkDivContainer",
       pageType: "ThankyouPage",
       requiresDocument: true,
@@ -274,7 +278,7 @@ export class SovendusThankyouPage {
     sovThankyouConfig: SovendusThankYouPageConfig,
     sovThankyouStatus: IntegrationData,
   ): string {
-    throwErrorOnSSR({
+    throwErrorInNonBrowserContext({
       methodName: "handleSovendusVoucherNetworkDivContainer",
       pageType: "ThankyouPage",
       requiresDocument: true,
@@ -328,7 +332,6 @@ export class SovendusThankyouPage {
     if (checkoutProducts) {
       const sovReqToken = await this.getCookie("sovReqToken");
       if (sovReqToken) {
-        // remove the cooky
         this.clearCookie("sovReqToken");
         const pixelUrl = `https://press-order-api.sovendus.com/ext/image?sovReqToken=${decodeURIComponent(sovReqToken)}`;
         await fetch(pixelUrl);
@@ -343,7 +346,7 @@ export class SovendusThankyouPage {
   async getCookie(
     name: keyof SovendusPageUrlParams,
   ): Promise<string | undefined> {
-    throwErrorOnSSR({
+    throwErrorInNonBrowserContext({
       methodName: "getCookie",
       pageType: "ThankyouPage",
       requiresDocument: true,
@@ -357,7 +360,7 @@ export class SovendusThankyouPage {
   }
 
   clearCookie(name: keyof SovendusPageUrlParams): void {
-    throwErrorOnSSR({
+    throwErrorInNonBrowserContext({
       methodName: "clearCookie",
       pageType: "ThankyouPage",
       requiresDocument: true,
@@ -432,7 +435,7 @@ export class SovendusThankyouPage {
   }
 
   detectLanguageCode(): LanguageCodes {
-    throwErrorOnSSR({
+    throwErrorInNonBrowserContext({
       methodName: "getCookie",
       pageType: "ThankyouPage",
       requiresDocument: true,
@@ -445,7 +448,7 @@ export class SovendusThankyouPage {
   }
 
   getPerformanceTime(): number {
-    throwErrorOnSSR({
+    throwErrorInNonBrowserContext({
       methodName: "getPerformanceTime",
       pageType: "ThankyouPage",
       requiresWindow: true,
