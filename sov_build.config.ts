@@ -17,7 +17,7 @@ const buildConfig: BuildConfig = {
     },
     {
       input: "src/app/index.ts",
-      output: "dist/demo-index",
+      output: "dist/demo/index",
       options: {
         type: "react-tailwind",
         packageConfig: {

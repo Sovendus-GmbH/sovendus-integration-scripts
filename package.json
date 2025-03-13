@@ -18,12 +18,11 @@
       "require": "./dist/index.cjs"
     },
     "./demo": {
-      "types": "./dist/demo-index.d.ts",
-      "import": "./dist/demo-index.mjs",
-      "require": "./dist/demo-index.cjs"
+      "types": "./dist/demo/index.d.ts",
+      "import": "./dist/demo/index.mjs",
+      "require": "./dist/demo/index.cjs"
     },
-    "./src/*": "./src/*",
-    "./dist/*": "./dist/*"
+    "./src/*": "./src/*"
   },
   "scripts": {
     "dev": "next dev",

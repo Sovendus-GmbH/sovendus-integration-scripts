@@ -40,7 +40,7 @@ export class SovendusPage {
   ] as const as (keyof SovendusPageUrlParams)[];
 
   // make it async to avoid blocking the main thread
-  // eslint-disable-next-line @typescript-eslint/require-await
+
   async main(
     sovPageConfig: SovendusPageConfig,
     onDone: ({ sovPageConfig, sovPageStatus }: SovendusPageData) => void,
@@ -55,7 +55,7 @@ export class SovendusPage {
         loggerError("sovPageConfig is not defined", "LandingPage");
         return;
       }
-      sovPageStatus.urlData = this.lookForUrlParamsToStore(sovPageStatus);
+      sovPageStatus.urlData = await this.lookForUrlParamsToStore(sovPageStatus);
       this.sovendusOptimize(sovPageConfig, sovPageStatus);
       sovPageStatus.times.integrationLoaderDone = this.getPerformanceTime();
     } catch (error) {
@@ -88,7 +88,9 @@ export class SovendusPage {
     return this.UrlParamAndCookieKeys;
   }
 
-  getSearchParams(): URLSearchParams {
+  // make it async as some context might require it
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async getSearchParams(): Promise<URLSearchParams> {
     throwErrorInNonBrowserContext({
       methodName: "getSearchParams",
       pageType: "LandingPage",
@@ -107,7 +109,7 @@ export class SovendusPage {
     return currentScript ? new URL(currentScript.src).searchParams : undefined;
   }
 
-  getSovendusUrlParameters(): SovendusPageUrlParams {
+  async getSovendusUrlParameters(): Promise<SovendusPageUrlParams> {
     const pageViewData: SovendusPageUrlParams = {
       sovCouponCode: undefined,
       sovReqToken: undefined,
@@ -115,7 +117,7 @@ export class SovendusPage {
       sovDebugLevel: undefined,
     };
     const scriptUrlParams = this.getScriptParams();
-    const urlParams = this.getSearchParams();
+    const urlParams = await this.getSearchParams();
     this.getCookieKeys().forEach((dataKey) => {
       const paramValue =
         urlParams?.get(dataKey) || scriptUrlParams?.get(dataKey);
@@ -132,20 +134,24 @@ export class SovendusPage {
     return pageViewData;
   }
 
-  lookForUrlParamsToStore(sovPageStatus: SovPageStatus): SovendusPageUrlParams {
+  async lookForUrlParamsToStore(
+    sovPageStatus: SovPageStatus,
+  ): Promise<SovendusPageUrlParams> {
     try {
       const pageViewData: SovendusPageUrlParams =
-        this.getSovendusUrlParameters();
-      Object.entries(pageViewData).forEach(([cookieKey, cookieValue]) => {
-        if (cookieValue) {
-          // for simplicity we store all supported url params as cookies
-          // as without the url params the cookies would not be set anyway
-          // each url param requires separate opt in on Sovendus side, so this is safe to use
-          // you can add your custom logic here if you want to limit to certain url params
-          this.setCookie(cookieKey, cookieValue);
-          sovPageStatus.status.storedCookies = true;
-        }
-      });
+        await this.getSovendusUrlParameters();
+      await Promise.all(
+        Object.entries(pageViewData).map(async ([cookieKey, cookieValue]) => {
+          if (cookieValue) {
+            // for simplicity we store all supported url params as cookies
+            // as without the url params the cookies would not be set anyway
+            // each url param requires separate opt in on Sovendus side, so this is safe to use
+            // you can add your custom logic here if you want to limit to certain url params
+            await this.setCookie(cookieKey, cookieValue);
+            sovPageStatus.status.storedCookies = true;
+          }
+        }),
+      );
       return pageViewData;
     } catch (error) {
       loggerError("Error while storing url params", "LandingPage", error);
@@ -169,7 +175,9 @@ export class SovendusPage {
     return true;
   }
 
-  setCookie(cookieName: string, value: string): void {
+  // make it async as some context might require it
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async setCookie(cookieName: string, value: string): Promise<void> {
     throwErrorInNonBrowserContext({
       methodName: "setCookie",
       pageType: "LandingPage",
