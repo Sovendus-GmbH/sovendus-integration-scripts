@@ -16,6 +16,21 @@ const buildConfig: BuildConfig = {
       },
     },
     {
+      input: "src/scripts/index.ts",
+      output: "dist/minified/index",
+      options: {
+        type: "vanilla",
+        buildOptions: {
+          minify: true,
+        },
+        packageConfig: {
+          isPackage: true,
+          dtsEntryRoot: "src/scripts",
+          dtsInclude: ["src/scripts/**/*"],
+        },
+      },
+    },
+    {
       input: "src/app/index.ts",
       output: "dist/demo/index",
       options: {

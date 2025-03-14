@@ -84,9 +84,6 @@ export class SovendusPage {
       },
     };
   }
-  getCookieKeys(): (keyof SovendusPageUrlParams)[] {
-    return this.UrlParamAndCookieKeys;
-  }
 
   // make it async as some context might require it
   // eslint-disable-next-line @typescript-eslint/require-await
@@ -99,16 +96,6 @@ export class SovendusPage {
     return new URLSearchParams(window.location.search);
   }
 
-  getScriptParams(): URLSearchParams | undefined {
-    throwErrorInNonBrowserContext({
-      methodName: "getScriptParams",
-      pageType: "LandingPage",
-      requiresDocument: true,
-    });
-    const currentScript = document.currentScript as HTMLScriptElement | null;
-    return currentScript ? new URL(currentScript.src).searchParams : undefined;
-  }
-
   async getSovendusUrlParameters(): Promise<SovendusPageUrlParams> {
     const pageViewData: SovendusPageUrlParams = {
       sovCouponCode: undefined,
@@ -116,11 +103,9 @@ export class SovendusPage {
       puid: undefined,
       sovDebugLevel: undefined,
     };
-    const scriptUrlParams = this.getScriptParams();
     const urlParams = await this.getSearchParams();
-    this.getCookieKeys().forEach((dataKey) => {
-      const paramValue =
-        urlParams?.get(dataKey) || scriptUrlParams?.get(dataKey);
+    this.UrlParamAndCookieKeys.forEach((dataKey) => {
+      const paramValue = urlParams?.get(dataKey);
       if (paramValue) {
         if (dataKey === "sovDebugLevel") {
           if (paramValue === "debug" || paramValue === "silent") {
@@ -162,17 +147,6 @@ export class SovendusPage {
       puid: undefined,
       sovDebugLevel: undefined,
     };
-  }
-
-  shouldSetCookie(
-    _cookieKey: keyof SovendusPageUrlParams,
-    _cookieValue: string,
-  ): boolean {
-    // for simplicity we store all supported url params as cookies
-    // as without the url params the cookies would not be set anyway
-    // each url param requires separate opt in on Sovendus side, so this is safe to use
-    // you can add your custom logic here if you want to limit to certain url params
-    return true;
   }
 
   // make it async as some context might require it

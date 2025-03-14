@@ -17,6 +17,11 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
+    "./minified": {
+      "types": "./dist/minified/index.d.ts",
+      "import": "./dist/minified/index.mjs",
+      "require": "./dist/minified/index.cjs"
+    },
     "./demo": {
       "types": "./dist/demo/index.d.ts",
       "import": "./dist/demo/index.mjs",
