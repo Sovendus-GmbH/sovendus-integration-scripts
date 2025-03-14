@@ -81,9 +81,9 @@
     "react-dom": "19.0.0",
     "sovendus-builder": "1.3.2",
     "sovendus-integration-settings-ui": "3.7.16",
-    "sovendus-release-tool": "1.1.4",
+    "sovendus-release-tool": "1.2.0",
     "typescript": "5.8.2",
-    "vite": "6.2.1",
+    "vite": "6.2.2",
     "vite-plugin-dts": "4.5.3"
   }
 }
