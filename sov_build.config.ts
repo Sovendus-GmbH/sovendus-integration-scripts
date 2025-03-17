@@ -5,7 +5,7 @@ const buildConfig: BuildConfig = {
   filesToCompile: [
     {
       input: "src/scripts/index.ts",
-      output: "dist/index",
+      output: "dist/scripts/index",
       options: {
         type: "vanilla",
         packageConfig: {
