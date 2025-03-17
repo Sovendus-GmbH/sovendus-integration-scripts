@@ -50,7 +50,7 @@ export async function sovendusPageMain(
   onDone({ sovPageStatus, sovPageConfig });
 }
 
-export function initializeStatus(this: SovendusPage): SovPageStatus {
+export function initializePageStatus(this: SovendusPage): SovPageStatus {
   return {
     integrationScriptVersion: integrationScriptVersion,
     urlData: {
@@ -127,7 +127,7 @@ export async function lookForUrlParamsToStore(
   };
 }
 
-export function processConfig(
+export function processPageConfig(
   this: SovendusPage,
   sovPageConfig: SovendusPageConfig,
   sovPageStatus: SovPageStatus,
@@ -135,7 +135,7 @@ export function processConfig(
   this.handleCountryCode(sovPageConfig, sovPageStatus);
 }
 
-export function handleCountryCode(
+export function handlePageCountryCode(
   this: SovendusPage,
   sovPageConfig: SovendusPageConfig,
   sovPageStatus: SovPageStatus,

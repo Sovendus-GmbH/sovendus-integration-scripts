@@ -15,9 +15,9 @@ import {
 } from "../shared-utils";
 import {
   getSovendusUrlParameters,
-  initializeStatus,
+  initializePageStatus,
   lookForUrlParamsToStore,
-  processConfig,
+  processPageConfig,
   sovendusPageMain,
   urlParamAndCookieKeys,
 } from "./utils";
@@ -36,7 +36,7 @@ export class SovendusPage {
     onDone: ({ sovPageConfig, sovPageStatus }: SovendusPageData) => void,
   ) => Promise<void> = sovendusPageMain;
 
-  initializeStatus: () => SovPageStatus = initializeStatus;
+  initializeStatus: () => SovPageStatus = initializePageStatus;
 
   // make it async as some context might require it
   getSearchParams(): Promise<URLSearchParams> | URLSearchParams {
@@ -109,7 +109,7 @@ export class SovendusPage {
   processConfig: (
     sovPageConfig: SovendusPageConfig,
     sovPageStatus: SovPageStatus,
-  ) => void = processConfig;
+  ) => void = processPageConfig;
 
   handleCountryCode(
     sovPageConfig: SovendusPageConfig,

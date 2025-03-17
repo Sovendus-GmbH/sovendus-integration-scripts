@@ -1,4 +1,5 @@
 import type {
+  CountryCodes,
   IntegrationData,
   LanguageCodes,
   SovendusConsumerData,
@@ -8,115 +9,65 @@ import type {
   SovendusVNConversion,
   VoucherNetworkLanguage,
 } from "sovendus-integration-types";
-import {
-  CountryCodes,
-  defaultIframeContainerId,
-  LANGUAGES_BY_COUNTRIES,
-} from "sovendus-integration-types";
+import { defaultIframeContainerId } from "sovendus-integration-types";
 
-import { integrationScriptVersion } from "../constants";
 import {
   getCountryCodeFromHtmlTag,
   getCountryFromDomain,
   getCountryFromPagePath,
-  getOptimizeId,
   loggerError,
   throwErrorInNonBrowserContext,
 } from "../shared-utils";
+import {
+  getVoucherNetworkConfig,
+  getVoucherNetworkCountryBasedSettings,
+  handleCheckoutProductsConversion,
+  handleCountryCode,
+  handleOptimizeConversion,
+  handleStreet,
+  handleVoucherCode,
+  initializeStatus,
+  processConfig,
+  sovendusThankyouMain,
+  splitStreetAndStreetNumber,
+} from "./utils";
 
 export class SovendusThankyouPage {
   // Standard implementation of the Sovendus thankyou page script
   // You can extend this class and override the methods to customize the behavior
   // You can find example overrides in any of our Sovendus plugins
   // Also make sure to check out our docs for more information
-  async main(
+
+  main: (
     sovThankyouConfig: SovendusThankYouPageConfig,
     onDone: ({
       sovThankyouConfig,
       sovThankyouStatus,
     }: SovendusThankyouPageData) => void,
-  ): Promise<void> {
-    const sovThankyouStatus = this.initializeStatus();
-    try {
-      if (!sovThankyouConfig) {
-        sovThankyouStatus.status.sovThankyouConfigFound = false;
-        loggerError("sovThankyouConfig is not defined", "ThankyouPage");
-        onDone({ sovThankyouStatus, sovThankyouConfig });
-        return;
-      }
-      sovThankyouStatus.status.sovThankyouConfigFound = true;
-      await this.processConfig(sovThankyouConfig, sovThankyouStatus);
+  ) => Promise<void> = sovendusThankyouMain;
 
-      this.handleVoucherNetwork(sovThankyouConfig, sovThankyouStatus);
-      await this.handleCheckoutProductsConversion(
-        sovThankyouConfig,
-        sovThankyouStatus,
-      );
-      await this.handleOptimizeConversion(sovThankyouConfig, sovThankyouStatus);
-      sovThankyouStatus.times.integrationLoaderDone = this.getPerformanceTime();
-      sovThankyouStatus.status.integrationLoaderDone = true;
-    } catch (error) {
-      loggerError("Error in SovendusThankyouPage.main", "ThankyouPage", error);
-    }
-    onDone({ sovThankyouConfig, sovThankyouStatus });
-  }
-
-  async processConfig(
+  processConfig: (
     sovThankyouConfig: SovendusThankYouPageConfig,
     sovThankyouStatus: IntegrationData,
-  ): Promise<void> {
-    await this.handleVoucherCode(sovThankyouConfig);
-    this.handleStreet(sovThankyouConfig);
-    this.handleCountryCode(sovThankyouConfig, sovThankyouStatus);
-  }
+  ) => Promise<void> = processConfig;
 
-  handleCountryCode(
+  handleCountryCode: (
     sovThankyouConfig: SovendusThankYouPageConfig,
     sovThankyouStatus: IntegrationData,
-  ): void {
-    // using string literal "UK" intentionally despite type mismatch as some systems might return UK instead of GB
-    if (sovThankyouConfig.customerData.consumerCountry === "UK") {
-      sovThankyouConfig.customerData.consumerCountry = CountryCodes.GB;
-    }
-    if (!sovThankyouConfig.customerData.consumerCountry) {
-      sovThankyouStatus.status.countryCodePassedOnByPlugin = false;
-      sovThankyouConfig.customerData.consumerCountry =
-        sovThankyouConfig.customerData.consumerCountry ||
-        this.detectCountryCode();
-    } else {
-      sovThankyouStatus.status.countryCodePassedOnByPlugin = true;
-    }
-  }
+  ) => void = handleCountryCode;
 
-  async handleOptimizeConversion(
+  handleOptimizeConversion: (
     sovThankyouConfig: SovendusThankYouPageConfig,
     sovThankyouStatus: IntegrationData,
-  ): Promise<void> {
-    const optimizeId = getOptimizeId(
-      sovThankyouConfig.settings,
-      sovThankyouConfig.customerData.consumerCountry,
-    );
-    if (!optimizeId) {
-      return;
-    }
-    // TODO handle multiple coupon codes
-    const couponCode = sovThankyouConfig.orderData.usedCouponCodes?.[0];
-    await this.handleOptimizeConversionScript(
-      optimizeId,
-      couponCode,
-      sovThankyouConfig,
-      sovThankyouStatus,
-    );
-  }
+  ) => Promise<void> = handleOptimizeConversion;
 
   // Is async in case the plugin needs to wait for the script to load
-  // eslint-disable-next-line @typescript-eslint/require-await
-  async handleOptimizeConversionScript(
+  handleOptimizeConversionScript(
     optimizeId: string,
     couponCode: string | undefined,
     sovThankyouConfig: SovendusThankYouPageConfig,
     sovThankyouStatus: IntegrationData,
-  ): Promise<void> {
+  ): Promise<void> | void {
     throwErrorInNonBrowserContext({
       methodName: "handleOptimizeConversionScript",
       pageType: "ThankyouPage",
@@ -134,82 +85,17 @@ export class SovendusThankyouPage {
     sovThankyouStatus.status.loadedOptimize = true;
   }
 
-  handleStreet(sovThankyouConfig: SovendusThankYouPageConfig): void {
-    if (sovThankyouConfig.customerData.consumerStreetWithNumber) {
-      const [street, streetNumber] = this.splitStreetAndStreetNumber(
-        sovThankyouConfig.customerData.consumerStreetWithNumber,
-      );
-      sovThankyouConfig.customerData.consumerStreet = street;
-      sovThankyouConfig.customerData.consumerStreetNumber = streetNumber;
-    }
-  }
+  handleStreet: (sovThankyouConfig: SovendusThankYouPageConfig) => void =
+    handleStreet;
 
-  splitStreetAndStreetNumber(street: string): [string, string] {
-    const trimmedStreet = street.trim();
-    // This regex looks for a street number at the end of the string.
-    // It expects the number to start with at least one digit, possibly followed by digits, spaces, dashes, or slashes,
-    // and optionally ending with a letter.
-    const numberRegex = /(\d[\d\s/-]*[a-zA-Z]?)$/;
-    const match = trimmedStreet.match(numberRegex);
+  splitStreetAndStreetNumber: (street: string) => [string, string] =
+    splitStreetAndStreetNumber;
 
-    if (match && match.index !== undefined) {
-      const streetNumber = match[1] ? match[1].trim() : "";
-      const streetName = trimmedStreet.slice(0, match.index).trim();
-      return [streetName, streetNumber];
-    }
-    return [street, ""];
-  }
-
-  async handleVoucherCode(
+  handleVoucherCode: (
     sovThankyouConfig: SovendusThankYouPageConfig,
-  ): Promise<void> {
-    const couponFromCookie = await this.getCookie("sovCouponCode");
-    if (couponFromCookie) {
-      this.clearCookie("sovCouponCode");
-      sovThankyouConfig.orderData.usedCouponCodes = [couponFromCookie];
-      return;
-    }
-    if (sovThankyouConfig.orderData.usedCouponCode) {
-      if (!sovThankyouConfig.orderData.usedCouponCodes?.length) {
-        sovThankyouConfig.orderData.usedCouponCodes = [];
-      }
-      sovThankyouConfig.orderData.usedCouponCodes.push(
-        sovThankyouConfig.orderData.usedCouponCode,
-      );
-    }
-  }
+  ) => Promise<void> = handleVoucherCode;
 
-  initializeStatus(): IntegrationData {
-    const sovThankyouStatus: IntegrationData = {
-      integrationScriptVersion,
-      status: {
-        sovThankyouConfigFound: false,
-        integrationLoaderStarted: false,
-        integrationParametersLoaded: false,
-        checkoutProductsPixelFired: false,
-        loadedOptimize: false,
-        voucherNetworkLinkTrackingSuccess: false,
-        integrationLoaderVnCbStarted: false,
-        integrationLoaderDone: false,
-        voucherNetworkIframeContainerIdFound: false,
-        voucherNetworkIframeContainerFound: false,
-        countryCodePassedOnByPlugin: false,
-      },
-      data: {
-        orderValue: undefined,
-        orderCurrency: undefined,
-        orderId: undefined,
-        sovCouponCode: undefined,
-        sovReqToken: undefined,
-        puid: undefined,
-        sovDebugLevel: undefined,
-      },
-      times: {
-        integrationLoaderStart: this.getPerformanceTime(),
-      },
-    };
-    return sovThankyouStatus;
-  }
+  initializeStatus: () => IntegrationData = initializeStatus;
 
   handleVoucherNetwork(
     sovThankyouConfig: SovendusThankYouPageConfig,
@@ -324,28 +210,15 @@ export class SovendusThankyouPage {
     return iframeContainerId;
   }
 
-  async handleCheckoutProductsConversion(
+  handleCheckoutProductsConversion: (
     sovThankyouConfig: SovendusThankYouPageConfig,
     sovThankyouStatus: IntegrationData,
-  ): Promise<boolean> {
-    const { checkoutProducts } = sovThankyouConfig.settings;
-    if (checkoutProducts) {
-      const sovReqToken = await this.getCookie("sovReqToken");
-      if (sovReqToken) {
-        this.clearCookie("sovReqToken");
-        const pixelUrl = `https://press-order-api.sovendus.com/ext/image?sovReqToken=${decodeURIComponent(sovReqToken)}`;
-        await fetch(pixelUrl);
-        sovThankyouStatus.status.checkoutProductsPixelFired = true;
-      }
-    }
-    return false;
-  }
+  ) => Promise<boolean> = handleCheckoutProductsConversion;
 
   // make it async as some platforms might need to wait for the cookies
-  // eslint-disable-next-line @typescript-eslint/require-await
-  async getCookie(
+  getCookie(
     name: keyof SovendusPageUrlParams,
-  ): Promise<string | undefined> {
+  ): Promise<string | undefined> | string | undefined {
     throwErrorInNonBrowserContext({
       methodName: "getCookie",
       pageType: "ThankyouPage",
@@ -374,65 +247,14 @@ export class SovendusThankyouPage {
     document.cookie = cookieString;
   }
 
-  getVoucherNetworkConfig(
+  getVoucherNetworkConfig: (
     sovThankyouConfig: SovendusThankYouPageConfig,
-  ): VoucherNetworkLanguage | undefined {
-    if (sovThankyouConfig.settings.voucherNetwork.settingType === "simple") {
-      return sovThankyouConfig.settings.voucherNetwork.simple;
-    }
-    if (sovThankyouConfig.settings.voucherNetwork.settingType === "country") {
-      return this.getVoucherNetworkCountryBasedSettings(sovThankyouConfig);
-    }
-    return undefined;
-  }
+  ) => VoucherNetworkLanguage | undefined = getVoucherNetworkConfig;
 
-  getVoucherNetworkCountryBasedSettings(
+  getVoucherNetworkCountryBasedSettings: (
     sovThankyouConfig: SovendusThankYouPageConfig,
-  ): VoucherNetworkLanguage | undefined {
-    const country = sovThankyouConfig.customerData
-      .consumerCountry as CountryCodes;
-    if (!sovThankyouConfig.customerData.consumerCountry) {
-      return undefined;
-    }
-    const countrySettings =
-      sovThankyouConfig.settings.voucherNetwork.countries?.ids?.[country];
-    const languagesSettings = countrySettings?.languages;
-    if (!languagesSettings) {
-      return undefined;
-    }
-    const languagesAvailable = Object.keys(LANGUAGES_BY_COUNTRIES[country]);
-    if (languagesAvailable?.length === 1) {
-      const language = languagesAvailable[0] as LanguageCodes;
-      const languageSettings = languagesSettings[language];
-      return {
-        isEnabled: languageSettings?.isEnabled || false,
-        trafficSourceNumber: languageSettings?.trafficSourceNumber || "",
-        trafficMediumNumber: languageSettings?.trafficMediumNumber || "",
-        ...languageSettings,
-        iframeContainerQuerySelector:
-          sovThankyouConfig.settings.voucherNetwork.countries
-            ?.iframeContainerQuerySelector ||
-          languageSettings?.iframeContainerQuerySelector,
-      };
-    }
-    if (languagesAvailable?.length > 1) {
-      const languageKey =
-        sovThankyouConfig.customerData.consumerLanguage ||
-        this.detectLanguageCode();
-      const languageSettings = languagesSettings[languageKey];
-      if (!languageSettings) {
-        return undefined;
-      }
-      return {
-        ...languageSettings,
-        iframeContainerQuerySelector:
-          sovThankyouConfig.settings.voucherNetwork.countries
-            ?.iframeContainerQuerySelector ||
-          languageSettings?.iframeContainerQuerySelector,
-      };
-    }
-    return undefined;
-  }
+  ) => VoucherNetworkLanguage | undefined =
+    getVoucherNetworkCountryBasedSettings;
 
   detectLanguageCode(): LanguageCodes {
     throwErrorInNonBrowserContext({
