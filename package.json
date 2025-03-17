@@ -12,7 +12,7 @@
     "src/**/*"
   ],
   "exports": {
-    "./scripts": {
+    ".": {
       "types": "./dist/scripts/index.d.ts",
       "import": "./dist/scripts/index.mjs",
       "require": "./dist/scripts/index.cjs"
