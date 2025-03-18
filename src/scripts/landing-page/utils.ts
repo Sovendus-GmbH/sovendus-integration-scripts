@@ -9,6 +9,9 @@ import {
 
 import { integrationScriptVersion } from "../constants";
 import {
+  getCountryCodeFromHtmlTag,
+  getCountryFromDomain,
+  getCountryFromPagePath,
   getOptimizeId,
   loggerError,
   throwErrorInNonBrowserContext,
@@ -199,4 +202,12 @@ export function getPerformanceTime(): number {
     requiresWindow: true,
   });
   return window.performance?.now?.() || 0;
+}
+
+export function detectCountryCode(): CountryCodes | undefined {
+  return (
+    getCountryCodeFromHtmlTag() ||
+    getCountryFromDomain() ||
+    getCountryFromPagePath()
+  );
 }
