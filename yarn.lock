@@ -3796,10 +3796,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-lucide-react@0.482.0:
-  version "0.482.0"
-  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.482.0.tgz#0277ec1c728bfcacab0ea8c4fb4aa5cc2f155623"
-  integrity sha512-XM8PzHzSrg8ATmmO+fzf+JyYlVVdQnJjuyLDj2p4V2zEtcKeBNAqAoJIGFv1x2HSBa7kT8gpYUxwdQ0g7nypfw==
+lucide-react@0.483.0:
+  version "0.483.0"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.483.0.tgz#036c538173a8c310ac6b7d6af150543e5ecdf116"
+  integrity sha512-WldsY17Qb/T3VZdMnVQ9C3DDIP7h1ViDTHVdVGnLZcvHNg30zH/MTQ04RTORjexoGmpsXroiQXZ4QyR0kBy0FA==
 
 magic-string@^0.30.17:
   version "0.30.17"
@@ -4663,10 +4663,10 @@ sovendus-builder@1.3.4:
     tailwindcss "4.0.14"
     vite-plugin-css-injected-by-js "3.5.2"
 
-sovendus-integration-settings-ui@4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.0.3.tgz#4b6afa3022e1f5324f129daf8893feda2c280cb8"
-  integrity sha512-hC9BMsiF41zRctq7UgfZ3qn45lcfPahQ1R28CEwbI4qrLztl8rM1JOfKMKsIvVoJYgw+2Gn2QYIGIDiFg4KnnQ==
+sovendus-integration-settings-ui@4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.0.4.tgz#bbddaecc8ccd60267d95a8839d04cad86394f182"
+  integrity sha512-fMtAcs+APsH8LgTJ7NQbR8xIhni8t+GhAxaFQCl4SCkqtTasSuMjYE/e6geoa5qDGXB8kvZkyj3OronFrGZlRg==
   dependencies:
     "@hookform/resolvers" "^4.1.3"
     "@radix-ui/react-accordion" "1.2.3"
@@ -4685,20 +4685,21 @@ sovendus-integration-settings-ui@4.0.3:
     clsx "2.1.1"
     cmdk "^1.1.1"
     framer-motion "12.5.0"
-    lucide-react "0.482.0"
+    lucide-react "0.483.0"
     postcss "8.5.3"
     react "19.0.0"
     react-dom "19.0.0"
     react-hook-form "^7.54.2"
-    sovendus-integration-types "3.3.30"
+    sovendus-integration-types "3.3.31"
     tailwind-merge "3.0.2"
     tailwindcss "4.0.14"
     tailwindcss-animate "1.0.7"
+    vite "^6.2.2"
 
-sovendus-integration-types@3.3.30:
-  version "3.3.30"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-types/-/sovendus-integration-types-3.3.30.tgz#0de70512840d5cf04e38f1371931a6ab5f31bdcf"
-  integrity sha512-Gqx1G/hS1joZ6hvIFyEKsY9vAGLHyvR1Rz5G3uO72MEi6oYd38FloYCaDG+pBb0exOxn+vsOt0Z7ZYTe1LX5Rg==
+sovendus-integration-types@3.3.31:
+  version "3.3.31"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-types/-/sovendus-integration-types-3.3.31.tgz#7abc0015e514ad6fa4263524d18bb19193427131"
+  integrity sha512-gJx2+fbqYAzkwRfgEYASR7dYvEN/zXDJknprk7qFFJbV9ke6CjxND88YZQOTjsi7igLC9dC8a7rIpvjSNBmIYA==
   optionalDependencies:
     zod "^3.24.2"
 

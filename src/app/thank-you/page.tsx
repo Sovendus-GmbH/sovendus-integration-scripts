@@ -18,7 +18,7 @@ const defaultConfig: {
   orderData: {
     sessionId: "asdas",
     orderId: "13245",
-    orderValue: "1324",
+    orderValue: 1324,
     orderCurrency: "EUR",
     usedCouponCode: "1324",
   },
