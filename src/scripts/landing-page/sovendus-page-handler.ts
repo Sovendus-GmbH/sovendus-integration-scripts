@@ -49,9 +49,11 @@ export class SovendusPage {
     });
     return new URLSearchParams(window.location.search);
   }
-
-  getSovendusUrlParameters: () => Promise<SovendusPageUrlParams> =
-    getSovendusUrlParameters;
+  
+  // allow non async as some context might not require it
+  getSovendusUrlParameters: () =>
+    | Promise<SovendusPageUrlParams>
+    | SovendusPageUrlParams = getSovendusUrlParameters;
 
   lookForUrlParamsToStore: (
     sovPageStatus: SovPageStatus,
