@@ -1,6 +1,23 @@
 import type { SovendusAppSettings } from "sovendus-integration-types";
 import { CountryCodes } from "sovendus-integration-types";
 
+export function getPerformanceTime(): number {
+  throwErrorInNonBrowserContext({
+    methodName: "getPerformanceTime",
+    pageType: "LandingPage",
+    requiresWindow: true,
+  });
+  return window.performance?.now?.() || 0;
+}
+
+export function detectCountryCode(): CountryCodes | undefined {
+  return (
+    getCountryCodeFromHtmlTag() ||
+    getCountryFromDomain() ||
+    getCountryFromPagePath()
+  );
+}
+
 export function getOptimizeId(
   settings: SovendusAppSettings,
   country: CountryCodes | "UK" | undefined,

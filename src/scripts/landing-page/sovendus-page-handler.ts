@@ -8,9 +8,7 @@ import type {
 import { sovendusPageApis } from "sovendus-integration-types";
 
 import {
-  getCountryCodeFromHtmlTag,
-  getCountryFromDomain,
-  getCountryFromPagePath,
+  detectCountryCode,
   throwErrorInNonBrowserContext,
 } from "../shared-utils";
 import {
@@ -112,13 +110,7 @@ export class SovendusPage {
 
   getPerformanceTime: () => number = getPerformanceTime;
 
-  detectCountryCode(): CountryCodes | undefined {
-    return (
-      getCountryCodeFromHtmlTag() ||
-      getCountryFromDomain() ||
-      getCountryFromPagePath()
-    );
-  }
+  detectCountryCode: () => CountryCodes | undefined = detectCountryCode;
 
   unmount(): void {
     document.getElementById(this.optimizeScriptId)?.remove();

@@ -12,9 +12,8 @@ import type {
 import { defaultIframeContainerId } from "sovendus-integration-types";
 
 import {
-  getCountryCodeFromHtmlTag,
-  getCountryFromDomain,
-  getCountryFromPagePath,
+  detectCountryCode,
+  getPerformanceTime,
   loggerError,
   throwErrorInNonBrowserContext,
 } from "../shared-utils";
@@ -269,22 +268,9 @@ export class SovendusThankyouPage {
     return navigator.language.split("-")[0] as LanguageCodes;
   }
 
-  getPerformanceTime(): number {
-    throwErrorInNonBrowserContext({
-      methodName: "getPerformanceTime",
-      pageType: "ThankyouPage",
-      requiresWindow: true,
-    });
-    return window.performance?.now?.() || 0;
-  }
+  getPerformanceTime: () => number = getPerformanceTime;
 
-  detectCountryCode(): CountryCodes | undefined {
-    return (
-      getCountryCodeFromHtmlTag() ||
-      getCountryFromDomain() ||
-      getCountryFromPagePath()
-    );
-  }
+  detectCountryCode: () => CountryCodes | undefined = detectCountryCode;
 
   unmount(): void {
     // TODO

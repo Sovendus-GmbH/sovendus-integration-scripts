@@ -194,20 +194,3 @@ export function handleOptimizeScript(
   script.src = `${sovendusPageApis.optimize}${optimizeId}`;
   document.head.appendChild(script);
 }
-
-export function getPerformanceTime(): number {
-  throwErrorInNonBrowserContext({
-    methodName: "getPerformanceTime",
-    pageType: "LandingPage",
-    requiresWindow: true,
-  });
-  return window.performance?.now?.() || 0;
-}
-
-export function detectCountryCode(): CountryCodes | undefined {
-  return (
-    getCountryCodeFromHtmlTag() ||
-    getCountryFromDomain() ||
-    getCountryFromPagePath()
-  );
-}
