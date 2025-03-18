@@ -4663,10 +4663,10 @@ sovendus-builder@1.3.4:
     tailwindcss "4.0.14"
     vite-plugin-css-injected-by-js "3.5.2"
 
-sovendus-integration-settings-ui@4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.0.2.tgz#9e58270bc84e253e6aeda3bd11c8575b3a6b3118"
-  integrity sha512-ehBUB8hc21z3pU+UuVYkT4vAk4UCTYDaz8+eEaYStmaiw9vNN8z+fJYidsqAPiLHwqXoHfBE5eAZqWC5lym1pg==
+sovendus-integration-settings-ui@4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.0.3.tgz#4b6afa3022e1f5324f129daf8893feda2c280cb8"
+  integrity sha512-hC9BMsiF41zRctq7UgfZ3qn45lcfPahQ1R28CEwbI4qrLztl8rM1JOfKMKsIvVoJYgw+2Gn2QYIGIDiFg4KnnQ==
   dependencies:
     "@hookform/resolvers" "^4.1.3"
     "@radix-ui/react-accordion" "1.2.3"
@@ -4690,15 +4690,15 @@ sovendus-integration-settings-ui@4.0.2:
     react "19.0.0"
     react-dom "19.0.0"
     react-hook-form "^7.54.2"
-    sovendus-integration-types "3.3.29"
+    sovendus-integration-types "3.3.30"
     tailwind-merge "3.0.2"
     tailwindcss "4.0.14"
     tailwindcss-animate "1.0.7"
 
-sovendus-integration-types@3.3.29:
-  version "3.3.29"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-types/-/sovendus-integration-types-3.3.29.tgz#002932497b77d98c45048d88ef307e813e2c6724"
-  integrity sha512-5O1AzERztJAWacU3WGEZCi0YmewqT6Hy5yZNrCt4wO3znureDsniFO3RH1AeRp+2xozooUyIRZQ1exm40ux8cw==
+sovendus-integration-types@3.3.30:
+  version "3.3.30"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-types/-/sovendus-integration-types-3.3.30.tgz#0de70512840d5cf04e38f1371931a6ab5f31bdcf"
+  integrity sha512-Gqx1G/hS1joZ6hvIFyEKsY9vAGLHyvR1Rz5G3uO72MEi6oYd38FloYCaDG+pBb0exOxn+vsOt0Z7ZYTe1LX5Rg==
   optionalDependencies:
     zod "^3.24.2"
 
