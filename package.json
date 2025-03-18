@@ -80,7 +80,7 @@
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "sovendus-builder": "1.3.4",
-    "sovendus-integration-settings-ui": "4.0.4",
+    "sovendus-integration-settings-ui": "4.0.5",
     "sovendus-release-tool": "1.4.1",
     "typescript": "5.8.2",
     "vite": "6.2.2",
