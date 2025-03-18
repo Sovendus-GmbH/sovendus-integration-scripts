@@ -9,10 +9,10 @@ import { sovendusPageApis } from "sovendus-integration-types";
 
 import {
   detectCountryCode,
+  getPerformanceTime,
   throwErrorInNonBrowserContext,
 } from "../shared-utils";
 import {
-  getPerformanceTime,
   getSovendusUrlParameters,
   handlePageCountryCode,
   initializePageStatus,

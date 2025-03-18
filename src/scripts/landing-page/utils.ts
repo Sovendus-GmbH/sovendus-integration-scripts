@@ -9,9 +9,6 @@ import {
 
 import { integrationScriptVersion } from "../constants";
 import {
-  getCountryCodeFromHtmlTag,
-  getCountryFromDomain,
-  getCountryFromPagePath,
   getOptimizeId,
   loggerError,
   throwErrorInNonBrowserContext,
