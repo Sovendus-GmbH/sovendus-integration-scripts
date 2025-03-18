@@ -1,23 +1,27 @@
 import type {
+  CountryCodes,
   SovendusPageConfig,
   SovendusPageData,
   SovendusPageUrlParams,
   SovPageStatus,
 } from "sovendus-integration-types";
-import { CountryCodes, sovendusPageApis } from "sovendus-integration-types";
+import { sovendusPageApis } from "sovendus-integration-types";
 
 import {
   getCountryCodeFromHtmlTag,
   getCountryFromDomain,
   getCountryFromPagePath,
-  getOptimizeId,
   throwErrorInNonBrowserContext,
 } from "../shared-utils";
 import {
+  getPerformanceTime,
   getSovendusUrlParameters,
+  handlePageCountryCode,
   initializePageStatus,
   lookForUrlParamsToStore,
+  optimizeScriptId,
   processPageConfig,
+  sovendusOptimize,
   sovendusPageMain,
   urlParamAndCookieKeys,
 } from "./utils";
@@ -71,22 +75,12 @@ export class SovendusPage {
     document.cookie = cookieString;
   }
 
-  sovendusOptimize(
+  sovendusOptimize: (
     sovPageConfig: SovendusPageConfig,
     sovPageStatus: SovPageStatus,
-  ): void {
-    const optimizeId = getOptimizeId(
-      sovPageConfig.settings,
-      sovPageConfig.country,
-    );
-    if (!optimizeId) {
-      return;
-    }
-    this.handleOptimizeScript(optimizeId, sovPageConfig, sovPageStatus);
-    sovPageStatus.status.loadedOptimize = true;
-  }
+  ) => void = sovendusOptimize;
 
-  optimizeScriptId = "sovendus-optimize-script";
+  optimizeScriptId = optimizeScriptId;
 
   handleOptimizeScript(
     optimizeId: string,
@@ -111,28 +105,12 @@ export class SovendusPage {
     sovPageStatus: SovPageStatus,
   ) => void = processPageConfig;
 
-  handleCountryCode(
+  handleCountryCode: (
     sovPageConfig: SovendusPageConfig,
     sovPageStatus: SovPageStatus,
-  ): void {
-    // using string literal "UK" intentionally despite type mismatch as some systems might return UK instead of GB
-    if (sovPageConfig.country === "UK") {
-      sovPageConfig.country = CountryCodes.GB;
-    }
-    if (!sovPageConfig.country) {
-      sovPageStatus.status.countryCodePassedOnByPlugin = false;
-      sovPageConfig.country = sovPageConfig.country || this.detectCountryCode();
-    }
-  }
+  ) => void = handlePageCountryCode;
 
-  getPerformanceTime(): number {
-    throwErrorInNonBrowserContext({
-      methodName: "getPerformanceTime",
-      pageType: "LandingPage",
-      requiresWindow: true,
-    });
-    return window.performance?.now?.() || 0;
-  }
+  getPerformanceTime: () => number = getPerformanceTime;
 
   detectCountryCode(): CountryCodes | undefined {
     return (

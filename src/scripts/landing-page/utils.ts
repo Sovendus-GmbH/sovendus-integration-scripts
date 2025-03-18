@@ -1,13 +1,18 @@
 import type { SovendusPageData } from "sovendus-integration-types";
 import {
   CountryCodes,
+  sovendusPageApis,
   type SovendusPageConfig,
   type SovendusPageUrlParams,
   type SovPageStatus,
 } from "sovendus-integration-types";
 
 import { integrationScriptVersion } from "../constants";
-import { loggerError } from "../shared-utils";
+import {
+  getOptimizeId,
+  loggerError,
+  throwErrorInNonBrowserContext,
+} from "../shared-utils";
 import type { SovendusPage } from "./sovendus-page-handler";
 
 export const urlParamAndCookieKeys = [
@@ -148,4 +153,50 @@ export function handlePageCountryCode(
     sovPageStatus.status.countryCodePassedOnByPlugin = false;
     sovPageConfig.country = sovPageConfig.country || this.detectCountryCode();
   }
+}
+
+export function sovendusOptimize(
+  this: SovendusPage,
+  sovPageConfig: SovendusPageConfig,
+  sovPageStatus: SovPageStatus,
+): void {
+  const optimizeId = getOptimizeId(
+    sovPageConfig.settings,
+    sovPageConfig.country,
+  );
+  if (!optimizeId) {
+    return;
+  }
+  this.handleOptimizeScript(optimizeId, sovPageConfig, sovPageStatus);
+  sovPageStatus.status.loadedOptimize = true;
+}
+
+export const optimizeScriptId = "sovendus-optimize-script";
+
+export function handleOptimizeScript(
+  this: SovendusPage,
+  optimizeId: string,
+  _sovPageConfig: SovendusPageConfig,
+  _sovPageStatus: SovPageStatus,
+): void {
+  throwErrorInNonBrowserContext({
+    methodName: "sovendusOptimize",
+    pageType: "LandingPage",
+    requiresDocument: true,
+  });
+  const script = document.createElement("script");
+  script.async = true;
+  script.id = this.optimizeScriptId;
+  script.type = "application/javascript";
+  script.src = `${sovendusPageApis.optimize}${optimizeId}`;
+  document.head.appendChild(script);
+}
+
+export function getPerformanceTime(): number {
+  throwErrorInNonBrowserContext({
+    methodName: "getPerformanceTime",
+    pageType: "LandingPage",
+    requiresWindow: true,
+  });
+  return window.performance?.now?.() || 0;
 }
