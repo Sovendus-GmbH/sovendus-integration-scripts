@@ -23,6 +23,7 @@ import {
   handleCheckoutProductsConversion,
   handleCountryCode,
   handleOptimizeConversion,
+  handleOrderValue,
   handleStreet,
   handleVoucherCode,
   initializeStatus,
@@ -157,6 +158,9 @@ export class SovendusThankyouPage {
         this.getPerformanceTime();
     }
   }
+
+  handleOrderValue: (sovThankyouConfig: SovendusThankYouPageConfig) => void =
+    handleOrderValue;
 
   handleSovendusVoucherNetworkDivContainer(
     voucherNetworkConfig: VoucherNetworkLanguage,

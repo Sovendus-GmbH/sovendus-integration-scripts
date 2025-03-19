@@ -11,7 +11,7 @@ import {
 } from "sovendus-integration-types";
 
 import { integrationScriptVersion } from "../constants";
-import { getOptimizeId, loggerError } from "../shared-utils";
+import { getOptimizeId, loggerError, makeNumber } from "../shared-utils";
 import type { SovendusThankyouPage } from "./thankyou-page-handler";
 
 export async function sovendusThankyouMain(
@@ -55,6 +55,7 @@ export async function processConfig(
   await this.handleVoucherCode(sovThankyouConfig);
   this.handleStreet(sovThankyouConfig);
   this.handleCountryCode(sovThankyouConfig, sovThankyouStatus);
+  this.handleOrderValue(sovThankyouConfig);
 }
 
 export function handleCountryCode(
@@ -108,6 +109,45 @@ export function handleStreet(
     );
     sovThankyouConfig.customerData.consumerStreet = street;
     sovThankyouConfig.customerData.consumerStreetNumber = streetNumber;
+  }
+}
+
+export function handleOrderValue(
+  this: SovendusThankyouPage,
+  sovThankyouConfig: SovendusThankYouPageConfig,
+): void {
+  if (sovThankyouConfig.orderData.netOrderValue) {
+    sovThankyouConfig.orderData.netOrderValue = makeNumber(
+      sovThankyouConfig.orderData.netOrderValue,
+    );
+  } else {
+    const grossOrderValue = makeNumber(
+      sovThankyouConfig.orderData.grossOrderValue,
+    );
+    if (typeof grossOrderValue === "undefined") {
+      sovThankyouConfig.orderData.netOrderValue = undefined;
+    } else {
+      const taxValue = makeNumber(sovThankyouConfig.orderData.taxValue);
+      if (typeof taxValue === "undefined") {
+        loggerError(
+          "taxValue is not defined in SovendusThankyouPage.calculateOrderValue",
+          "ThankyouPage",
+        );
+      }
+      const shippingValue = makeNumber(
+        sovThankyouConfig.orderData.shippingValue,
+      );
+      if (typeof shippingValue === "undefined") {
+        loggerError(
+          "shippingValue is not defined in SovendusThankyouPage.calculateOrderValue",
+          "ThankyouPage",
+        );
+      }
+      sovThankyouConfig.orderData.netOrderValue = Math.max(
+        0,
+        grossOrderValue - (taxValue || 0) - (shippingValue || 0),
+      );
+    }
   }
 }
 

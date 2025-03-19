@@ -1,4 +1,7 @@
-import type { SovendusAppSettings } from "sovendus-integration-types";
+import type {
+  ExplicitAnyType,
+  SovendusAppSettings,
+} from "sovendus-integration-types";
 import { CountryCodes } from "sovendus-integration-types";
 
 export function getPerformanceTime(): number {
@@ -150,9 +153,39 @@ export function getCountryFromPagePath(): CountryCodes | undefined {
   return castToCountry(country?.toUpperCase());
 }
 
-function castToCountry(value: string | undefined): CountryCodes | undefined {
+export function castToCountry(
+  value: string | undefined,
+): CountryCodes | undefined {
   if (value && Object.values(CountryCodes).includes(value as CountryCodes)) {
     return value as CountryCodes;
+  }
+  return undefined;
+}
+
+export function makeString(value: ExplicitAnyType): string | undefined {
+  // make sure its either a valid string or undefined
+  if (value === undefined) {
+    return undefined;
+  }
+  if (typeof value === "string") {
+    return value;
+  }
+  return undefined;
+}
+
+export function makeNumber(value: ExplicitAnyType): number | undefined {
+  // make sure its either a valid number or number string or undefined
+  if (value === undefined) {
+    return undefined;
+  }
+  if (typeof value === "number") {
+    return value;
+  }
+  if (typeof value === "string") {
+    const number = Number(value);
+    if (!Number.isNaN(number)) {
+      return number;
+    }
   }
   return undefined;
 }
