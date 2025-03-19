@@ -1,5 +1,6 @@
 import type {
   CountryCodes,
+  IframeContainerQuerySelectorSettings,
   IntegrationData,
   LanguageCodes,
   SovendusConsumerData,
@@ -9,7 +10,7 @@ import type {
   SovendusVNConversion,
   VoucherNetworkLanguage,
 } from "sovendus-integration-types";
-import { defaultIframeContainerId } from "sovendus-integration-types";
+import { defaultIframeContainerQuerySelector } from "sovendus-integration-types";
 
 import {
   detectCountryCode,
@@ -166,51 +167,57 @@ export class SovendusThankyouPage {
     voucherNetworkConfig: VoucherNetworkLanguage,
     sovThankyouConfig: SovendusThankYouPageConfig,
     sovThankyouStatus: IntegrationData,
-  ): string {
+  ): string  {
     throwErrorInNonBrowserContext({
       methodName: "handleSovendusVoucherNetworkDivContainer",
       pageType: "ThankyouPage",
       requiresDocument: true,
       requiresWindow: true,
     });
-    const iframeContainerId =
-      sovThankyouConfig.iframeContainerId || defaultIframeContainerId;
-    const rootElement =
-      iframeContainerId && document.getElementById(iframeContainerId);
-    if (!rootElement) {
-      if (voucherNetworkConfig.iframeContainerQuerySelector) {
-        const iframeContainer = document.querySelector(
-          voucherNetworkConfig.iframeContainerQuerySelector,
-        );
-        if (iframeContainer) {
-          const sovendusDiv = document.createElement("div");
-          sovendusDiv.id = defaultIframeContainerId;
-          iframeContainer.appendChild(sovendusDiv);
-          sovThankyouStatus.status.voucherNetworkIframeContainerIdFound = true;
-          sovThankyouStatus.status.voucherNetworkIframeContainerFound = true;
-        } else {
-          sovThankyouStatus.status.voucherNetworkIframeContainerFound = false;
-          sovThankyouStatus.status.voucherNetworkIframeContainerIdFound = true;
-          loggerError(
-            `Voucher Network custom iframe container ${voucherNetworkConfig.iframeContainerQuerySelector} not found`,
-            "ThankyouPage",
-          );
-          return "";
-        }
-      } else {
-        sovThankyouStatus.status.voucherNetworkIframeContainerFound = false;
-        sovThankyouStatus.status.voucherNetworkIframeContainerIdFound = false;
-        loggerError(
-          "Voucher Network iframe container not found",
-          "ThankyouPage",
-        );
-        return "";
+    const iframeContainerSettings = this.getIframeQuerySelector(
+      voucherNetworkConfig,
+      sovThankyouConfig,
+    );
+    const rootElement = document.querySelector(
+      iframeContainerSettings.selector,
+    );
+    if (rootElement) {
+      if (iframeContainerSettings.where === "none") {
+        return rootElement.id;
       }
-    } else {
+      const sovendusDiv = document.createElement("div");
+      sovendusDiv.id = "sovendus-container";
+      rootElement.insertAdjacentElement(
+        iframeContainerSettings.where,
+        sovendusDiv,
+      );
       sovThankyouStatus.status.voucherNetworkIframeContainerFound = true;
-      sovThankyouStatus.status.voucherNetworkIframeContainerIdFound = true;
+      return sovendusDiv.id;
+    } else {
+      sovThankyouStatus.status.voucherNetworkIframeContainerFound = false;
+      loggerError(
+        `Voucher Network container query selector ${iframeContainerSettings.selector} not found`,
+        "ThankyouPage",
+      );
+      return "";
     }
-    return iframeContainerId;
+  }
+
+  getIframeQuerySelector(
+    voucherNetworkConfig: VoucherNetworkLanguage,
+    sovThankyouConfig: SovendusThankYouPageConfig,
+  ): IframeContainerQuerySelectorSettings {
+    if (voucherNetworkConfig.iframeContainerQuerySelector) {
+      return voucherNetworkConfig.iframeContainerQuerySelector;
+    }
+    if (sovThankyouConfig.iframeContainerQuerySelector) {
+      return sovThankyouConfig.iframeContainerQuerySelector;
+    }
+    loggerError(
+      "No iframeContainerQuerySelector found in SovendusThankYouPageConfig, trying default",
+      "ThankyouPage",
+    );
+    return defaultIframeContainerQuerySelector;
   }
 
   handleCheckoutProductsConversion: (
