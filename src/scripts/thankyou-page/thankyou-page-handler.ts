@@ -167,7 +167,7 @@ export class SovendusThankyouPage {
     voucherNetworkConfig: VoucherNetworkLanguage,
     sovThankyouConfig: SovendusThankYouPageConfig,
     sovThankyouStatus: IntegrationData,
-  ): string  {
+  ): string {
     throwErrorInNonBrowserContext({
       methodName: "handleSovendusVoucherNetworkDivContainer",
       pageType: "ThankyouPage",
