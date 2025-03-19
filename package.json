@@ -57,7 +57,7 @@
     }
   ],
   "dependencies": {
-    "sovendus-integration-types": "3.4.0"
+    "sovendus-integration-types": "3.5.1"
   },
   "devDependencies": {
     "@types/eslint": "9.6.1",
@@ -80,7 +80,7 @@
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "sovendus-builder": "1.3.4",
-    "sovendus-integration-settings-ui": "4.0.6",
+    "sovendus-integration-settings-ui": "4.0.8",
     "sovendus-release-tool": "1.4.1",
     "typescript": "5.8.2",
     "vite": "6.2.2",

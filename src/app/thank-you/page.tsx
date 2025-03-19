@@ -18,7 +18,13 @@ const defaultConfig: {
   orderData: {
     sessionId: "asdas",
     orderId: "13245",
-    orderValue: 1324,
+    orderValue: {
+      // netOrderValue: 1100,
+      grossOrderValue: 1324,
+      shippingValue: 12,
+      taxPercent: 20,
+      // taxValue: 15,
+    },
     orderCurrency: "EUR",
     usedCouponCode: "1324",
   },
