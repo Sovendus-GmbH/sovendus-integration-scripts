@@ -77,7 +77,7 @@ export class SovendusThankyouPage {
     script.type = "text/javascript";
     script.async = true;
     script.src = `https://www.sovopt.com/${optimizeId}/conversion/?ordervalue=${
-      sovThankyouConfig.orderData.netOrderValue
+      sovThankyouConfig.orderData.orderValue?.netOrderValue
     }&ordernumber=${sovThankyouConfig.orderData.orderId}&vouchercode=${
       couponCode
     }&email=${sovThankyouConfig.customerData.consumerEmail}`;
@@ -127,7 +127,7 @@ export class SovendusThankyouPage {
         trafficMediumNumber: voucherNetworkConfig.trafficMediumNumber,
         sessionId: sovThankyouConfig.orderData.sessionId,
         orderId: sovThankyouConfig.orderData.orderId,
-        orderValue: sovThankyouConfig.orderData.netOrderValue,
+        orderValue: sovThankyouConfig.orderData.orderValue?.netOrderValue,
         orderCurrency: sovThankyouConfig.orderData.orderCurrency,
         usedCouponCode: couponCode,
         iframeContainerId: iframeContainerId,
