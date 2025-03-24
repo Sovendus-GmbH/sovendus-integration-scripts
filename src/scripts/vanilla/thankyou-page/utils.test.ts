@@ -1,4 +1,3 @@
-import { CountryCodes } from "sovendus-integration-types";
 import { describe, expect, it } from "vitest";
 
 import { splitStreetAndStreetNumber } from "./utils";
@@ -233,20 +232,25 @@ describe("splitStreetAndStreetNumber", () => {
 
   // Address with country code
   it("should handle address with country code", () => {
-    expect(
-      splitStreetAndStreetNumber("Hauptstrasse 123", CountryCodes.DE),
-    ).toEqual(["Hauptstrasse", "123"]);
-    expect(
-      splitStreetAndStreetNumber("10 Downing Street", CountryCodes.GB),
-    ).toEqual(["Downing Street", "10"]);
-    expect(
-      splitStreetAndStreetNumber("221B Baker Street", CountryCodes.GB),
-    ).toEqual(["Baker Street", "221B"]);
-    expect(
-      splitStreetAndStreetNumber("O'Connell Street 33", CountryCodes.IE),
-    ).toEqual(["O'Connell Street", "33"]);
-    expect(
-      splitStreetAndStreetNumber("33 O'Connell Street", CountryCodes.IE),
-    ).toEqual(["O'Connell Street", "33"]);
+    expect(splitStreetAndStreetNumber("Hauptstrasse 123")).toEqual([
+      "Hauptstrasse",
+      "123",
+    ]);
+    expect(splitStreetAndStreetNumber("10 Downing Street")).toEqual([
+      "Downing Street",
+      "10",
+    ]);
+    expect(splitStreetAndStreetNumber("221B Baker Street")).toEqual([
+      "Baker Street",
+      "221B",
+    ]);
+    expect(splitStreetAndStreetNumber("O'Connell Street 33")).toEqual([
+      "O'Connell Street",
+      "33",
+    ]);
+    expect(splitStreetAndStreetNumber("33 O'Connell Street")).toEqual([
+      "O'Connell Street",
+      "33",
+    ]);
   });
 });
