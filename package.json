@@ -4,23 +4,28 @@
   "license": "GPL-3.0-only",
   "private": false,
   "description": "Sovendus Integration Scripts - checkout the docs at developer-hub.sovendus.com",
-  "types": "./dist/scripts/index.d.ts",
-  "main": "./dist/scripts/index.mjs",
-  "module": "./dist/scripts/index.mjs",
+  "types": "./dist/scripts/vanilla/index.d.ts",
+  "main": "./dist/scripts/vanilla/index.mjs",
+  "module": "./dist/scripts/vanilla/index.mjs",
   "files": [
     "dist/**/*",
     "src/**/*"
   ],
   "exports": {
     ".": {
-      "types": "./dist/scripts/index.d.ts",
-      "import": "./dist/scripts/index.mjs",
-      "require": "./dist/scripts/index.cjs"
+      "types": "./dist/scripts/vanilla/index.d.ts",
+      "import": "./dist/scripts/vanilla/index.mjs",
+      "require": "./dist/scripts/vanilla/index.cjs"
     },
     "./minified": {
       "types": "./dist/minified/index.d.ts",
       "import": "./dist/minified/index.mjs",
       "require": "./dist/minified/index.cjs"
+    },
+    "./react": {
+      "types": "./dist/scripts/react/index.d.ts",
+      "import": "./dist/scripts/react/index.mjs",
+      "require": "./dist/scripts/react/index.cjs"
     },
     "./demo": {
       "types": "./dist/demo/index.d.ts",
@@ -31,8 +36,11 @@
   },
   "scripts": {
     "dev": "next dev",
+    "preview": "next build && next start",
     "build": "sovendus-builder build",
     "lint": "eslint --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "pub": "sovendus-release-tool"
   },
   "repository": {
@@ -57,33 +65,44 @@
     }
   ],
   "dependencies": {
-    "sovendus-integration-types": "3.7.1"
+    "sovendus-integration-types": "3.8.3"
   },
   "devDependencies": {
     "@types/eslint": "9.6.1",
-    "@types/node": "22.13.10",
+    "@types/node": "22.13.13",
     "@types/react": "19.0.12",
-    "@typescript-eslint/eslint-plugin": "8.26.1",
-    "@typescript-eslint/parser": "8.26.1",
-    "eslint": "9.22.0",
+    "@typescript-eslint/eslint-plugin": "8.27.0",
+    "@typescript-eslint/parser": "8.27.0",
+    "autoprefixer": "10.4.21",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "cmdk": "^1.1.1",
+    "postcss": "8.5.3",
+    "tailwind-merge": "3.0.2",
+    "tailwindcss": "4.0.15",
+    "tailwindcss-animate": "1.0.7",
+    "@tailwindcss/postcss": "4.0.15",
+    "eslint": "9.23.0",
     "eslint-config-prettier": "10.1.1",
+    "eslint-import-resolver-typescript": "^4.2.2",
     "eslint-plugin-import": "2.31.0",
-    "eslint-plugin-prettier": "5.2.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "5.2.4",
     "eslint-plugin-react-compiler": "19.0.0-beta-e1e972c-20250221",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-plugin-unused-imports": "4.1.4",
     "next": "15.2.3",
     "prettier": "3.5.3",
-    "prettier-eslint": "16.3.0",
     "prettier-plugin-sort-json": "4.1.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "sovendus-builder": "1.3.4",
-    "sovendus-integration-settings-ui": "4.0.11",
+    "sovendus-builder": "1.3.6",
+    "sovendus-integration-settings-ui": "4.2.5",
     "sovendus-release-tool": "1.4.1",
     "typescript": "5.8.2",
-    "vite": "6.2.2",
-    "vite-plugin-dts": "4.5.3"
+    "vite": "6.2.3",
+    "vite-plugin-dts": "4.5.3",
+    "vitest": "^3.0.9"
   }
 }

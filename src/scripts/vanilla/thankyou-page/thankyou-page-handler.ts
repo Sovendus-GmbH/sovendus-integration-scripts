@@ -18,7 +18,9 @@ import {
   loggerError,
   throwErrorInNonBrowserContext,
 } from "../shared-utils";
+import { cleanUp } from "./unmount";
 import {
+  flexibleIframeScriptId,
   getVoucherNetworkConfig,
   getVoucherNetworkCountryBasedSettings,
   handleCheckoutProductsConversion,
@@ -103,7 +105,7 @@ export class SovendusThankyouPage {
     sovThankyouStatus: IntegrationData,
   ): void {
     throwErrorInNonBrowserContext({
-      methodName: "handleSovendusVoucherNetworkDivContainer",
+      methodName: "handleVoucherNetwork",
       pageType: "ThankyouPage",
       requiresDocument: true,
       requiresWindow: true,
@@ -145,12 +147,19 @@ export class SovendusThankyouPage {
         consumerCity: sovThankyouConfig.customerData.consumerCity,
         consumerCountry: sovThankyouConfig.customerData.consumerCountry,
         consumerPhone: sovThankyouConfig.customerData.consumerPhone,
+        consumerDateOfBirth: sovThankyouConfig.customerData.consumerDateOfBirth,
+        consumerYearOfBirth: sovThankyouConfig.customerData.consumerYearOfBirth,
+        consumerEmailHash: sovThankyouConfig.customerData.consumerEmailHash,
+        consumerSalutation: sovThankyouConfig.customerData.consumerSalutation,
+        consumerStreetWithNumber:
+          sovThankyouConfig.customerData.consumerStreetWithNumber,
         consumerLanguage: sovThankyouConfig.customerData.consumerLanguage,
       };
 
       const script = document.createElement("script");
       script.type = "text/javascript";
       script.async = true;
+      script.id = flexibleIframeScriptId;
       script.src =
         "https://api.sovendus.com/sovabo/common/js/flexibleIframe.js";
       document.body.appendChild(script);
@@ -284,7 +293,7 @@ export class SovendusThankyouPage {
   detectCountryCode: () => CountryCodes | undefined = detectCountryCode;
 
   unmount(): void {
-    // TODO
+    cleanUp();
   }
 }
 

@@ -2,7 +2,7 @@ import type {
   ExplicitAnyType,
   SovendusAppSettings,
 } from "sovendus-integration-types";
-import { CountryCodes } from "sovendus-integration-types";
+import { CountryCodes, SettingsType } from "sovendus-integration-types";
 
 export function getPerformanceTime(): number {
   throwErrorInNonBrowserContext({
@@ -25,7 +25,7 @@ export function getOptimizeId(
   settings: SovendusAppSettings,
   country: CountryCodes | "UK" | undefined,
 ): string | undefined {
-  if (settings?.optimize?.settingsType === "simple") {
+  if (settings?.optimize?.settingsType === SettingsType.SIMPLE) {
     if (
       settings?.optimize?.simple?.isEnabled !== false &&
       settings?.optimize?.simple?.optimizeId

@@ -2,14 +2,20 @@
 
 import type { JSX } from "react";
 import { useEffect, useState } from "react";
+import {
+  getSettings,
+  initialSettings,
+} from "sovendus-integration-settings-ui/demo-style-less";
+import type { SovendusAppSettings } from "sovendus-integration-types";
 import { CountryCodes } from "sovendus-integration-types";
 import type {
   SovendusConsumerData,
   SovendusConversionsData,
 } from "sovendus-integration-types/src";
 
+import { SovendusThankyouPageReact } from "../../scripts/react/thankyou";
+import { loggerInfo } from "../../scripts/vanilla";
 import { SovendusThankyouPageDemoForm } from "./demo-form";
-import { SovendusThankyouPageDemoScript } from "./script";
 
 const defaultConfig: {
   orderData: SovendusConversionsData;
@@ -34,17 +40,27 @@ const defaultConfig: {
     consumerLastName: "Doe",
     consumerEmail: "John.doe@bla.bla",
     consumerCountry: CountryCodes.DE,
-    consumerZipcode: "",
+    consumerZipcode: "84359",
     consumerPhone: "0123456789",
     consumerYearOfBirth: "1991",
     consumerDateOfBirth: "01.01.1991",
-    consumerStreet: "test street",
-    consumerStreetNumber: "1",
+    consumerStreetWithNumber: "1 test street",
     consumerCity: "testCity",
   },
 };
 
 export default function SovendusThankYouPageDemo(): JSX.Element {
+  const [settings] = useState<SovendusAppSettings>(() => {
+    if (typeof window !== "undefined") {
+      const settings = localStorage.getItem("sovendus-settings");
+      if (settings) {
+        return JSON.parse(settings) as SovendusAppSettings;
+      }
+      return getSettings();
+    }
+    return initialSettings;
+  });
+
   const [config, setConfig] = useState<{
     orderData: SovendusConversionsData;
     customerData: SovendusConsumerData;
@@ -69,17 +85,29 @@ export default function SovendusThankYouPageDemo(): JSX.Element {
   useEffect(() => {
     localStorage.setItem("thankyouConfig", JSON.stringify(config));
   }, [config]);
-  const containerId = "sovendus-thankyou-container";
+
   return (
     <div>
       <h1>This is a thank you page</h1>
       <SovendusThankyouPageDemoForm config={config} setConfig={setConfig} />
-      <SovendusThankyouPageDemoScript
-        config={config}
-        containerId={containerId}
-      />
       <h2>Here should be the inline integration</h2>
-      <div id={containerId} />
+      <SovendusThankyouPageReact
+        integrationType={"sovendus-integration-scripts-preview"}
+        sovDebugLevel={"debug"}
+        orderData={config.orderData}
+        customerData={config.customerData}
+        settings={settings}
+        onDone={(sovThankyouStatus, sovThankyouConfig) => {
+          loggerInfo(
+            "Sovendus Thankyou Page done",
+            "ThankyouPage",
+            "sovThankyouStatus",
+            sovThankyouStatus,
+            "sovThankyouConfig",
+            sovThankyouConfig,
+          );
+        }}
+      />
     </div>
   );
 }

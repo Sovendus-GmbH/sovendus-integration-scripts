@@ -1,18 +1,13 @@
 import SovendusLandingPageDemoForm from "./landing-page/demo-form";
 import SovendusLandingPageDemo from "./landing-page/page";
-import SovendusLandingPageDemoScript from "./landing-page/script";
+import EmptyDemoPage from "./page";
 import { SovendusThankyouPageDemoForm } from "./thank-you/demo-form";
 import SovendusThankYouPageDemo from "./thank-you/page";
-import { SovendusThankyouPageDemoScript } from "./thank-you/script";
 
 export {
-  SovendusThankYouPageDemo,
-  SovendusThankyouPageDemoForm,
-  SovendusThankyouPageDemoScript,
-};
-
-export {
+  EmptyDemoPage,
   SovendusLandingPageDemo,
   SovendusLandingPageDemoForm,
-  SovendusLandingPageDemoScript,
+  SovendusThankYouPageDemo,
+  SovendusThankyouPageDemoForm,
 };

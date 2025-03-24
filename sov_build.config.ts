@@ -4,29 +4,26 @@ const buildConfig: BuildConfig = {
   foldersToClean: ["dist"],
   filesToCompile: [
     {
-      input: "src/scripts/index.ts",
-      output: "dist/scripts/index",
+      input: "src/scripts/vanilla/index.ts",
+      output: "dist/scripts/vanilla/index",
       options: {
         type: "vanilla",
         packageConfig: {
           isPackage: true,
-          dtsEntryRoot: "src/scripts",
-          dtsInclude: ["src/scripts/**/*"],
+          dtsEntryRoot: "src/scripts/vanilla",
+          dtsInclude: ["src/scripts/vanilla/**/*"],
         },
       },
     },
     {
-      input: "src/scripts/index.ts",
-      output: "dist/minified/index",
+      input: "src/scripts/react/index.ts",
+      output: "dist/scripts/react/index",
       options: {
-        type: "vanilla",
-        buildOptions: {
-          minify: true,
-        },
+        type: "react",
         packageConfig: {
           isPackage: true,
-          dtsEntryRoot: "src/scripts",
-          dtsInclude: ["src/scripts/**/*"],
+          dtsEntryRoot: "src/scripts/react",
+          dtsInclude: ["src/scripts/react/**/*"],
         },
       },
     },

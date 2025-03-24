@@ -6,6 +6,7 @@ import type {
   SetStateAction,
 } from "react";
 import type {
+  OrderValueData,
   SovendusConsumerData,
   SovendusConversionsData,
 } from "sovendus-integration-types/src";
@@ -33,6 +34,20 @@ export function SovendusThankyouPageDemoForm({
     }));
   };
 
+  const handleOrderValueChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
+    setConfig((prevData) => ({
+      ...prevData,
+      orderData: {
+        ...prevData.orderData,
+        orderValue: {
+          ...(prevData.orderData.orderValue || {}),
+          [name]: value,
+        },
+      },
+    }));
+  };
+
   const handleConsumerChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
     setConfig((prevData) => ({
@@ -50,6 +65,41 @@ export function SovendusThankyouPageDemoForm({
     <form onSubmit={handleFormSubmit} className="space-y-4">
       <h3 className="text-lg font-semibold">Iframe Data</h3>
       {Object.keys(config.orderData).map((key) => {
+        // Special handling for orderValue which is an object
+        if (key === "orderValue") {
+          const orderValue = config.orderData.orderValue || {};
+          return (
+            <div key={key} className="mt-2">
+              <h4 className="text-md font-medium ml-4">Order Value:</h4>
+              <div className="ml-8 space-y-2">
+                {[
+                  "netOrderValue",
+                  "grossOrderValue",
+                  "shippingValue",
+                  "taxValue",
+                  "taxPercent",
+                ].map((valueKey) => (
+                  <div key={valueKey} className="flex items-center">
+                    <label className="w-32 text-right mr-4">{valueKey}:</label>
+                    <input
+                      type="text"
+                      name={valueKey}
+                      value={
+                        (orderValue[valueKey as keyof OrderValueData] as
+                          | string
+                          | undefined) || ""
+                      }
+                      onChange={handleOrderValueChange}
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        }
+
+        // Regular fields
         const value = config.orderData[key as keyof typeof config.orderData];
         return (
           <div key={key} className="flex items-center">
