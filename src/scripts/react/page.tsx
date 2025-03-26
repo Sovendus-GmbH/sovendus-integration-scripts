@@ -11,8 +11,7 @@ import type {
 
 import { SovendusPage } from "../vanilla/landing-page/sovendus-page-handler";
 
-export interface SovendusLandingPageReactProps
-  extends SovendusPageConfig {
+export interface SovendusLandingPageReactProps extends SovendusPageConfig {
   onDone?: (
     sovPageStatus: SovPageStatus,
     sovPageConfig: SovendusPageConfig,
