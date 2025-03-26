@@ -11,7 +11,7 @@ import type {
 
 import { SovendusPage } from "../vanilla/landing-page/sovendus-page-handler";
 
-export interface SovendusLandingPageReactScriptProps
+export interface SovendusLandingPageReactProps
   extends SovendusPageConfig {
   onDone?: (
     sovPageStatus: SovPageStatus,
@@ -20,7 +20,7 @@ export interface SovendusLandingPageReactScriptProps
 }
 
 export function SovendusLandingPageReact(
-  props: SovendusLandingPageReactScriptProps,
+  props: SovendusLandingPageReactProps,
 ): JSX.Element {
   return useMemo(() => {
     return <Handler {...props} />;
@@ -32,7 +32,7 @@ export function SovendusLandingPageReact(
 function Handler({
   onDone,
   ...sovPageConfig
-}: SovendusLandingPageReactScriptProps): JSX.Element {
+}: SovendusLandingPageReactProps): JSX.Element {
   useEffect(() => {
     if (typeof window === "undefined") {
       return;
