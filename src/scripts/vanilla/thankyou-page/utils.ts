@@ -347,7 +347,7 @@ export function getVoucherNetworkCountryBasedSettings(
     const languageKey =
       sovThankyouConfig.customerData.consumerLanguage ||
       this.detectLanguageCode();
-    const languageSettings = languagesSettings[languageKey];
+    const languageSettings = languageKey && languagesSettings[languageKey];
     if (!languageSettings) {
       return undefined;
     }
