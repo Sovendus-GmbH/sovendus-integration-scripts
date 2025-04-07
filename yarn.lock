@@ -4155,10 +4155,10 @@ source-map@~0.6.1:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
-sovendus-builder@1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/sovendus-builder/-/sovendus-builder-1.4.2.tgz#0aff9a9b27c3804895324a94131ffbc0fe8e7379"
-  integrity sha512-Tk/riyqU7vIa5OtsxdVvsW7VwfQXPd0lIYFJ6RXN7fpgvksJH+ejwwb1s0LTMAJl8XF3xNCNBTuBfT+csNInkQ==
+sovendus-builder@1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/sovendus-builder/-/sovendus-builder-1.4.4.tgz#5d8abaecfd0f4b81a943ef54d4b3c0cae3a275d3"
+  integrity sha512-JO51rZwMVZakwO26svLF9WIQ4Dk3cOiapjNhIgrj8y7PhXUZOJNTkX/10jwmR0RTnX0zg2azPqdJ6TnA4gquuA==
   dependencies:
     archiver "7.0.1"
     commander "13.1.0"
@@ -4175,10 +4175,10 @@ sovendus-builder@1.4.2:
     tailwindcss "4.1.3"
     vite-plugin-css-injected-by-js "3.5.2"
 
-sovendus-integration-settings-ui@4.2.10:
-  version "4.2.10"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.2.10.tgz#c3f5bf7651b6e21fe0ca54b1406486bd93525ab3"
-  integrity sha512-RKHxZwmJJsCpFso6lk0Qv9jb7DDcZhl0y++LyqckTm6MB/6Y/6ahUEZCBXi7QRk/ykQtkx8sfSjZN6qfj6sY1g==
+sovendus-integration-settings-ui@4.2.13:
+  version "4.2.13"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.2.13.tgz#aec7a645e6948fcb353c6e6964417986c23fe114"
+  integrity sha512-KpHVCQSHbjzIp91ogH5GORn1AMiutRYOwGWzwKHLte+/qebbOVAKWsNPF+Kync+CW62Dx8Rjql2nUTTyEc3Xhg==
   dependencies:
     sovendus-integration-types "3.8.8"
 
