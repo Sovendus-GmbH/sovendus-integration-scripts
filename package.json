@@ -1,6 +1,6 @@
 {
   "name": "sovendus-integration-scripts",
-  "version": "3.9.4",
+  "version": "3.9.5",
   "license": "GPL-3.0-only",
   "private": false,
   "description": "Sovendus Integration Scripts - checkout the docs at developer-hub.sovendus.com",
@@ -65,7 +65,7 @@
     }
   ],
   "dependencies": {
-    "sovendus-integration-types": "3.8.7"
+    "sovendus-integration-types": "3.8.8"
   },
   "devDependencies": {
     "@types/eslint": "9.6.1",
@@ -88,7 +88,7 @@
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "5.2.6",
-    "eslint-plugin-react-compiler": "19.0.0-beta-e993439-20250328",
+    "eslint-plugin-react-compiler": "19.0.0-beta-e993439-20250405",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-plugin-unused-imports": "4.1.4",
@@ -98,7 +98,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "sovendus-builder": "1.4.2",
-    "sovendus-integration-settings-ui": "4.2.8",
+    "sovendus-integration-settings-ui": "4.2.9",
     "sovendus-release-tool": "1.4.4",
     "typescript": "5.8.3",
     "vite": "6.2.5",

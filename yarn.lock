@@ -2807,10 +2807,10 @@ eslint-plugin-prettier@5.2.6:
     prettier-linter-helpers "^1.0.0"
     synckit "^0.11.0"
 
-eslint-plugin-react-compiler@19.0.0-beta-e993439-20250328:
-  version "19.0.0-beta-e993439-20250328"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react-compiler/-/eslint-plugin-react-compiler-19.0.0-beta-e993439-20250328.tgz#433a402be3c6e086841d3fcfb34bc1c05a6902ed"
-  integrity sha512-7hTFaGMz0YYLtkStJFBHjr2zOZwULxg2qCJ8pNYlaOqq2zL1/+Wg7BiDwrPZQIpAn3YQbBu1SHF509M3qpTyIg==
+eslint-plugin-react-compiler@19.0.0-beta-e993439-20250405:
+  version "19.0.0-beta-e993439-20250405"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-compiler/-/eslint-plugin-react-compiler-19.0.0-beta-e993439-20250405.tgz#fbb3799ebb9d00d27a8bd0343481aef809d2c499"
+  integrity sha512-8ZQU4qGc8NOfsM7u7tf7gXmZ+d4tSK+7BFb+Fvs4s9ItQ12m/G6ttSGxompH/Jq7nXgnJ20EqQRshwVG6GwUdA==
   dependencies:
     "@babel/core" "^7.24.4"
     "@babel/parser" "^7.24.4"
@@ -4603,10 +4603,10 @@ sovendus-builder@1.4.2:
     tailwindcss "4.1.3"
     vite-plugin-css-injected-by-js "3.5.2"
 
-sovendus-integration-settings-ui@4.2.8:
-  version "4.2.8"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.2.8.tgz#fd6f09828907325284c24cdb17922c546ed7730f"
-  integrity sha512-7tciTZq7TdjDIpDvY67M7cD/tnJZfCGUGfDR+nKapOzHQFeUiHizNMHq0zU4Jjg8eAct5kVfTHFDuHnVmgKozQ==
+sovendus-integration-settings-ui@4.2.9:
+  version "4.2.9"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.2.9.tgz#f995b80b7763a5b743a12dffa10d0a31fd1c4cc6"
+  integrity sha512-QnGJwHmcAMEaQnDwSc5SNbnY/Bm8zsueoYh9tHXRqzHagXzic1V2gkVq0TpDqyC+YOZXM52j8JCcr9YuRicHTw==
   dependencies:
     "@hookform/resolvers" "^5.0.1"
     "@radix-ui/react-accordion" "1.2.3"
@@ -4630,16 +4630,16 @@ sovendus-integration-settings-ui@4.2.8:
     react "19.1.0"
     react-dom "19.1.0"
     react-hook-form "^7.55.0"
-    sovendus-integration-types "3.8.7"
+    sovendus-integration-types "3.8.8"
     tailwind-merge "3.2.0"
     tailwindcss "4.1.3"
     tailwindcss-animate "1.0.7"
     vite "^6.2.5"
 
-sovendus-integration-types@3.8.7:
-  version "3.8.7"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-types/-/sovendus-integration-types-3.8.7.tgz#fa4d70b017196fe1ec5e86d8daaffd9066aa6155"
-  integrity sha512-ZfAA685djD7xhe4dGYuE6Vq6eYN0S/EfBV2A8IW7dRwMS/MGWMw/oEidDzeTyMbNTR59F2l+XHMnjJBIPwdUxg==
+sovendus-integration-types@3.8.8:
+  version "3.8.8"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-types/-/sovendus-integration-types-3.8.8.tgz#e3f20a9c8a6ebc0a943526daaddf2ee482dd377a"
+  integrity sha512-iZ0Umv5/G0C8dP2ukwx0BdwZDudei1nxJ2jcbTsjR6iATja3HFD7p5xnGw64wKWQtcWIeUVkH9/7uq3PwJw27A==
   optionalDependencies:
     zod "^3.24.2"
 
