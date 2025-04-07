@@ -94,7 +94,7 @@
     "prettier": "3.5.3",
     "prettier-plugin-sort-json": "4.1.1",
     "sovendus-builder": "1.4.2",
-    "sovendus-integration-settings-ui": "4.2.9",
+    "sovendus-integration-settings-ui": "4.2.10",
     "sovendus-release-tool": "1.4.4",
     "typescript": "5.8.3",
     "vite": "6.2.5",
