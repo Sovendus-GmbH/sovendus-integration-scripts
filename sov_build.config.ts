@@ -4,9 +4,9 @@ const buildConfig: BuildConfig = {
   foldersToClean: ["dist"],
   filesToCompile: [
     {
-      input: "src/scripts/vanilla/index.ts",
-      output: "dist/scripts/vanilla/index",
-      options: {
+      sovOptions: {
+        input: "src/scripts/vanilla/index.ts",
+        output: "dist/scripts/vanilla/index",
         type: "vanilla",
         packageConfig: {
           isPackage: true,
@@ -16,9 +16,9 @@ const buildConfig: BuildConfig = {
       },
     },
     {
-      input: "src/scripts/react/index.ts",
-      output: "dist/scripts/react/index",
-      options: {
+      sovOptions: {
+        input: "src/scripts/react/index.ts",
+        output: "dist/scripts/react/index",
         type: "react",
         packageConfig: {
           isPackage: true,
@@ -28,9 +28,9 @@ const buildConfig: BuildConfig = {
       },
     },
     {
-      input: "src/app/index.ts",
-      output: "dist/demo/index",
-      options: {
+      sovOptions: {
+        input: "src/app/index.ts",
+        output: "dist/demo/index",
         type: "react-tailwind",
         packageConfig: {
           isPackage: true,
