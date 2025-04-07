@@ -70,7 +70,6 @@
   "devDependencies": {
     "@types/eslint": "9.6.1",
     "@types/node": "22.14.0",
-    "@types/react": "19.1.0",
     "@typescript-eslint/eslint-plugin": "8.29.0",
     "@typescript-eslint/parser": "8.29.0",
     "autoprefixer": "10.4.21",
@@ -92,17 +91,26 @@
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-plugin-unused-imports": "4.1.4",
-    "next": "15.2.4",
     "prettier": "3.5.3",
     "prettier-plugin-sort-json": "4.1.1",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
     "sovendus-builder": "1.4.2",
     "sovendus-integration-settings-ui": "4.2.9",
     "sovendus-release-tool": "1.4.4",
     "typescript": "5.8.3",
     "vite": "6.2.5",
     "vite-plugin-dts": "4.5.3",
-    "vitest": "^3.1.1"
-  }
+    "vitest": "^3.1.1",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "next": "^14",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "updateIgnoreDependencies": [
+    "@types/react",
+    "@types/react-dom",
+    "react",
+    "react-dom",
+    "next"
+  ]
 }
