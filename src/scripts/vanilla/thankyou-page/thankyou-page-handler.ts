@@ -275,7 +275,7 @@ export class SovendusThankyouPage {
   ) => VoucherNetworkLanguage | undefined =
     getVoucherNetworkCountryBasedSettings;
 
-  detectLanguageCode(): LanguageCodes {
+  detectLanguageCode(): LanguageCodes | undefined {
     throwErrorInNonBrowserContext({
       methodName: "getCookie",
       pageType: "ThankyouPage",
@@ -283,9 +283,11 @@ export class SovendusThankyouPage {
     });
     const htmlLang = document.documentElement.lang.split("-")[0];
     if (htmlLang) {
-      return htmlLang as LanguageCodes;
+      return htmlLang.toUpperCase() as LanguageCodes;
     }
-    return navigator.language.split("-")[0] as LanguageCodes;
+    return navigator.language.split("-")[0]?.toUpperCase() as
+      | LanguageCodes
+      | undefined;
   }
 
   getPerformanceTime: () => number = getPerformanceTime;
