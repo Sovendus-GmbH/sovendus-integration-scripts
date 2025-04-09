@@ -129,6 +129,9 @@ export function getCountryFromDomain(): CountryCodes | undefined {
     "es": "ES",
     "pt": "PT",
     "pl": "PL",
+    "cz": "CZ",
+    "sk": "SK",
+    "hu": "HU",
   };
   const domain = window.location.hostname;
   const domainParts = domain.split(".");

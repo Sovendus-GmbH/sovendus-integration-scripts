@@ -1,3 +1,4 @@
+import "./app.css";
 import "sovendus-integration-settings-ui/dist/demo-style-less/sovendus-integration-settings-ui.css";
 
 import type { JSX, ReactNode } from "react";
