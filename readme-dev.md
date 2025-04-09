@@ -33,7 +33,7 @@ This package is used to handle publishing, testing, linting, and building the pa
 
 ### sovendus-builder
 
-A wrapper around vite to simplify and standardize the build process. It is used in the scripts and in the plugins/components.
+A wrapper around vite to simplify and standardize the build process. It is used to bundle the package.
 
 [github.com/Sovendus-GmbH/sovendus-builder](https://github.com/Sovendus-GmbH/sovendus-builder)
 
