@@ -7,9 +7,9 @@ The scripts are used by our plugins/components e.g. for [Shopify](https://gitlab
 
 The directory structure is as follows:
 
-- src/scripts/vanilla you can find the code of the landing page script and the thank you page script.
-- src/scripts/react is the code for the React component
-- src/app is the code for the dev/preview server
+- **src/scripts/vanilla** you can find the code of the landing page script and the thank you page script.
+- **src/scripts/react** is the code for the React component
+- **src/app** is the code for the dev/preview server
 
 ## Sovendus packages used
 
