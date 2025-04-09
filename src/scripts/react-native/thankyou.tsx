@@ -504,7 +504,7 @@ function parseBannerResponseData(
     rawBanner.position === "INLINE" ? "ABOVE_THE_LIST" : rawBanner.position;
   if (!position) {
     loggerError(
-      "Position is not defined, but banner is, rendering will be cancelled",
+      "Position is not defined, but banner is, rendering will be continued",
       "ThankyouPage",
       "response:",
       responseData,
@@ -609,6 +609,7 @@ function addHashParams(
   originalLink: string,
   personalData: PersonalData,
 ): string {
+  // we add the customer data only on the client to avoid sending it to the server
   const cleanUrl = originalLink.split("#")[0];
   const hashParams = new URLSearchParams();
   Object.entries(personalData).forEach(
