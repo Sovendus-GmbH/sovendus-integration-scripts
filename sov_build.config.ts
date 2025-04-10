@@ -40,6 +40,12 @@ const buildConfig: BuildConfig = {
       },
     },
   ],
+  filesOrFoldersToCopy: [
+    {
+      input: ".next",
+      output: "dist/demo-dist/",
+    },
+  ],
 };
 
 export default buildConfig;
