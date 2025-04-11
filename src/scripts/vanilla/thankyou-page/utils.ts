@@ -368,26 +368,22 @@ export function getVoucherNetworkCountryBasedSettings(
  */
 export async function handleCouponCodes(
   orderData: SovendusConversionsData,
-  sovThankyouStatus: IntegrationData,
   trafficSourceNumber: string,
 ): Promise<void> {
   const couponCodes = orderData.usedCouponCodes?.slice(1);
   if (couponCodes) {
     await Promise.all(
       couponCodes.map(async (coupon) => {
-        await sendCouponCode(
-          {
-            trafficSourceNumber: trafficSourceNumber,
-            couponCode: coupon,
-            orderValue: orderData.orderValue?.netOrderValue
-              ? Number(orderData.orderValue?.netOrderValue)
-              : undefined,
-            orderCurrency: orderData.orderCurrency,
-            orderId: orderData.orderId,
-            sessionId: orderData.sessionId,
-          },
-          sovThankyouStatus,
-        );
+        await sendCouponCode({
+          trafficSourceNumber: trafficSourceNumber,
+          couponCode: coupon,
+          orderValue: orderData.orderValue?.netOrderValue
+            ? Number(orderData.orderValue?.netOrderValue)
+            : undefined,
+          orderCurrency: orderData.orderCurrency,
+          orderId: orderData.orderId,
+          sessionId: orderData.sessionId,
+        });
       }),
     );
   }
@@ -395,8 +391,8 @@ export async function handleCouponCodes(
 
 async function sendCouponCode(
   redemptionData: RedemptionApiRequestData,
-  sovThankyouStatus: IntegrationData,
 ): Promise<void> {
+  // TODO handle sovendus status
   const endpoint = `https://integration-api.sovendus.com/coupon/code-transmitted/${encodeURIComponent(
     btoa(JSON.stringify(redemptionData)),
   )}`;
@@ -404,7 +400,6 @@ async function sendCouponCode(
     method: "POST",
     body: JSON.stringify(redemptionData),
   });
-  sovThankyouStatus.status.voucherNetworkLinkTrackingSuccess = true;
 }
 
 export const flexibleIframeScriptId = "sovendus-iframe-script";

@@ -169,7 +169,6 @@ export class SovendusThankyouPage {
 
       void handleCouponCodes(
         sovThankyouConfig.orderData,
-        sovThankyouStatus,
         voucherNetworkConfig.trafficSourceNumber,
       );
 
