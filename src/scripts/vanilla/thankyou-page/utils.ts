@@ -362,4 +362,47 @@ export function getVoucherNetworkCountryBasedSettings(
   return undefined;
 }
 
+function handleVoucherNetwork(
+  sovThankyouConfig: SovendusThankYouPageConfig,
+  sovThankyouStatus: IntegrationData,
+): void {
+  const couponCode = sovThankyouConfig.orderData.usedCouponCodes?.[0];
+  if (couponCode) {
+    const voucherNetworkConfig =
+      this.getVoucherNetworkConfig(sovThankyouConfig);
+    if (
+      voucherNetworkConfig?.isEnabled &&
+      voucherNetworkConfig?.trafficMediumNumber &&
+      voucherNetworkConfig?.trafficSourceNumber
+    ) {
+      const redemptionData: RedemptionApiRequestData = {
+        trafficSourceNumber: voucherNetworkConfig.trafficSourceNumber,
+        couponCode,
+        orderValue: Number(
+          sovThankyouConfig.orderData.orderValue.netOrderValue,
+        ),
+        orderCurrency: sovThankyouConfig.orderData.orderCurrency,
+        orderId: sovThankyouConfig.orderData.orderId,
+        sessionId: sovThankyouConfig.orderData.sessionId,
+      };
+
+      void this.sendCouponCode(redemptionData, sovThankyouStatus);
+    }
+  }
+}
+
+async function sendCouponCode(
+  redemptionData: RedemptionApiRequestData,
+  sovThankyouStatus: IntegrationData,
+): Promise<void> {
+  const endpoint = `https://integration-api.sovendus.com/coupon/code-transmitted/${encodeURIComponent(
+    btoa(JSON.stringify(redemptionData)),
+  )}`;
+  await fetch(endpoint, {
+    method: "POST",
+    body: JSON.stringify(redemptionData),
+  });
+  sovThankyouStatus.status.voucherNetworkLinkTrackingSuccess = true;
+}
+
 export const flexibleIframeScriptId = "sovendus-iframe-script";
