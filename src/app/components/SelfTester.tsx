@@ -43,7 +43,8 @@ export function ClearTesterStorageButton(): JSX.Element {
   return (
     <button
       onClick={() => {
-        localStorage.removeItem("sov_settings");
+        localStorage.removeItem("sovendus-settings");
+        localStorage.removeItem("thankyouConfig");
         window.location.reload();
       }}
       style={{ padding: "5px", background: "red", color: "white" }}

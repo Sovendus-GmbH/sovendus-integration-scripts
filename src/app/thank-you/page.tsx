@@ -33,6 +33,7 @@ const defaultConfig: {
     },
     orderCurrency: "EUR",
     usedCouponCode: "1324",
+    // usedCouponCodes: ["1324", "4321", "5421", "8461", "1296"],
   },
   customerData: {
     consumerSalutation: "Mr.",
