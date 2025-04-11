@@ -34,6 +34,17 @@ export function SovendusThankyouPageDemoForm({
     }));
   };
 
+  const handleCouponCodeChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
+    setConfig((prevData) => ({
+      ...prevData,
+      orderData: {
+        ...prevData.orderData,
+        [name]: value ? JSON.parse(value) : undefined,
+      },
+    }));
+  };
+
   const handleOrderValueChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
     setConfig((prevData) => ({
@@ -95,6 +106,21 @@ export function SovendusThankyouPageDemoForm({
                   </div>
                 ))}
               </div>
+            </div>
+          );
+        }
+        if (key === "usedCouponCodes") {
+          const value = config.orderData[key as keyof typeof config.orderData];
+          return (
+            <div key={key} className="flex items-center">
+              <label className="w-32 text-right mr-4">{key}:</label>
+              <input
+                type="text"
+                name={key}
+                value={value ? JSON.stringify(value) : ""}
+                onChange={handleCouponCodeChange}
+                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              />
             </div>
           );
         }

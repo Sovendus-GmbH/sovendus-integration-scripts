@@ -25,6 +25,7 @@ import {
   getVoucherNetworkCountryBasedSettings,
   handleCheckoutProductsConversion,
   handleCountryCode,
+  handleCouponCodes,
   handleOptimizeConversion,
   handleOrderValue,
   handleStreet,
@@ -112,8 +113,6 @@ export class SovendusThankyouPage {
     });
     const voucherNetworkConfig =
       this.getVoucherNetworkConfig(sovThankyouConfig);
-    // TODO handle multiple coupon codes
-    const couponCode = sovThankyouConfig.orderData.usedCouponCodes?.[0];
     if (
       voucherNetworkConfig?.trafficSourceNumber &&
       voucherNetworkConfig?.trafficMediumNumber &&
@@ -132,7 +131,11 @@ export class SovendusThankyouPage {
         orderId: sovThankyouConfig.orderData.orderId,
         orderValue: sovThankyouConfig.orderData.orderValue?.netOrderValue,
         orderCurrency: sovThankyouConfig.orderData.orderCurrency,
-        usedCouponCode: couponCode,
+
+        // TODO Handle Coupon Codes in FlexibleIFrame
+        // Transmit first Coupon Code and handle all other Coupon Codes in handleCouponCodes()
+        usedCouponCode: sovThankyouConfig.orderData.usedCouponCodes?.[0],
+
         iframeContainerId: iframeContainerId,
         integrationType: sovThankyouConfig.integrationType,
       });
@@ -163,6 +166,13 @@ export class SovendusThankyouPage {
       script.src =
         "https://api.sovendus.com/sovabo/common/js/flexibleIframe.js";
       document.body.appendChild(script);
+
+      void handleCouponCodes(
+        sovThankyouConfig.orderData,
+        sovThankyouStatus,
+        voucherNetworkConfig.trafficSourceNumber,
+      );
+
       sovThankyouStatus.status.integrationLoaderVnCbStarted = true;
       sovThankyouStatus.times.integrationLoaderVnCbStart =
         this.getPerformanceTime();

@@ -1,6 +1,8 @@
 import type {
   LanguageCodes,
   OrderValueData,
+  RedemptionApiRequestData,
+  SovendusConversionsData,
   SovendusThankyouPageData,
   VoucherNetworkLanguage,
 } from "sovendus-integration-types";
@@ -228,6 +230,9 @@ export async function handleVoucherCode(
   this: SovendusThankyouPage,
   sovThankyouConfig: SovendusThankYouPageConfig,
 ): Promise<void> {
+  const couponCodes = new Set<string>(
+    sovThankyouConfig.orderData.usedCouponCodes,
+  );
   const couponFromCookie = await this.getCookie("sovCouponCode");
   if (couponFromCookie) {
     this.clearCookie("sovCouponCode");
@@ -235,13 +240,9 @@ export async function handleVoucherCode(
     return;
   }
   if (sovThankyouConfig.orderData.usedCouponCode) {
-    if (!sovThankyouConfig.orderData.usedCouponCodes?.length) {
-      sovThankyouConfig.orderData.usedCouponCodes = [];
-    }
-    sovThankyouConfig.orderData.usedCouponCodes.push(
-      sovThankyouConfig.orderData.usedCouponCode,
-    );
+    couponCodes.add(sovThankyouConfig.orderData.usedCouponCode);
   }
+  sovThankyouConfig.orderData.usedCouponCodes = Array.from(couponCodes);
 }
 
 export function initializeStatus(this: SovendusThankyouPage): IntegrationData {
@@ -362,32 +363,33 @@ export function getVoucherNetworkCountryBasedSettings(
   return undefined;
 }
 
-function handleVoucherNetwork(
-  sovThankyouConfig: SovendusThankYouPageConfig,
+/**
+ * Handle multiple Coupon Codes and send them to the Sovendus API.
+ */
+export async function handleCouponCodes(
+  orderData: SovendusConversionsData,
   sovThankyouStatus: IntegrationData,
-): void {
-  const couponCode = sovThankyouConfig.orderData.usedCouponCodes?.[0];
-  if (couponCode) {
-    const voucherNetworkConfig =
-      this.getVoucherNetworkConfig(sovThankyouConfig);
-    if (
-      voucherNetworkConfig?.isEnabled &&
-      voucherNetworkConfig?.trafficMediumNumber &&
-      voucherNetworkConfig?.trafficSourceNumber
-    ) {
-      const redemptionData: RedemptionApiRequestData = {
-        trafficSourceNumber: voucherNetworkConfig.trafficSourceNumber,
-        couponCode,
-        orderValue: Number(
-          sovThankyouConfig.orderData.orderValue.netOrderValue,
-        ),
-        orderCurrency: sovThankyouConfig.orderData.orderCurrency,
-        orderId: sovThankyouConfig.orderData.orderId,
-        sessionId: sovThankyouConfig.orderData.sessionId,
-      };
-
-      void this.sendCouponCode(redemptionData, sovThankyouStatus);
-    }
+  trafficSourceNumber: string,
+): Promise<void> {
+  const couponCodes = orderData.usedCouponCodes?.slice(1);
+  if (couponCodes) {
+    await Promise.all(
+      couponCodes.map(async (coupon) => {
+        await sendCouponCode(
+          {
+            trafficSourceNumber: trafficSourceNumber,
+            couponCode: coupon,
+            orderValue: orderData.orderValue?.netOrderValue
+              ? Number(orderData.orderValue?.netOrderValue)
+              : undefined,
+            orderCurrency: orderData.orderCurrency,
+            orderId: orderData.orderId,
+            sessionId: orderData.sessionId,
+          },
+          sovThankyouStatus,
+        );
+      }),
+    );
   }
 }
 
