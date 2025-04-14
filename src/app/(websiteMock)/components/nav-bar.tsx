@@ -21,7 +21,7 @@ export default function NavBar(): JSX.Element {
           empty-page
         </button>
       </Link>
-      <Link href={"/settings"}>
+      <Link href={"/admin/settings"}>
         <button
           disabled={currentPage === "/settings"}
           style={{ padding: "5px" }}

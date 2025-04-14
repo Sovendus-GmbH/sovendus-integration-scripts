@@ -4,8 +4,8 @@ import { type JSX, useEffect, useState } from "react";
 import { getSettings } from "sovendus-integration-settings-ui/demo-style-less";
 import type { SovendusAppSettings } from "sovendus-integration-types";
 
-import { SovendusLandingPageReact } from "../../scripts/react";
-import { loggerInfo } from "../../scripts/vanilla";
+import { SovendusLandingPageReact } from "../../../scripts/react";
+import { loggerInfo } from "../../../scripts/vanilla";
 import SovendusLandingPageDemoForm from "./demo-form";
 
 export default function SovendusLandingPageDemo(): JSX.Element {

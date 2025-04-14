@@ -13,8 +13,8 @@ import type {
   SovendusConversionsData,
 } from "sovendus-integration-types/src";
 
-import { SovendusThankyouPageReact } from "../../scripts/react/thankyou";
-import { loggerInfo } from "../../scripts/vanilla";
+import { SovendusThankyouPageReact } from "../../../scripts/react/thankyou";
+import { loggerInfo } from "../../../scripts/vanilla";
 import { SovendusThankyouPageDemoForm } from "./demo-form";
 
 const defaultConfig: {
