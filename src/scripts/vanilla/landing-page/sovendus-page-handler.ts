@@ -12,6 +12,7 @@ import {
   getPerformanceTime,
   throwErrorInNonBrowserContext,
 } from "../shared-utils";
+import { unmount } from "./unmount";
 import {
   getSovendusUrlParameters,
   handlePageCountryCode,
@@ -114,7 +115,5 @@ export class SovendusPage {
 
   detectCountryCode: () => CountryCodes | undefined = detectCountryCode;
 
-  unmount(): void {
-    document.getElementById(this.optimizeScriptId)?.remove();
-  }
+  unmount: () => void = unmount;
 }

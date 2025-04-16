@@ -1,6 +1,6 @@
 "use client";
 
-import type { JSX } from "react";
+import type { ReactElement } from "react";
 import { useEffect, useMemo } from "react";
 import type {
   IframeContainerQuerySelectorSettings,
@@ -12,23 +12,20 @@ import type {
 
 import { SovendusThankyouPage } from "../vanilla/thankyou-page/thankyou-page-handler";
 
-export type SovendusThankYouPageReactConfig = Omit<
-  SovendusThankYouPageConfig,
-  "iframeContainerQuerySelector"
->;
-
 export interface SovendusThankyouPageReactProps
-  extends SovendusThankYouPageConfig {
+  extends Omit<SovendusThankYouPageConfig, "iframeContainerQuerySelector"> {
   onDone?: (
     sovThankyouStatus: IntegrationData,
-    sovThankyouConfig: SovendusThankYouPageReactConfig,
+    sovThankyouConfig: SovendusThankYouPageConfig,
   ) => void | Promise<void>;
 }
+
+const sovendusPage = new SovendusThankyouPage();
 
 export function SovendusThankyouPageReact({
   onDone,
   ...sovThankyouConfig
-}: SovendusThankyouPageReactProps): JSX.Element {
+}: SovendusThankyouPageReactProps): ReactElement {
   const containerId = "sovendus-thankyou-container";
   const containerSelector = `#${containerId}`;
   const iframeContainerQuerySelector: IframeContainerQuerySelectorSettings = {
@@ -48,7 +45,7 @@ export function SovendusThankyouPageReact({
       Date.now() - window.sovendusThankyouPageInitialized < 1000
     ) {
       // debounce for dev env
-      return;
+      return unmount;
     }
     window.sovendusThankyouPageInitialized = Date.now();
     // used for debugging with the testing app
@@ -59,24 +56,26 @@ export function SovendusThankyouPageReact({
       void onDone?.(sovThankyouStatus, config);
     };
 
-    const sovendusPage = new SovendusThankyouPage();
     void sovendusPage.main(config, _onDone);
-    return (): void => {
-      if (
-        window.sovendusThankyouPageInitialized &&
-        Date.now() - window.sovendusThankyouPageInitialized < 1000
-      ) {
-        // debounce for dev env
-        return;
-      }
-      sovendusPage.unmount();
-    };
+    return unmount;
     // eslint-disable-next-line react-compiler/react-compiler
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return useMemo(() => <div id={containerId} />, []);
 }
+
+function unmount(): void {
+  if (
+    window.sovendusThankyouPageInitialized &&
+    Date.now() - window.sovendusThankyouPageInitialized < 1000
+  ) {
+    // debounce for dev env
+    return;
+  }
+  sovendusPage.unmount();
+}
+
 interface _SovendusThankyouWindow extends SovendusThankyouWindow {
   sovendusThankyouPageInitialized?: number;
 }

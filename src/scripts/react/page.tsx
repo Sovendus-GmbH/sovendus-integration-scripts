@@ -1,6 +1,6 @@
 "use client";
 
-import type { JSX } from "react";
+import type { ReactElement } from "react";
 import { useEffect, useMemo } from "react";
 import type {
   SovendusPageConfig,
@@ -20,7 +20,7 @@ export interface SovendusLandingPageReactProps extends SovendusPageConfig {
 
 export function SovendusLandingPageReact(
   props: SovendusLandingPageReactProps,
-): JSX.Element {
+): ReactElement {
   return useMemo(() => {
     return <Handler {...props} />;
     // eslint-disable-next-line react-compiler/react-compiler
@@ -28,38 +28,52 @@ export function SovendusLandingPageReact(
   }, []);
 }
 
+const sovendusPage = new SovendusPage();
+
 function Handler({
   onDone,
   ...sovPageConfig
-}: SovendusLandingPageReactProps): JSX.Element {
+}: SovendusLandingPageReactProps): ReactElement {
   useEffect(() => {
     if (typeof window === "undefined") {
       return;
     }
-    if (window.sovendusPageInitialized) {
-      return;
+    if (
+      window.sovendusPageInitialized &&
+      Date.now() - window.sovendusPageInitialized < 1000
+    ) {
+      // debounce for dev env
+      return unmount;
     }
-    window.sovendusPageInitialized = true;
+    window.sovendusPageInitialized = Date.now();
     // this is done for the testing app
     window.sovPageConfig = sovPageConfig;
     const _onDone = ({ sovPageStatus }: SovendusPageData): void => {
       // this is done for the testing app
       window.sovPageStatus = sovPageStatus;
-      void onDone?.(sovPageStatus, sovPageConfig);
+      void onDone?.(sovPageStatus, window.sovPageConfig);
     };
-    const sovendusPage = new SovendusPage();
-    void sovendusPage.main(sovPageConfig, _onDone);
-    return (): void => {
-      sovendusPage.unmount();
-    };
+    void sovendusPage.main(window.sovPageConfig, _onDone);
+    return unmount;
     // eslint-disable-next-line react-compiler/react-compiler
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return <></>;
 }
 
+function unmount(): void {
+  if (
+    window.sovendusPageInitialized &&
+    Date.now() - window.sovendusPageInitialized < 1000
+  ) {
+    // debounce for dev env
+    return;
+  }
+  sovendusPage.unmount();
+}
+
 interface _SovendusPageWindow extends SovendusPageWindow {
-  sovendusPageInitialized?: boolean;
+  sovendusPageInitialized?: number;
 }
 
 declare let window: _SovendusPageWindow;
