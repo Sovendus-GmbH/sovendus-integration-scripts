@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { JSX } from "react";
 
-import { ClearTesterStorageButton } from "./SelfTester";
+import { ClearTesterStorageButton } from "./self-tester";
 
 export default function NavBar(): JSX.Element {
   const currentPage = usePathname();

@@ -5,7 +5,7 @@ export const metadata = {
   description: "Admin Mock",
 };
 
-export default function RootLayout({
+export default function AdminMockLayout({
   children,
 }: {
   children: ReactNode;

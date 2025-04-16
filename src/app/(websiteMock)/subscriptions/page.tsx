@@ -66,7 +66,7 @@ const defaultConfig: {
   },
 };
 
-export default function (): JSX.Element {
+export default function SovendusRewardsPageDemo(): JSX.Element {
   const [config, setConfig] = useState<{
     orderData: SovendusConversionsData;
     customerData: SovendusConsumerData;
@@ -76,7 +76,7 @@ export default function (): JSX.Element {
       customerData: SovendusConsumerData;
     } => {
       if (typeof window !== "undefined") {
-        const storedConfig = localStorage.getItem("thankyouConfig");
+        const storedConfig = localStorage.getItem("rewardsConfig");
         return storedConfig
           ? (JSON.parse(storedConfig) as {
               orderData: SovendusConversionsData;

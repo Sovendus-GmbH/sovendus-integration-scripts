@@ -9,7 +9,7 @@ export const metadata = {
   description: "Using Next.js <3",
 };
 
-export default function RootLayout({
+export default function RootMockLayout({
   children,
 }: Readonly<{
   children: ReactNode;

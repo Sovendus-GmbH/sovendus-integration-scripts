@@ -1,8 +1,8 @@
 "use client";
 
 import type { JSX } from "react";
-import { EmployeeBenefitsDemo } from "sovendus-integration-settings-ui/demo-style-less";
+import { EmployeeBenefitsDemo as _EmployeeBenefitsDemo } from "sovendus-integration-settings-ui/demo-style-less";
 
-export default function _EmployeeBenefitsDemo(): JSX.Element {
-  return <EmployeeBenefitsDemo urlPrefix="/admin" />;
+export default function EmployeeBenefitsDemo(): JSX.Element {
+  return <_EmployeeBenefitsDemo urlPrefix="/admin" />;
 }

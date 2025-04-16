@@ -22,7 +22,7 @@ import type {
   SovendusConversionsData,
 } from "sovendus-integration-types/src";
 
-export function SovendusThankyouPageDemoForm({
+export function SovendusRewardsPageDemoForm({
   config,
   setConfig,
   setConfigOpen: _setConfigOpen,

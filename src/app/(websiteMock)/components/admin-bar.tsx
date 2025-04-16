@@ -12,7 +12,7 @@ import {
   DialogTitle,
 } from "sovendus-integration-settings-ui/ui";
 
-import { clearStorage } from "./SelfTester";
+import { clearStorage } from "./self-tester";
 
 interface AdminBarProps {
   configContent: (

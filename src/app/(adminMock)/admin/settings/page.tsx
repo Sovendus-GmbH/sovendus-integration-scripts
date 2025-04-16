@@ -1,21 +1,21 @@
 "use client";
 
 import type { JSX } from "react";
-import { SettingsUIDemo } from "sovendus-integration-settings-ui/demo-style-less";
+import { SettingsUIDemo as _SettingsUIDemo } from "sovendus-integration-settings-ui/demo-style-less";
 import { TriggerPages } from "sovendus-integration-types";
 
-export default function _SettingsUIDemo(): JSX.Element {
+export default function SettingsUIDemo(): JSX.Element {
   return (
-    <SettingsUIDemo
+    <_SettingsUIDemo
       urlPrefix="/admin"
       featureFlags={{
         employeeBenefits: {
           addToSidebar: true,
           showWidgetOnDashboard: true,
-          isEnabled: true,
+          isEnabled: false,
         },
         rewards: {
-          rewardsEnabled: true,
+          rewardsEnabled: false,
           triggers: {
             [TriggerPages.MY_ACCOUNT_DASHBOARD]: true,
             [TriggerPages.MY_ORDERS]: true,
