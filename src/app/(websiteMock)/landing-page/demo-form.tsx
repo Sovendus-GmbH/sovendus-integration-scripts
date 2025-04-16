@@ -8,7 +8,6 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-  DialogFooter,
 } from "sovendus-integration-settings-ui/ui";
 
 export default function SovendusLandingPageDemoForm({
@@ -31,21 +30,22 @@ export default function SovendusLandingPageDemoForm({
   return (
     <Card className="w-full max-w-4xl mx-auto shadow-md">
       <CardHeader className="bg-muted/50">
-        <CardTitle className="text-xl font-bold">URL Parameters Configuration</CardTitle>
+        <CardTitle className="text-xl font-bold">
+          URL Parameters Configuration
+        </CardTitle>
       </CardHeader>
       <CardContent className="p-6">
         <div className="mb-6">
-          <p className="text-sm text-muted-foreground">Apply URL parameters to test various features of the integration.</p>
+          <p className="text-sm text-muted-foreground">
+            Apply URL parameters to test various features of the integration.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {Object.entries(testForm).map(([elementKey, elementData]) => {
             return (
               <div key={elementKey} className="flex flex-col space-y-2">
-                <label
-                  htmlFor={elementKey}
-                  className="text-sm font-medium"
-                >
+                <label htmlFor={elementKey} className="text-sm font-medium">
                   {elementData.key}
                 </label>
                 <input

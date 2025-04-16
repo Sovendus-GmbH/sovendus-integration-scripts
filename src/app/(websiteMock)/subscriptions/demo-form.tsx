@@ -77,7 +77,9 @@ export function SovendusThankyouPageDemoForm({
   return (
     <Card className="w-full max-w-4xl mx-auto shadow-md">
       <CardHeader className="bg-muted/50">
-        <CardTitle className="text-xl font-bold">Subscription Configuration</CardTitle>
+        <CardTitle className="text-xl font-bold">
+          Subscription Configuration
+        </CardTitle>
       </CardHeader>
       <CardContent className="p-6">
         <form onSubmit={handleFormSubmit} className="space-y-6">

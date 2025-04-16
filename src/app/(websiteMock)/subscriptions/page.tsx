@@ -5,10 +5,6 @@ import Link from "next/link";
 import type { JSX } from "react";
 import { useEffect, useState } from "react";
 import {
-  getSettings,
-  initialSettings,
-} from "sovendus-integration-settings-ui/demo-style-less";
-import {
   Badge,
   Button,
   Card,
@@ -24,8 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "sovendus-integration-settings-ui/ui";
-import type { SovendusAppSettings } from "sovendus-integration-types";
-import { CountryCodes } from "sovendus-integration-types";
+import { CountryCodes, LanguageCodes } from "sovendus-integration-types";
 import type {
   SovendusConsumerData,
   SovendusConversionsData,
@@ -49,7 +44,8 @@ const defaultConfig: {
       taxPercent: 20,
     },
     orderCurrency: "EUR",
-    usedCouponCode: "1324",
+    usedCouponCode: "1234",
+    usedCouponCodes: ["5678", "91011", "121314"],
   },
   customerData: {
     consumerSalutation: "Mr.",
@@ -63,21 +59,14 @@ const defaultConfig: {
     consumerDateOfBirth: "01.01.1991",
     consumerStreetWithNumber: "1 test street",
     consumerCity: "testCity",
+    consumerEmailHash: "",
+    consumerLanguage: LanguageCodes.DE,
+    consumerStreet: "",
+    consumerStreetNumber: "",
   },
 };
 
 export default function (): JSX.Element {
-  const [settings] = useState<SovendusAppSettings>(() => {
-    if (typeof window !== "undefined") {
-      const settings = localStorage.getItem("sovendus-settings");
-      if (settings) {
-        return JSON.parse(settings) as SovendusAppSettings;
-      }
-      return getSettings();
-    }
-    return initialSettings;
-  });
-
   const [config, setConfig] = useState<{
     orderData: SovendusConversionsData;
     customerData: SovendusConsumerData;
