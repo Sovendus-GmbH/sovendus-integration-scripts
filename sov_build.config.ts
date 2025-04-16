@@ -32,6 +32,7 @@ const buildConfig: BuildConfig = {
         input: "src/app/index.ts",
         output: "dist/demo/index",
         type: "react-tailwind",
+        modulesToExternalize: ["next/link", "next/router"],
         packageConfig: {
           isPackage: true,
           dtsEntryRoot: "src/app",
