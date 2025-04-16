@@ -44,7 +44,11 @@ const buildConfig: BuildConfig = {
   filesOrFoldersToCopy: [
     {
       input: ".next",
-      output: "dist/demo-dist/",
+      output: "dist/demo-dist/.next",
+    },
+    {
+      input: "yarn.lock",
+      output: "dist/demo-dist/yarn.lock",
     },
   ],
 };
