@@ -39,14 +39,16 @@ export function IntegrationTester(): null {
   return null;
 }
 
+export function clearStorage(): void {
+  localStorage.removeItem("sovendus-settings");
+  localStorage.removeItem("thankyouConfig");
+  window.location.reload();
+}
+
 export function ClearTesterStorageButton(): JSX.Element {
   return (
     <button
-      onClick={() => {
-        localStorage.removeItem("sovendus-settings");
-        localStorage.removeItem("thankyouConfig");
-        window.location.reload();
-      }}
+      onClick={clearStorage}
       style={{ padding: "5px", background: "red", color: "white" }}
     >
       clear tester storage

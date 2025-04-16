@@ -1,9 +1,21 @@
 "use client";
 
-import type { JSX } from "react";
+import type { Dispatch, JSX, SetStateAction } from "react";
 import { useState } from "react";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  DialogFooter,
+} from "sovendus-integration-settings-ui/ui";
 
-export default function SovendusLandingPageDemoForm(): JSX.Element {
+export default function SovendusLandingPageDemoForm({
+  setConfigOpen,
+}: {
+  setConfigOpen: Dispatch<SetStateAction<boolean>>;
+}): JSX.Element {
   const [testForm, setTestForm] = useState(initialForm);
   function onchange(value: string, elementKey: string): void {
     setTestForm((prevForm) => {
@@ -17,40 +29,47 @@ export default function SovendusLandingPageDemoForm(): JSX.Element {
     });
   }
   return (
-    <>
-      <div className="flex gap-10 flex-row">
-        <div>
-          <h2 className="text-xl font-semibold mb-4">
-            Apply URL params to test some features
-          </h2>
-          <div className="space-y-4">
-            {Object.entries(testForm).map(([elementKey, elementData]) => {
-              return (
-                <div key={elementKey} className="flex flex-col">
-                  <label
-                    htmlFor={elementKey}
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    {elementData.key}
-                  </label>
-                  <input
-                    type="text"
-                    id={elementKey}
-                    onChange={(event) =>
-                      onchange(event.currentTarget.value, elementKey)
-                    }
-                    value={elementData.value || ""}
-                    className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-              );
-            })}
-          </div>
+    <Card className="w-full max-w-4xl mx-auto shadow-md">
+      <CardHeader className="bg-muted/50">
+        <CardTitle className="text-xl font-bold">URL Parameters Configuration</CardTitle>
+      </CardHeader>
+      <CardContent className="p-6">
+        <div className="mb-6">
+          <p className="text-sm text-muted-foreground">Apply URL parameters to test various features of the integration.</p>
         </div>
-      </div>
 
-      <ApplyFormButton testForm={testForm} />
-    </>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {Object.entries(testForm).map(([elementKey, elementData]) => {
+            return (
+              <div key={elementKey} className="flex flex-col space-y-2">
+                <label
+                  htmlFor={elementKey}
+                  className="text-sm font-medium"
+                >
+                  {elementData.key}
+                </label>
+                <input
+                  type="text"
+                  id={elementKey}
+                  onChange={(event) =>
+                    onchange(event.currentTarget.value, elementKey)
+                  }
+                  value={elementData.value || ""}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="flex justify-end items-center gap-3 mt-8 pt-4 border-t">
+          <Button variant="outline" onClick={() => setConfigOpen(false)}>
+            Cancel
+          </Button>
+          <ApplyFormButton testForm={testForm} />
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -87,17 +106,15 @@ function ApplyFormButton({
         params.append(valueData.key, valueData.value);
       }
     });
-    return `/landing-page?${params.toString()}`;
+    return `/?${params.toString()}`;
   }
 
   const targetUrl = createTargetUrl();
   return (
-    <div className="pt-5">
-      <a href={targetUrl}>
-        <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          Apply values
-        </button>
-      </a>
-    </div>
+    <a href={targetUrl}>
+      <Button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+        Apply Values
+      </Button>
+    </a>
   );
 }

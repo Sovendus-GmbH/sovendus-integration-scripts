@@ -6,6 +6,7 @@ import type {
   SetStateAction,
 } from "react";
 import {
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -46,17 +47,6 @@ export function SovendusThankyouPageDemoForm({
     }));
   };
 
-  const handleCouponCodeChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.target;
-    setConfig((prevData) => ({
-      ...prevData,
-      orderData: {
-        ...prevData.orderData,
-        [name]: value ? JSON.parse(value) : undefined,
-      },
-    }));
-  };
-
   const handleOrderValueChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
     setConfig((prevData) => ({
@@ -87,7 +77,7 @@ export function SovendusThankyouPageDemoForm({
   return (
     <Card className="w-full max-w-4xl mx-auto shadow-md">
       <CardHeader className="bg-muted/50">
-        <CardTitle className="text-xl font-bold">Configuration Form</CardTitle>
+        <CardTitle className="text-xl font-bold">Subscription Configuration</CardTitle>
       </CardHeader>
       <CardContent className="p-6">
         <form onSubmit={handleFormSubmit} className="space-y-6">
@@ -143,25 +133,6 @@ export function SovendusThankyouPageDemoForm({
                       </div>
                     );
                   }
-                  if (key === "usedCouponCodes") {
-                    const value =
-                      config.orderData[key as keyof typeof config.orderData];
-                    return (
-                      <div
-                        key={key}
-                        className="col-span-1 md:col-span-2 flex flex-col space-y-1"
-                      >
-                        <label className="text-sm font-medium">{key}:</label>
-                        <input
-                          type="text"
-                          name={key}
-                          value={value ? JSON.stringify(value) : ""}
-                          onChange={handleCouponCodeChange}
-                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        />
-                      </div>
-                    );
-                  }
 
                   // Regular fields
                   const value =
@@ -204,13 +175,19 @@ export function SovendusThankyouPageDemoForm({
             </TabsContent>
           </Tabs>
 
-          <div className="flex justify-end pt-4">
-            <button
-              type="submit"
+          <div className="flex justify-end items-center gap-3 pt-4 border-t">
+            <Button variant="outline" onClick={() => _setConfigOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                handleFormSubmit(e as unknown as FormEvent<HTMLFormElement>);
+              }}
               className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
             >
               Save Form Data
-            </button>
+            </Button>
           </div>
         </form>
       </CardContent>

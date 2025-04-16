@@ -1,7 +1,6 @@
 import type { JSX, ReactNode } from "react";
 import React from "react";
 
-import NavBar from "./components/nav-bar";
 import { IntegrationTester } from "./components/SelfTester";
 
 export const metadata = {
@@ -17,10 +16,7 @@ export default function RootLayout({
   return (
     <>
       <IntegrationTester />
-      <div style={{ padding: "40px" }}>
-        <NavBar />
-        {children}
-      </div>
+      {children}
     </>
   );
 }

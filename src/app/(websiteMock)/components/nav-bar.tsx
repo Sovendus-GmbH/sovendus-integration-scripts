@@ -37,6 +37,14 @@ export default function NavBar(): JSX.Element {
           Landing Page
         </button>
       </Link>
+      <Link href={"/my-subscription"}>
+        <button
+          disabled={currentPage === "/thank-you"}
+          style={{ padding: "5px" }}
+        >
+          go to my subscription page
+        </button>
+      </Link>
       <Link href={"/thank-you"}>
         <button
           disabled={currentPage === "/thank-you"}
