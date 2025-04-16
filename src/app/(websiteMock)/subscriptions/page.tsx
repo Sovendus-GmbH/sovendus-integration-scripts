@@ -29,7 +29,7 @@ import type {
 import AdminBar from "../components/admin-bar";
 import Footer from "../components/footer";
 import Header from "../components/header";
-import { SovendusThankyouPageDemoForm } from "./demo-form";
+import { SovendusRewardsPageDemoForm } from "./demo-form";
 
 const defaultConfig: {
   orderData: SovendusConversionsData;
@@ -97,7 +97,7 @@ export default function SovendusRewardsPageDemo(): JSX.Element {
       <AdminBar
         pageName="Subscriptions Page"
         configContent={(setConfigOpen) => (
-          <SovendusThankyouPageDemoForm
+          <SovendusRewardsPageDemoForm
             config={config}
             setConfig={setConfig}
             setConfigOpen={setConfigOpen}
