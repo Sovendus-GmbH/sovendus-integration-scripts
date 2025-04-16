@@ -4661,10 +4661,10 @@ sovendus-builder@1.4.4:
     tailwindcss "4.1.3"
     vite-plugin-css-injected-by-js "3.5.2"
 
-sovendus-integration-settings-ui@4.3.10:
-  version "4.3.10"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.3.10.tgz#e0c1dd5abf8aa500097567cfc2a139fd45f9e937"
-  integrity sha512-V2bEOATbLAALWvfr/pug7eLtS+wKD0sFs/sE0ZyokRLa9u+kSW1GbBlpU7kSBLNEOXLua2SDnk+K9ms5HOMdAA==
+sovendus-integration-settings-ui@4.3.12:
+  version "4.3.12"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.3.12.tgz#f483f528769fe3ca44b314b7c912a8a3659ff982"
+  integrity sha512-6gohBPc7GgN8Sl44eZS5GyFDEmY6kodsrFUTokCXtAD2GgO0vej6yx8oAsFhg3thO5rd1GqnhIdpXGokDZCvhA==
   dependencies:
     "@radix-ui/react-alert-dialog" "^1.1.7"
     "@radix-ui/react-scroll-area" "^1.2.4"

@@ -15,7 +15,7 @@ import Header from "./components/header";
 import ProductCard from "./components/product-card";
 import SovendusLandingPageDemoForm from "./landing-page/demo-form";
 
-export default function LandingPage(): JSX.Element {
+export default function SovendusLandingPageDemo(): JSX.Element {
   const [settings, setSettings] = useState<SovendusAppSettings>();
 
   useEffect(() => {

@@ -97,7 +97,7 @@
     "react": "^18",
     "react-dom": "^18",
     "sovendus-builder": "1.4.4",
-    "sovendus-integration-settings-ui": "4.3.10",
+    "sovendus-integration-settings-ui": "4.3.12",
     "sovendus-release-tool": "1.4.4",
     "tailwind-merge": "3.2.0",
     "tailwindcss": "4.1.4",
