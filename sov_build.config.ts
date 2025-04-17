@@ -47,6 +47,10 @@ const buildConfig: BuildConfig = {
       output: "dist/demo-dist/.next",
     },
     {
+      input: "public",
+      output: "dist/demo-dist/public",
+    },
+    {
       input: "yarn.lock",
       output: "dist/demo-dist/yarn.lock",
     },
