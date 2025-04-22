@@ -35,8 +35,9 @@
     "./src/*": "./src/*"
   },
   "scripts": {
-    "dev": "next dev",
-    "preview": "next start",
+    "dev": "node server.js",
+    "preview": "node server.js",
+    "start": "NODE_ENV=production node server.js",
     "build": "next build && sovendus-builder build",
     "lint": "eslint --fix",
     "test": "vitest run",
