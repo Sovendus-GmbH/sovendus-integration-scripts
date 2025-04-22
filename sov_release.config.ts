@@ -9,7 +9,7 @@ const releaseConfig: ReleaseConfig = {
       build: true,
       test: true,
       release: {
-        version: "3.11.6",
+        version: "3.11.7",
         versionBumper: [
           {
             filePath: "src/scripts/vanilla/constants.ts",
