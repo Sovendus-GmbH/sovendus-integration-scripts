@@ -55,6 +55,10 @@ const buildConfig: BuildConfig = {
       output: "dist/demo-dist/yarn.lock",
     },
     {
+      input: "next.config.js",
+      output: "dist/demo-dist/next.config.js",
+    },
+    {
       input: "server.js",
       output: "dist/demo-dist/server.js",
     },
