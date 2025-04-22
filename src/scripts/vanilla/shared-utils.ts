@@ -81,6 +81,32 @@ export function loggerError(
 ): void {
   // eslint-disable-next-line no-console
   console.error(`Sovendus App [${pageType}] - ${message}`, ...other);
+  void fetch("https://press-tracking-api.sovendus.com/error", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      source: "sovendus-integration-scripts",
+      type: "exception",
+      message,
+      counter: ++sovApplication.errorCounter,
+      trafficSource:
+        (sovApplication.instances &&
+          sovApplication.instances.length &&
+          sovApplication.instances[0].trafficSourceNumber) ||
+        0,
+      trafficMedium:
+        (sovApplication.instances &&
+          sovApplication.instances.length &&
+          sovApplication.instances[0].trafficMediumNumber) ||
+        0,
+      additionalData: JSON.stringify(
+        Object.assign({ appName: "ueber-script" }, other || {}),
+      ),
+      implementationType: sovApplication.implementationType || "",
+    }),
+  });
 }
 
 export function loggerInfo(
