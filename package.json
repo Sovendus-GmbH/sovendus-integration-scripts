@@ -36,7 +36,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "preview": "node server.js",
+    "preview": "next start",
     "build": "next build && sovendus-builder build",
     "lint": "eslint --fix",
     "test": "vitest run",

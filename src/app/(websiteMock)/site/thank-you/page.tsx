@@ -23,8 +23,8 @@ import type {
   SovendusConversionsData,
 } from "sovendus-integration-types/src";
 
-import { SovendusThankyouPageReact } from "../../../scripts/react";
-import { loggerInfo } from "../../../scripts/vanilla";
+import { SovendusThankyouPageReact } from "../../../../scripts/react";
+import { loggerInfo } from "../../../../scripts/vanilla";
 import AdminBar from "../components/admin-bar";
 import Footer from "../components/footer";
 import Header from "../components/header";

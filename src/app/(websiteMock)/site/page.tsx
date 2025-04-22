@@ -7,8 +7,8 @@ import { getSettings } from "sovendus-integration-settings-ui/demo-style-less";
 import { Button } from "sovendus-integration-settings-ui/ui";
 import type { SovendusAppSettings } from "sovendus-integration-types";
 
-import { SovendusLandingPageReact } from "../../scripts/react";
-import { loggerInfo } from "../../scripts/vanilla";
+import { SovendusLandingPageReact } from "../../../scripts/react";
+import { loggerInfo } from "../../../scripts/vanilla";
 import AdminBar from "./components/admin-bar";
 import Footer from "./components/footer";
 import Header from "./components/header";
