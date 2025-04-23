@@ -106,7 +106,7 @@ function ApplyFormButton({
         params.append(valueData.key, valueData.value);
       }
     });
-    return `/?${params.toString()}`;
+    return `/site/?${params.toString()}`;
   }
 
   const targetUrl = createTargetUrl();

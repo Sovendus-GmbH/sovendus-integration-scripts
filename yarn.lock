@@ -4428,10 +4428,10 @@ sovendus-builder@1.4.6:
     tailwindcss "4.1.4"
     vite-plugin-css-injected-by-js "3.5.2"
 
-sovendus-integration-settings-ui@4.3.14:
-  version "4.3.14"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.3.14.tgz#142eb67d8762574c5812b8ca8766b5d0d6831483"
-  integrity sha512-OSyJQ5AmJM3vqGjwjJwq0mE+LnFIq83jQeZrjcLFWzW4jtl6bHDQDRRkoBngwVIikmWuhrO+4pdpwT7SDSNyuA==
+sovendus-integration-settings-ui@4.3.18:
+  version "4.3.18"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.3.18.tgz#b5437820efba7c346e182bcab148ab9d83131682"
+  integrity sha512-cwgJmrMYvxeBVROwUy0F77x018+TS4WY66kBnrwHIH9gYVc5lwPiTovyEYl4IEWmuKYtCXmCLd5V99UswCUBmQ==
   dependencies:
     sovendus-integration-types "3.8.14"
   optionalDependencies:

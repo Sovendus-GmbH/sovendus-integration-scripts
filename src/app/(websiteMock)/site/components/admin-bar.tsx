@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Dispatch, JSX, SetStateAction } from "react";
 import { useState } from "react";
 import {
+  Badge,
   Button,
   Dialog,
   DialogContent,
@@ -21,7 +22,7 @@ interface AdminBarProps {
   pageName: string;
 }
 
-export default function AdminBar({
+export function AdminBar({
   configContent,
   pageName,
 }: AdminBarProps): JSX.Element {
@@ -43,8 +44,10 @@ export default function AdminBar({
             <div className="flex items-center text-sm">
               <Gauge className="h-4 w-4 mr-1" />
               <span>
-                Current Page Type:{" "}
-                <span className="font-medium">{pageName}</span>
+                Current Page Type:
+                <Badge variant={"destructive"} className="ml-1 font-medium">
+                  {pageName}
+                </Badge>
               </span>
             </div>
           </div>

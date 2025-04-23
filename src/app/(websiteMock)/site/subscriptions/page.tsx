@@ -26,7 +26,7 @@ import type {
   SovendusConversionsData,
 } from "sovendus-integration-types/src";
 
-import AdminBar from "../components/admin-bar";
+import { AdminBar } from "../components/admin-bar";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import { SovendusRewardsPageDemoForm } from "./demo-form";

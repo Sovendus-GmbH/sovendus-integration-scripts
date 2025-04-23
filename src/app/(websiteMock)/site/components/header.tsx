@@ -26,60 +26,63 @@ export default function Header(): JSX.Element {
             <SheetContent side="left" className="w-[300px] sm:w-[400px]">
               <nav className="flex flex-col gap-4">
                 <SheetClose asChild>
-                  <Link href="/" className="text-lg font-medium">
+                  <Link href="/site/" className="text-lg font-medium">
                     Home
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>
-                  <Link href="/" className="text-lg font-medium">
+                  <Link href="/site/thank-you" className="text-lg font-medium">
                     Shop
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>
-                  <Link href="/" className="text-lg font-medium">
+                  <Link href="/site/" className="text-lg font-medium">
                     Categories
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>
-                  <Link href="/" className="text-lg font-medium">
+                  <Link href="/site/" className="text-lg font-medium">
                     New Arrivals
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>
-                  <Link href="/subscriptions" className="text-lg font-medium">
+                  <Link
+                    href="/site/subscriptions"
+                    className="text-lg font-medium"
+                  >
                     My Subscriptions
                   </Link>
                 </SheetClose>
               </nav>
             </SheetContent>
           </Sheet>
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/site" className="flex items-center space-x-2">
             <ShoppingBag className="h-6 w-6" />
             <span className="text-xl font-bold">Test Shop</span>
           </Link>
         </div>
         <nav className="hidden md:flex items-center gap-6">
-          <Link href="/" className="text-sm font-medium">
+          <Link href="/site/" className="text-sm font-medium">
             Home
           </Link>
-          <Link href="/" className="text-sm font-medium">
+          <Link href="/site/thank-you" className="text-sm font-medium">
             Shop
           </Link>
-          <Link href="/" className="text-sm font-medium">
+          <Link href="/site/" className="text-sm font-medium">
             Categories
           </Link>
-          <Link href="/" className="text-sm font-medium">
+          <Link href="/site/" className="text-sm font-medium">
             New Arrivals
           </Link>
         </nav>
         <div className="flex items-center gap-2">
-          <Link href="/subscriptions">
+          <Link href="/site/subscriptions">
             <Button variant="ghost" size="icon">
               <User className="h-5 w-5" />
               <span className="sr-only">Account</span>
             </Button>
           </Link>
-          <Link href="/thank-you">
+          <Link href="/site/thank-you">
             <Button variant="ghost" size="icon">
               <ShoppingCart className="h-5 w-5" />
               <span className="sr-only">Cart</span>

@@ -25,7 +25,7 @@ import type {
 
 import { SovendusThankyouPageReact } from "../../../../scripts/react";
 import { loggerInfo } from "../../../../scripts/vanilla";
-import AdminBar from "../components/admin-bar";
+import { AdminBar } from "../components/admin-bar";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import { SovendusThankyouPageDemoForm } from "./demo-form";

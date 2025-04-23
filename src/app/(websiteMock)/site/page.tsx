@@ -9,7 +9,7 @@ import type { SovendusAppSettings } from "sovendus-integration-types";
 
 import { SovendusLandingPageReact } from "../../../scripts/react";
 import { loggerInfo } from "../../../scripts/vanilla";
-import AdminBar from "./components/admin-bar";
+import { AdminBar } from "./components/admin-bar";
 import Footer from "./components/footer";
 import Header from "./components/header";
 import ProductCard from "./components/product-card";
@@ -63,7 +63,7 @@ export default function SovendusLandingPageDemo(): JSX.Element {
                   shipping on orders over $50.
                 </p>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Link href="/thank-you">
+                  <Link href="/site/thank-you">
                     <Button
                       size="lg"
                       className="inline-flex items-center justify-center"
