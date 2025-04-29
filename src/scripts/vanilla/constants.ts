@@ -1,1 +1,1 @@
-export const integrationScriptVersion = "3.11.12";
+export const integrationScriptVersion = "3.11.13";
