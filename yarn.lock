@@ -627,10 +627,10 @@
     "@inquirer/type" "^3.0.6"
     ansi-escapes "^4.3.2"
 
-"@inquirer/prompts@^7.4.1":
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/@inquirer/prompts/-/prompts-7.4.1.tgz#b9bfbba7384305f1d632aca1b800b2b3c22fbcbf"
-  integrity sha512-UlmM5FVOZF0gpoe1PT/jN4vk8JmpIWBlMvTL8M+hlvPmzN89K6z03+IFmyeu/oFCenwdwHDr2gky7nIGSEVvlA==
+"@inquirer/prompts@^7.5.0":
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/@inquirer/prompts/-/prompts-7.5.0.tgz#e4cdfd1ce0cb63592968b5de92d3a35f9b7c1b6e"
+  integrity sha512-tk8Bx7l5AX/CR0sVfGj3Xg6v7cYlFBkEahH+EgBB+cZib6Fc83dwerTbzj7f2+qKckjIUGsviWRI1d7lx6nqQA==
   dependencies:
     "@inquirer/checkbox" "^4.1.5"
     "@inquirer/confirm" "^5.1.9"
@@ -639,14 +639,14 @@
     "@inquirer/input" "^4.1.9"
     "@inquirer/number" "^3.0.12"
     "@inquirer/password" "^4.0.12"
-    "@inquirer/rawlist" "^4.0.12"
+    "@inquirer/rawlist" "^4.1.0"
     "@inquirer/search" "^3.0.12"
-    "@inquirer/select" "^4.1.1"
+    "@inquirer/select" "^4.2.0"
 
-"@inquirer/rawlist@^4.0.12":
-  version "4.0.12"
-  resolved "https://registry.yarnpkg.com/@inquirer/rawlist/-/rawlist-4.0.12.tgz#97b9540199590d2b197836ba3a5658addd406479"
-  integrity sha512-wNPJZy8Oc7RyGISPxp9/MpTOqX8lr0r+lCCWm7hQra+MDtYRgINv1hxw7R+vKP71Bu/3LszabxOodfV/uTfsaA==
+"@inquirer/rawlist@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@inquirer/rawlist/-/rawlist-4.1.0.tgz#bb08a0a50663fda7359777e042e8821b0ac5b18f"
+  integrity sha512-6ob45Oh9pXmfprKqUiEeMz/tjtVTFQTgDDz1xAMKMrIvyrYjAmRbQZjMJfsictlL4phgjLhdLu27IkHNnNjB7g==
   dependencies:
     "@inquirer/core" "^10.1.10"
     "@inquirer/type" "^3.0.6"
@@ -662,10 +662,10 @@
     "@inquirer/type" "^3.0.6"
     yoctocolors-cjs "^2.1.2"
 
-"@inquirer/select@^4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@inquirer/select/-/select-4.1.1.tgz#0496b913514149171cf6351f0acb6d4243a39fdf"
-  integrity sha512-IUXzzTKVdiVNMA+2yUvPxWsSgOG4kfX93jOM4Zb5FgujeInotv5SPIJVeXQ+fO4xu7tW8VowFhdG5JRmmCyQ1Q==
+"@inquirer/select@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@inquirer/select/-/select-4.2.0.tgz#42c66977c8992bd025f5d2f4124bee390cb16a98"
+  integrity sha512-KkXQ4aSySWimpV4V/TUJWdB3tdfENZUU765GjOIZ0uPwdbGIG6jrxD4dDf1w68uP+DVtfNhr1A92B+0mbTZ8FA==
   dependencies:
     "@inquirer/core" "^10.1.10"
     "@inquirer/figures" "^1.0.11"
@@ -3156,13 +3156,13 @@ inherits@~2.0.3:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
-inquirer@^12.5.2:
-  version "12.5.2"
-  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-12.5.2.tgz#8ef07eb4a9fee6c9f4ac701275308d3d30ae599c"
-  integrity sha512-qoDk/vdSTIaXNXAoNnlg7ubexpJfUo7t8GT2vylxvE49BrLhToFuPPdMViidG2boHV7+AcP1TCkJs/+PPoF2QQ==
+inquirer@^12.6.0:
+  version "12.6.0"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-12.6.0.tgz#523bd0043aed5a0494edd95ef2cd8f213a11a7c5"
+  integrity sha512-3zmmccQd/8o65nPOZJZ+2wqt76Ghw3+LaMrmc6JE/IzcvQhJ1st+QLCOo/iLS85/tILU0myG31a2TAZX0ysAvg==
   dependencies:
     "@inquirer/core" "^10.1.10"
-    "@inquirer/prompts" "^7.4.1"
+    "@inquirer/prompts" "^7.5.0"
     "@inquirer/type" "^3.0.6"
     ansi-escapes "^4.3.2"
     mute-stream "^2.0.0"
@@ -3762,10 +3762,10 @@ normalize-range@^0.1.2:
   resolved "https://registry.yarnpkg.com/normalize-range/-/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
   integrity sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==
 
-npm-check-updates@17.1.18:
-  version "17.1.18"
-  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-17.1.18.tgz#b26e5a6bb5f2b32af5950cda7ea40aafaf92e2cc"
-  integrity sha512-bkUy2g4v1i+3FeUf5fXMLbxmV95eG4/sS7lYE32GrUeVgQRfQEk39gpskksFunyaxQgTIdrvYbnuNbO/pSUSqw==
+npm-check-updates@18.0.1:
+  version "18.0.1"
+  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-18.0.1.tgz#72b4dd6bf12749e3634ba96855bc1ed3d153fe98"
+  integrity sha512-MO7mLp/8nm6kZNLLyPgz4gHmr9tLoU+pWPLdXuGAx+oZydBHkHWN0ibTonsrfwC2WEQNIQxuZagYwB67JQpAuw==
 
 object-inspect@^1.13.3:
   version "1.13.4"
@@ -4428,10 +4428,10 @@ sovendus-builder@1.4.6:
     tailwindcss "4.1.4"
     vite-plugin-css-injected-by-js "3.5.2"
 
-sovendus-integration-settings-ui@4.3.19:
-  version "4.3.19"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.3.19.tgz#7913a1cab3c7b2d13e440b4aea498fc55dd867fa"
-  integrity sha512-2x42OF4zujdX51tz3JZLdpZQf3+JO0TrB/Mf/aD5oIlFc2xfOuD+J3MFmYB5XjCkwCiHqKZn4td1E4cvVATaGA==
+sovendus-integration-settings-ui@4.3.20:
+  version "4.3.20"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.3.20.tgz#ea7fa5b31a53f4b45b5126ff5d7a63f5b5a2318b"
+  integrity sha512-6Ee/Zc33owKvxZYjLxyVxW1OeGFz5Su77Nm0CIk+LNgx69ZKkGzFa9CIqZKjfKhhdBqLUZ6XqFcSLg4jAw58BA==
   dependencies:
     sovendus-integration-types "3.8.14"
   optionalDependencies:
@@ -4444,15 +4444,15 @@ sovendus-integration-types@3.8.14:
   optionalDependencies:
     zod "^3.24.2"
 
-sovendus-release-tool@1.4.6:
-  version "1.4.6"
-  resolved "https://registry.yarnpkg.com/sovendus-release-tool/-/sovendus-release-tool-1.4.6.tgz#c09ec9f023e49dc308ef994a45d9da8459770f33"
-  integrity sha512-Mi2eAni1CsZvj8wxlg4ZO/EqpH//oAHD/DJXMvF7doFcEUKufrxQtFMumglFOMWst8J39Gr2HQmS2C1Qqs6UwA==
+sovendus-release-tool@1.4.7:
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/sovendus-release-tool/-/sovendus-release-tool-1.4.7.tgz#1f6060cb36b6755c8e5a3c0b13ada45a3d470957"
+  integrity sha512-Ta/tF/opgH5a9ZsNtXlfPVM66v/RizTYeUShHWHgQMUz2sDVjHSMbwkfkpxSHjHqPo0UKjNznRuZSza/wufVrA==
   dependencies:
     commander "13.1.0"
-    inquirer "^12.5.2"
-    npm-check-updates "17.1.18"
-    vite "^6.3.0"
+    inquirer "^12.6.0"
+    npm-check-updates "18.0.1"
+    vite "^6.3.3"
 
 sprintf-js@~1.0.2:
   version "1.0.3"
@@ -4925,7 +4925,7 @@ vite-plugin-dts@4.5.3:
     local-pkg "^1.0.0"
     magic-string "^0.30.17"
 
-vite@6.3.0, vite@^6.3.0:
+vite@6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/vite/-/vite-6.3.0.tgz#17c86b3a0f4d20b210fe89f22f7b27d5926fcce5"
   integrity sha512-9aC0n4pr6hIbvi1YOpFjwQ+QOTGssvbJKoeYkuHHGWwlXfdxQlI8L2qNMo9awEEcCPSiS+5mJZk5jH1PAqoDeQ==
@@ -4939,7 +4939,7 @@ vite@6.3.0, vite@^6.3.0:
   optionalDependencies:
     fsevents "~2.3.3"
 
-vite@6.3.3:
+vite@6.3.3, vite@^6.3.3:
   version "6.3.3"
   resolved "https://registry.yarnpkg.com/vite/-/vite-6.3.3.tgz#497392c3f2243194e4dbf09ea83e9a3dddf49b88"
   integrity sha512-5nXH+QsELbFKhsEfWLkHrvgRpTdGJzqOZ+utSdmPTvwHmvU6ITTm3xx+mRusihkcI8GeC7lCDyn3kDtiki9scw==
