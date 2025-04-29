@@ -89,7 +89,7 @@ export default function Footer(): JSX.Element {
               </li>
               <li>
                 <Link
-                  href="/subscriptions"
+                  href="/site/subscriptions"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   Subscriptions

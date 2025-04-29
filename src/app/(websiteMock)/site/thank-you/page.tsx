@@ -263,7 +263,7 @@ export default function SovendusThankYouPageDemo(): JSX.Element {
               <Link href="/">Continue Shopping</Link>
             </Button>
             <Button variant="outline" size="lg">
-              <Link href="/subscriptions">View My Subscriptions</Link>
+              <Link href="/site/subscriptions">View My Subscriptions</Link>
             </Button>
           </div>
         </div>
