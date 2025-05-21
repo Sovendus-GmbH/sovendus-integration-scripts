@@ -1,0 +1,122 @@
+{
+  "name": "sovendus-integration-scripts",
+  "version": "3.11.15",
+  "license": "GPL-3.0-only",
+  "private": false,
+  "description": "Sovendus Integration Scripts - checkout the docs at developer-hub.sovendus.com",
+  "types": "./dist/scripts/vanilla/index.d.ts",
+  "main": "./dist/scripts/vanilla/index.mjs",
+  "module": "./dist/scripts/vanilla/index.mjs",
+  "react": "./dist/scripts/react/index.cjs",
+  "files": [
+    "dist/**/*",
+    "src/**/*"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/scripts/vanilla/index.d.ts",
+      "import": "./dist/scripts/vanilla/index.mjs",
+      "require": "./dist/scripts/vanilla/index.cjs"
+    },
+    "./minified": {
+      "types": "./dist/minified/index.d.ts",
+      "import": "./dist/minified/index.mjs",
+      "require": "./dist/minified/index.cjs"
+    },
+    "./react": {
+      "types": "./dist/scripts/react/index.d.ts",
+      "import": "./dist/scripts/react/index.mjs",
+      "require": "./dist/scripts/react/index.cjs"
+    },
+    "./demo": {
+      "types": "./dist/demo/index.d.ts",
+      "import": "./dist/demo/index.mjs",
+      "require": "./dist/demo/index.cjs"
+    },
+    "./src/*": "./src/*"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "preview": "next start",
+    "build": "next build && sovendus-builder build",
+    "lint": "eslint --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "pub": "sovendus-release-tool"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sovendus-GmbH/sovendus-integration-scripts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sovendus-GmbH/sovendus-integration-scripts/issues"
+  },
+  "homepage": "https://github.com/Sovendus-GmbH/sovendus-integration-scripts#readme",
+  "keywords": [
+    "sovendus",
+    "integration",
+    "types",
+    "typescript"
+  ],
+  "author": "Marcus Brandstaetter <techsupport@sovendus.com>",
+  "contributors": [
+    {
+      "name": "Marcus Brandstaetter - Sovendus GmbH",
+      "email": "techsupport@sovendus.com"
+    }
+  ],
+  "dependencies": {
+    "sovendus-integration-types": "3.8.14"
+  },
+  "optionalDependencies": {
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.1.7",
+    "@types/eslint": "9.6.1",
+    "@types/node": "22.15.21",
+    "@types/react": ">=16.8",
+    "@types/react-dom": ">=16.8",
+    "@typescript-eslint/eslint-plugin": "8.32.1",
+    "@typescript-eslint/parser": "8.32.1",
+    "autoprefixer": "10.4.21",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "cmdk": "^1.1.1",
+    "eslint": "9.27.0",
+    "eslint-config-prettier": "10.1.5",
+    "eslint-import-resolver-typescript": "^4.3.5",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "5.4.0",
+    "eslint-plugin-react-compiler": "19.1.0-rc.2",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-plugin-simple-import-sort": "12.1.1",
+    "eslint-plugin-unused-imports": "4.1.4",
+    "lucide-react": "^0.511.0",
+    "next": "^14",
+    "postcss": "8.5.3",
+    "prettier": "3.5.3",
+    "prettier-plugin-sort-json": "4.1.1",
+    "react": ">=16.8",
+    "react-dom": ">=16.8",
+    "sovendus-builder": "1.5.0",
+    "sovendus-integration-settings-ui": "4.3.21",
+    "sovendus-release-tool": "1.5.2",
+    "tailwind-merge": "3.3.0",
+    "tailwindcss": "4.1.7",
+    "tailwindcss-animate": "1.0.7",
+    "typescript": "5.8.3",
+    "vite": "6.3.5",
+    "vite-plugin-dts": "4.5.4",
+    "vitest": "^3.1.4"
+  },
+  "updateIgnoreDependencies": [
+    "@types/react",
+    "@types/react-dom",
+    "react",
+    "react-dom",
+    "next"
+  ]
+}
