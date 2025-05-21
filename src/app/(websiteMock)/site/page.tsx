@@ -12,10 +12,13 @@ import { loggerInfo } from "../../../scripts/vanilla";
 import { AdminBar } from "./components/admin-bar";
 import Footer from "./components/footer";
 import Header from "./components/header";
+import HomeTour from "./components/home-tour";
 import ProductCard from "./components/product-card";
+import { useTour } from "./components/tour-context";
 import SovendusLandingPageDemoForm from "./landing-page/demo-form";
 
 export default function SovendusLandingPageDemo(): JSX.Element {
+  const { runTour, isStepCompleted } = useTour();
   const [settings, setSettings] = useState<SovendusAppSettings>();
 
   useEffect(() => {
@@ -25,8 +28,16 @@ export default function SovendusLandingPageDemo(): JSX.Element {
     setSettings(getSettings());
   }, []);
 
+  // Start the home tour automatically if not completed
+  useEffect(() => {
+    if (!isStepCompleted("home")) {
+      runTour("home");
+    }
+  }, [isStepCompleted, runTour]);
+
   return settings ? (
     <div className="flex flex-col min-h-screen">
+      <HomeTour />
       <AdminBar
         pageName="Landing Page"
         configContent={(setConfigOpen) => (
@@ -66,7 +77,7 @@ export default function SovendusLandingPageDemo(): JSX.Element {
                   <Link href="/site/thank-you">
                     <Button
                       size="lg"
-                      className="inline-flex items-center justify-center"
+                      className="inline-flex items-center justify-center shop-now-button"
                     >
                       Shop Now
                     </Button>

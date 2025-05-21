@@ -35,7 +35,7 @@ export function AdminBar({
           <div className="flex items-center space-x-4">
             <Link
               href="/admin"
-              className="flex items-center text-sm font-medium hover:text-gray-300"
+              className="admin-bar-button flex items-center text-sm font-medium hover:text-gray-300"
             >
               <ChevronLeft className="h-4 w-4 mr-1" />
               Back to Admin
@@ -64,7 +64,7 @@ export function AdminBar({
             <Button
               variant="unstyled"
               size="sm"
-              className="text-orange-400 hover:text-orange-500 p-0 h-auto"
+              className="text-orange-400 hover:text-orange-500 p-0 h-auto admin-bar-button"
               onClick={() => setConfigOpen(true)}
             >
               <Settings className="h-4 w-4 mr-1" />

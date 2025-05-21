@@ -6,7 +6,7 @@ import type { JSX } from "react";
 // import { defaultStorage } from "sovendus-integration-tester/src/tester-ui/testing-storage";
 import type { SovendusPageWindow } from "sovendus-integration-types";
 
-export function IntegrationTester(): null {
+export function IntegrationTester(): JSX.Element | null {
   // if (typeof window !== "undefined") {
   //   window.transmitTestResult = true;
   //   const initializeExtension = async (): Promise<void> => {

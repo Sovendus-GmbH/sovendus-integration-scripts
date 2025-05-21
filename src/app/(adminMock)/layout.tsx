@@ -1,5 +1,7 @@
 import type { JSX, ReactNode } from "react";
 
+import { TourProvider } from "../(websiteMock)/site/components/tour-context";
+
 export const metadata = {
   title: "Admin Mock",
   description: "Admin Mock",
@@ -12,7 +14,9 @@ export default function AdminMockLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <TourProvider>{children}</TourProvider>
+      </body>
     </html>
   );
 }

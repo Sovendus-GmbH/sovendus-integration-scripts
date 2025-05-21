@@ -48,7 +48,7 @@ export default function Header(): JSX.Element {
                 <SheetClose asChild>
                   <Link
                     href="/site/subscriptions"
-                    className="text-lg font-medium"
+                    className="text-lg font-medium subscriptions-link"
                   >
                     My Subscriptions
                   </Link>
@@ -61,7 +61,7 @@ export default function Header(): JSX.Element {
             <span className="text-xl font-bold">Test Shop</span>
           </Link>
         </div>
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-6 header-navigation">
           <Link href="/site/" className="text-sm font-medium">
             Home
           </Link>
@@ -73,6 +73,12 @@ export default function Header(): JSX.Element {
           </Link>
           <Link href="/site/" className="text-sm font-medium">
             New Arrivals
+          </Link>
+          <Link
+            href="/site/subscriptions"
+            className="text-sm font-medium subscriptions-link"
+          >
+            My Subscriptions
           </Link>
         </nav>
         <div className="flex items-center gap-2">

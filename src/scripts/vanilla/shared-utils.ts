@@ -85,7 +85,7 @@ export function loggerError(
 
 export function loggerInfo(
   message: string,
-  pageType: "LandingPage" | "ThankyouPage",
+  pageType: "LandingPage" | "ThankyouPage" | "RewardsPage",
   ...other: unknown[]
 ): void {
   // eslint-disable-next-line no-console

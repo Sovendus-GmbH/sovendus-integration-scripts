@@ -28,6 +28,8 @@ import { loggerInfo } from "../../../../scripts/vanilla";
 import { AdminBar } from "../components/admin-bar";
 import Footer from "../components/footer";
 import Header from "../components/header";
+import ThankYouTour from "../components/thankyou-tour";
+import { useTour } from "../components/tour-context";
 import { SovendusThankyouPageDemoForm } from "./demo-form";
 
 const defaultConfig: {
@@ -64,6 +66,7 @@ const defaultConfig: {
 };
 
 export default function SovendusThankYouPageDemo(): JSX.Element {
+  const { runTour, isStepCompleted } = useTour();
   const [settings] = useState<SovendusAppSettings>(() => {
     if (typeof window !== "undefined") {
       const settings = localStorage.getItem("sovendus-settings");
@@ -100,8 +103,16 @@ export default function SovendusThankYouPageDemo(): JSX.Element {
     localStorage.setItem("thankyouConfig", JSON.stringify(config));
   }, [config]);
 
+  // Start the thank you page tour automatically if not completed
+  useEffect(() => {
+    if (!isStepCompleted("thankyou")) {
+      runTour("thankyou");
+    }
+  }, [isStepCompleted, runTour]);
+
   return (
     <div className="flex flex-col min-h-screen">
+      <ThankYouTour />
       <AdminBar
         pageName="Order Success Page"
         configContent={(setConfigOpen) => (
@@ -129,23 +140,25 @@ export default function SovendusThankYouPageDemo(): JSX.Element {
               <span className="font-bold">{orderDetails.orderNumber}</span>
             </p>
           </div>
-          <SovendusThankyouPageReact
-            integrationType={"sovendus-integration-scripts-preview"}
-            sovDebugLevel={"debug"}
-            orderData={config.orderData}
-            customerData={config.customerData}
-            settings={settings}
-            onDone={(sovThankyouStatus, sovThankyouConfig) => {
-              loggerInfo(
-                "Sovendus Thankyou Page done",
-                "ThankyouPage",
-                "sovThankyouStatus",
-                sovThankyouStatus,
-                "sovThankyouConfig",
-                sovThankyouConfig,
-              );
-            }}
-          />
+          <div className="sovendus-thankyou-page">
+            <SovendusThankyouPageReact
+              integrationType={"sovendus-integration-scripts-preview"}
+              sovDebugLevel={"debug"}
+              orderData={config.orderData}
+              customerData={config.customerData}
+              settings={settings}
+              onDone={(sovThankyouStatus, sovThankyouConfig) => {
+                loggerInfo(
+                  "Sovendus Thankyou Page done",
+                  "ThankyouPage",
+                  "sovThankyouStatus",
+                  sovThankyouStatus,
+                  "sovThankyouConfig",
+                  sovThankyouConfig,
+                );
+              }}
+            />
+          </div>
           <div className="space-y-4">
             <h2 className="text-xl font-semibold">Order Summary</h2>
             <Card>
@@ -154,7 +167,7 @@ export default function SovendusThankYouPageDemo(): JSX.Element {
                 <CardDescription>Placed on {orderDetails.date}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="space-y-4">
+                <div className="space-y-4 sovendus-order-details">
                   {orderDetails.items.map((item) => (
                     <div key={item.id} className="flex items-center space-x-4">
                       <div className="h-20 w-20 rounded-md overflow-hidden bg-muted">

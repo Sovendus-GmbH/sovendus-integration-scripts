@@ -1,0 +1,46 @@
+/* Styles to ensure tour targets are properly highlighted */
+
+.admin-navigation {
+  position: relative;
+  z-index: 100;
+}
+
+.sovendus-settings-link {
+  position: relative;
+  z-index: 100;
+}
+
+.sovendus-config-section {
+  position: relative;
+  z-index: 100;
+}
+
+.preview-button {
+  position: relative;
+  z-index: 100;
+}
+
+/* Add tooltip override styles */
+:global(.react-joyride__tooltip) {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+:global(.react-joyride__beacon) {
+  animation: pulse 1.5s infinite !important;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+}

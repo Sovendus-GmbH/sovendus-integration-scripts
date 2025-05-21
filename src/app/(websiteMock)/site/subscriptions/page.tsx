@@ -1,9 +1,11 @@
 "use client";
 
-import { ExternalLink, Gift } from "lucide-react";
-import Link from "next/link";
 import type { JSX } from "react";
 import { useEffect, useState } from "react";
+import {
+  getSettings,
+  initialSettings,
+} from "sovendus-integration-settings-ui/demo-style-less";
 import {
   Badge,
   Button,
@@ -20,15 +22,20 @@ import {
   TableHeader,
   TableRow,
 } from "sovendus-integration-settings-ui/ui";
-import { CountryCodes, LanguageCodes } from "sovendus-integration-types";
+import type { SovendusAppSettings } from "sovendus-integration-types";
+import { CountryCodes } from "sovendus-integration-types";
 import type {
   SovendusConsumerData,
   SovendusConversionsData,
 } from "sovendus-integration-types/src";
 
+import { SovendusThankyouPageReact as SovendusRewardsPageReact } from "../../../../scripts/react";
+import { loggerInfo } from "../../../../scripts/vanilla";
 import { AdminBar } from "../components/admin-bar";
 import Footer from "../components/footer";
 import Header from "../components/header";
+import SubscriptionTour from "../components/subscription-tour";
+import { useTour } from "../components/tour-context";
 import { SovendusRewardsPageDemoForm } from "./demo-form";
 
 const defaultConfig: {
@@ -39,13 +46,15 @@ const defaultConfig: {
     sessionId: "asdas",
     orderId: "13245",
     orderValue: {
+      // netOrderValue: 1100,
       grossOrderValue: 1324,
       shippingValue: 12,
       taxPercent: 20,
+      // taxValue: 15,
     },
     orderCurrency: "EUR",
-    usedCouponCode: "1234",
-    usedCouponCodes: ["5678", "91011", "121314"],
+    usedCouponCode: "1324",
+    // usedCouponCodes: ["1324", "4321", "5421", "8461", "1296"],
   },
   customerData: {
     consumerSalutation: "Mr.",
@@ -59,14 +68,22 @@ const defaultConfig: {
     consumerDateOfBirth: "01.01.1991",
     consumerStreetWithNumber: "1 test street",
     consumerCity: "testCity",
-    consumerEmailHash: "",
-    consumerLanguage: LanguageCodes.DE,
-    consumerStreet: "",
-    consumerStreetNumber: "",
   },
 };
 
 export default function SovendusRewardsPageDemo(): JSX.Element {
+  const { runTour, isStepCompleted } = useTour();
+  const [settings] = useState<SovendusAppSettings>(() => {
+    if (typeof window !== "undefined") {
+      const settings = localStorage.getItem("sovendus-settings");
+      if (settings) {
+        return JSON.parse(settings) as SovendusAppSettings;
+      }
+      return getSettings();
+    }
+    return initialSettings;
+  });
+
   const [config, setConfig] = useState<{
     orderData: SovendusConversionsData;
     customerData: SovendusConsumerData;
@@ -89,11 +106,19 @@ export default function SovendusRewardsPageDemo(): JSX.Element {
   );
 
   useEffect(() => {
-    localStorage.setItem("thankyouConfig", JSON.stringify(config));
+    localStorage.setItem("rewardsConfig", JSON.stringify(config));
   }, [config]);
+
+  // Start the subscription tour automatically if not completed
+  useEffect(() => {
+    if (!isStepCompleted("subscription")) {
+      runTour("subscription");
+    }
+  }, [isStepCompleted, runTour]);
 
   return (
     <div className="flex flex-col min-h-screen">
+      <SubscriptionTour />
       <AdminBar
         pageName="Subscriptions Page"
         configContent={(setConfigOpen) => (
@@ -116,71 +141,26 @@ export default function SovendusRewardsPageDemo(): JSX.Element {
             </p>
           </div>
 
-          {/* Sovendus Rewards Banner */}
-          <Card className="overflow-hidden bg-gradient-to-r from-rose-100 to-teal-100 border-none">
-            <div>
-              <CardContent className="p-6 md:p-8">
-                <div className="flex flex-col md:flex-row items-center gap-6 pt-4">
-                  <div className="flex-shrink-0 bg-white/90 backdrop-blur-sm p-4 rounded-full">
-                    <Gift className="h-12 w-12 text-rose-500" />
-                  </div>
-                  <div className="space-y-2 text-center md:text-left">
-                    <h3 className="text-xl md:text-2xl font-bold">
-                      Exclusive Member Rewards
-                    </h3>
-                    <p className="text-sm md:text-base">
-                      Thanks for being a valued Test Shop member! Unlock special
-                      vouchers from top brands through our partnership with
-                      Sovendus.
-                    </p>
-                    <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                      <Badge variant="secondary" className="bg-white/70">
-                        Nike
-                      </Badge>
-                      <Badge variant="secondary" className="bg-white/70">
-                        Adidas
-                      </Badge>
-                      <Badge variant="secondary" className="bg-white/70">
-                        H&M
-                      </Badge>
-                      <Badge variant="secondary" className="bg-white/70">
-                        Zara
-                      </Badge>
-                      <Badge variant="secondary" className="bg-white/70">
-                        +50 more
-                      </Badge>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex-shrink-0 pt-4 md:mt-0 md:ml-auto">
-                  <Button asChild size="lg" className="group">
-                    <Link href="#">
-                      Claim Your Vouchers
-                      <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </div>
-          </Card>
-          {/* 
-          <SovendusThankyouPageReact
-            integrationType={"sovendus-integration-scripts-preview"}
-            sovDebugLevel={"debug"}
-            orderData={config.orderData}
-            customerData={config.customerData}
-            settings={settings}
-            onDone={(sovThankyouStatus, sovThankyouConfig) => {
-              loggerInfo(
-                "Sovendus Thankyou Page done",
-                "ThankyouPage",
-                "sovThankyouStatus",
-                sovThankyouStatus,
-                "sovThankyouConfig",
-                sovThankyouConfig,
-              );
-            }}
-          /> */}
+          <div className="sovendus-integration-scripts-rewards-preview">
+            <SovendusRewardsPageReact
+              integrationType={"sovendus-integration-scripts-rewards-preview"}
+              sovDebugLevel={"debug"}
+              orderData={config.orderData}
+              customerData={config.customerData}
+              settings={settings}
+              onDone={(sovRewardsStatus, sovRewardsConfig) => {
+                loggerInfo(
+                  "Sovendus Rewards Page done",
+                  "RewardsPage",
+                  "sovRewardsStatus",
+                  sovRewardsStatus,
+                  "sovRewardsConfig",
+                  sovRewardsConfig,
+                );
+              }}
+            />
+          </div>
+
           <Card>
             <CardHeader>
               <CardTitle>Active Subscriptions</CardTitle>

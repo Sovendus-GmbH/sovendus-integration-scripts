@@ -65,6 +65,7 @@
     }
   ],
   "dependencies": {
+    "react-joyride": "^2.9.3",
     "sovendus-integration-types": "3.8.14"
   },
   "optionalDependencies": {
