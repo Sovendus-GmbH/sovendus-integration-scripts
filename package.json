@@ -7,6 +7,7 @@
   "types": "./dist/scripts/vanilla/index.d.ts",
   "main": "./dist/scripts/vanilla/index.mjs",
   "module": "./dist/scripts/vanilla/index.mjs",
+  "react": "./dist/scripts/react/index.cjs",
   "files": [
     "dist/**/*",
     "src/**/*"
