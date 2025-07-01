@@ -9,6 +9,7 @@
       "node"
     ],
     "outDir": "dist",
+    "rootDir": ".",
     "noEmitOnError": true,
     "removeComments": true,
     "allowJs": false,

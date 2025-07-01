@@ -88,6 +88,12 @@ export default function Header(): JSX.Element {
               <span className="sr-only">Cart</span>
             </Button>
           </Link>
+          <Link href="/site/thank-you-api">
+            <Button variant="ghost" size="sm">
+              <ShoppingCart className="h-5 w-5" />
+              <span>API Based</span>
+            </Button>
+          </Link>
         </div>
       </div>
     </header>
