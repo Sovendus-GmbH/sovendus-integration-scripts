@@ -74,6 +74,175 @@ export function throwErrorInNonBrowserContext({
   }
 }
 
+const errorApi = "https://press-tracking-api.sovendus.com/error";
+let errorCounter = 0;
+
+export async function reportError(
+  errorMessage: string,
+  error: unknown,
+  options: {
+    onError?: (errorMessage: string, error: unknown) => void;
+    type: string;
+    trafficSourceNumber?: number;
+    trafficMediumNumber?: number;
+    additionalData?: Record<string, unknown>;
+  },
+): Promise<void> {
+  try {
+    errorCounter++;
+    if (errorCounter > 3) {
+      return;
+    }
+
+    const errorData = {
+      source: `typescript-${options.type}`,
+      type: "exception",
+      message: errorMessage,
+      counter: errorCounter,
+      trafficSource: options.trafficSourceNumber ?? "not_defined",
+      trafficMedium: options.trafficMediumNumber ?? "not_defined",
+      additionalData: JSON.stringify({
+        error: error instanceof Error ? error.toString() : String(error),
+        appName: `typescript-script-${options.type}`,
+        ...options.additionalData,
+      }),
+      implementationType: `typescript-${options.type}`,
+    };
+
+    await fetch(errorApi, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(errorData),
+    });
+  } catch (apiError) {
+    options.onError?.(`Failed to report error to API: ${apiError}`, error);
+  }
+
+  options.onError?.(errorMessage, error);
+}
+
+function extractContextData(params: unknown[]): {
+  trafficSourceNumber?: number;
+  trafficMediumNumber?: number;
+  contextData: Record<string, unknown>;
+} {
+  const contextData: Record<string, unknown> = {};
+  let trafficSourceNumber: number | undefined;
+  let trafficMediumNumber: number | undefined;
+
+  for (const param of params) {
+    if (param && typeof param === "object") {
+      try {
+        // Look for config objects that might contain traffic source/medium
+        if (
+          "settings" in param &&
+          param.settings &&
+          typeof param.settings === "object"
+        ) {
+          const settings = param.settings as Record<string, unknown>;
+          if (
+            settings["voucherNetwork"] &&
+            typeof settings["voucherNetwork"] === "object" &&
+            settings["voucherNetwork"] !== null &&
+            "countries" in settings["voucherNetwork"] &&
+            (settings["voucherNetwork"] as Record<string, unknown>)[
+              "countries"
+            ] &&
+            typeof (settings["voucherNetwork"] as Record<string, unknown>)[
+              "countries"
+            ] === "object" &&
+            (settings["voucherNetwork"] as Record<string, unknown>)[
+              "countries"
+            ] !== null &&
+            "ids" in
+              ((settings["voucherNetwork"] as Record<string, unknown>)[
+                "countries"
+              ] as Record<string, unknown>)
+          ) {
+            const countries = (
+              (settings["voucherNetwork"] as Record<string, unknown>)[
+                "countries"
+              ] as Record<string, unknown>
+            )["ids"];
+            if (
+              countries &&
+              typeof countries === "object" &&
+              countries !== null
+            ) {
+              for (const countryData of Object.values(countries)) {
+                if (
+                  countryData &&
+                  typeof countryData === "object" &&
+                  countryData !== null
+                ) {
+                  const country = countryData as Record<string, unknown>;
+                  if (typeof country["trafficSourceNumber"] === "number") {
+                    trafficSourceNumber = country["trafficSourceNumber"];
+                  }
+                  if (typeof country["trafficMediumNumber"] === "number") {
+                    trafficMediumNumber = country["trafficMediumNumber"];
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        // Look for status objects with useful debugging info
+        if ("status" in param || "data" in param || "times" in param) {
+          contextData["statusInfo"] = param;
+        }
+
+        // Look for config objects
+        if (
+          "orderData" in param ||
+          "customerData" in param ||
+          "integrationType" in param
+        ) {
+          contextData["configInfo"] = param;
+        }
+
+        // Look for URL data
+        if ("urlData" in param) {
+          contextData["urlData"] = (param as Record<string, unknown>)[
+            "urlData"
+          ];
+        }
+
+        // Add browser/environment info if available
+        if (typeof window !== "undefined") {
+          contextData["browserInfo"] = {
+            userAgent: window.navigator?.userAgent,
+            url: window.location?.href,
+            timestamp: new Date().toISOString(),
+          };
+        }
+      } catch {
+        // Ignore errors when extracting context data
+      }
+    }
+  }
+
+  const result: {
+    trafficSourceNumber?: number;
+    trafficMediumNumber?: number;
+    contextData: Record<string, unknown>;
+  } = {
+    contextData,
+  };
+
+  if (trafficSourceNumber !== undefined) {
+    result.trafficSourceNumber = trafficSourceNumber;
+  }
+  if (trafficMediumNumber !== undefined) {
+    result.trafficMediumNumber = trafficMediumNumber;
+  }
+
+  return result;
+}
+
 export function loggerError(
   message: string,
   pageType: "LandingPage" | "ThankyouPage",
@@ -81,6 +250,47 @@ export function loggerError(
 ): void {
   // eslint-disable-next-line no-console
   console.error(`Sovendus App [${pageType}] - ${message}`, ...other);
+
+  // Extract context data from the other parameters
+  const contextData = extractContextData(other);
+
+  // Report error to API with full context
+  const reportOptions: {
+    type: string;
+    trafficSourceNumber?: number;
+    trafficMediumNumber?: number;
+    additionalData?: Record<string, unknown>;
+    onError?: (errorMessage: string, error: unknown) => void;
+  } = {
+    type: pageType.toLowerCase().replace("page", ""),
+    additionalData: {
+      pageType,
+      contextData: contextData.contextData,
+      otherParams: other.map((param) => {
+        try {
+          return typeof param === "object" && param !== null
+            ? JSON.stringify(param)
+            : String(param);
+        } catch {
+          return "[Circular or non-serializable object]";
+        }
+      }),
+    },
+    onError: (errorMessage: string, error: unknown) => {
+      // Fallback console logging if API fails
+      // eslint-disable-next-line no-console
+      console.warn(`Failed to report error to API: ${errorMessage}`, error);
+    },
+  };
+
+  if (contextData.trafficSourceNumber !== undefined) {
+    reportOptions.trafficSourceNumber = contextData.trafficSourceNumber;
+  }
+  if (contextData.trafficMediumNumber !== undefined) {
+    reportOptions.trafficMediumNumber = contextData.trafficMediumNumber;
+  }
+
+  void reportError(message, new Error(message), reportOptions);
 }
 
 export function loggerInfo(
@@ -90,6 +300,63 @@ export function loggerInfo(
 ): void {
   // eslint-disable-next-line no-console
   console.log(`Sovendus App [${pageType}] - ${message}`, ...other);
+}
+
+export function loggerInfoWithReporting(
+  message: string,
+  pageType: "LandingPage" | "ThankyouPage",
+  shouldReport: boolean = false,
+  ...other: unknown[]
+): void {
+  // Always log to console
+  loggerInfo(message, pageType, ...other);
+
+  // Optionally report to API for important information
+  if (shouldReport) {
+    const contextData = extractContextData(other);
+
+    const reportOptions: {
+      type: string;
+      trafficSourceNumber?: number;
+      trafficMediumNumber?: number;
+      additionalData?: Record<string, unknown>;
+      onError?: (errorMessage: string, error: unknown) => void;
+    } = {
+      type: `${pageType.toLowerCase().replace("page", "")}-info`,
+      additionalData: {
+        pageType,
+        level: "info",
+        contextData: contextData.contextData,
+        otherParams: other.map((param) => {
+          try {
+            return typeof param === "object" && param !== null
+              ? JSON.stringify(param)
+              : String(param);
+          } catch {
+            return "[Circular or non-serializable object]";
+          }
+        }),
+      },
+      onError: (errorMessage: string, error: unknown) => {
+        // Fallback console logging if API fails
+        // eslint-disable-next-line no-console
+        console.warn(`Failed to report info to API: ${errorMessage}`, error);
+      },
+    };
+
+    if (contextData.trafficSourceNumber !== undefined) {
+      reportOptions.trafficSourceNumber = contextData.trafficSourceNumber;
+    }
+    if (contextData.trafficMediumNumber !== undefined) {
+      reportOptions.trafficMediumNumber = contextData.trafficMediumNumber;
+    }
+
+    void reportError(
+      `INFO: ${message}`,
+      new Error(`Info: ${message}`),
+      reportOptions,
+    );
+  }
 }
 
 export function getCountryCodeFromHtmlTag(): CountryCodes | undefined {
