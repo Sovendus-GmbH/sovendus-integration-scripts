@@ -393,7 +393,7 @@ async function sendCouponCode(
   redemptionData: RedemptionApiRequestData,
 ): Promise<void> {
   // TODO handle sovendus status
-  const endpoint = `https://coupon-api.sovendus.com/redeem/sovendus-integration${encodeURIComponent(
+  const endpoint = `https://coupon-api.sovendus.com/redeem/sovendus-integration/${encodeURIComponent(
     btoa(JSON.stringify(redemptionData)),
   )}`;
   await fetch(endpoint, {
