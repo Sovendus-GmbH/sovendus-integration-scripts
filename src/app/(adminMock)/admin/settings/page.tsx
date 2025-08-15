@@ -13,17 +13,17 @@ export default function SettingsUIDemo(): JSX.Element {
       urlPrefix="/admin"
       featureFlags={{
         employeeBenefits: {
-          addToSidebar: true,
-          showWidgetOnDashboard: true,
-          isEnabled: true,
+          addToSidebar: false,
+          showWidgetOnDashboard: false,
+          isEnabled: false,
         },
         rewards: {
-          rewardsEnabled: true,
+          rewardsEnabled: false,
           triggers: {
-            [TriggerPages.MY_ACCOUNT_DASHBOARD]: true,
-            [TriggerPages.MY_ORDERS]: true,
-            [TriggerPages.MY_ORDERS_DETAIL]: true,
-            [TriggerPages.CUSTOM]: true,
+            [TriggerPages.MY_ACCOUNT_DASHBOARD]: false,
+            [TriggerPages.MY_ORDERS]: false,
+            [TriggerPages.MY_ORDERS_DETAIL]: false,
+            [TriggerPages.CUSTOM]: false,
           },
         },
       }}

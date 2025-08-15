@@ -8,9 +8,9 @@ import type {
 } from "sovendus-integration-types";
 import { sovLoaderScriptId } from "sovendus-integration-types";
 
-import { flexibleIframeScriptId } from "./utils";
+import { flexibleIframeScriptId } from ".";
 
-export function cleanUp(): void {
+export function unmountThankYou(): void {
   window.sovApplication?.instances?.forEach((instance) => {
     if (instance.isCollapsableOverlay) {
       window.sovApplication?.collapsableOverlay?.closeInstance(instance, false);

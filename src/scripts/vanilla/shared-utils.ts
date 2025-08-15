@@ -5,11 +5,6 @@ import type {
 import { CountryCodes, SettingsType } from "sovendus-integration-types";
 
 export function getPerformanceTime(): number {
-  throwErrorInNonBrowserContext({
-    methodName: "getPerformanceTime",
-    pageType: "LandingPage",
-    requiresWindow: true,
-  });
   return window.performance?.now?.() || 0;
 }
 
@@ -53,27 +48,6 @@ export function getOptimizeId(
   return undefined;
 }
 
-export function throwErrorInNonBrowserContext({
-  methodName,
-  requiresWindow,
-  requiresDocument,
-  pageType,
-}: {
-  methodName: string;
-  requiresWindow?: boolean;
-  requiresDocument?: boolean;
-  pageType: "LandingPage" | "ThankyouPage";
-}): void {
-  if (
-    (requiresDocument ? typeof document === "undefined" : false) ||
-    (requiresWindow ? typeof window === "undefined" : false)
-  ) {
-    throw new Error(
-      `Sovendus App [${pageType}] - ${methodName}: ${requiresWindow ? "window" : ""} ${requiresDocument ? "document" : ""} is not available in your context, you can override this method`,
-    );
-  }
-}
-
 export function loggerError(
   message: string,
   pageType: "LandingPage" | "ThankyouPage",
@@ -93,22 +67,12 @@ export function loggerInfo(
 }
 
 export function getCountryCodeFromHtmlTag(): CountryCodes | undefined {
-  throwErrorInNonBrowserContext({
-    methodName: "getCountryCodeFromHtmlTag",
-    pageType: "LandingPage",
-    requiresDocument: true,
-  });
   const lang = document.documentElement.lang;
   const countryCode = lang.split("-")[1];
   return countryCode ? castToCountry(countryCode.toUpperCase()) : undefined;
 }
 
 export function getCountryFromDomain(): CountryCodes | undefined {
-  throwErrorInNonBrowserContext({
-    methodName: "getCountryFromDomain",
-    pageType: "LandingPage",
-    requiresWindow: true,
-  });
   const domainToCountry: {
     [key: string]: string | undefined;
   } = {
@@ -142,11 +106,6 @@ export function getCountryFromDomain(): CountryCodes | undefined {
 }
 
 export function getCountryFromPagePath(): CountryCodes | undefined {
-  throwErrorInNonBrowserContext({
-    methodName: "getCountryFromDomain",
-    pageType: "LandingPage",
-    requiresWindow: true,
-  });
   const path = window.location.pathname;
   const pathParts = path.split("/");
   const country = pathParts[1];
@@ -164,7 +123,7 @@ export function castToCountry(
 
 export function makeString(value: ExplicitAnyType): string | undefined {
   // make sure its either a valid string or undefined
-  if (value === undefined) {
+  if (!value) {
     return undefined;
   }
   if (typeof value === "string") {
@@ -175,7 +134,7 @@ export function makeString(value: ExplicitAnyType): string | undefined {
 
 export function makeNumber(value: ExplicitAnyType): number | undefined {
   // make sure its either a valid number or number string or undefined
-  if (value === undefined) {
+  if (!value && value !== 0) {
     return undefined;
   }
   if (typeof value === "number") {
