@@ -127,6 +127,7 @@ export class SovendusThankyouPage {
       window.sovIframes.push({
         trafficSourceNumber: voucherNetworkConfig.trafficSourceNumber,
         trafficMediumNumber: voucherNetworkConfig.trafficMediumNumber,
+        hasConsent: sovThankyouConfig.orderData.hasConsent,
         sessionId: sovThankyouConfig.orderData.sessionId,
         orderId: sovThankyouConfig.orderData.orderId,
         orderValue: sovThankyouConfig.orderData.orderValue?.netOrderValue,
