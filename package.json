@@ -58,15 +58,15 @@
     "types",
     "typescript"
   ],
-  "author": "Marcus Brandstaetter <techsupport@sovendus.com>",
+  "author": "Sovendus Technical Integration <techsupport@sovendus.com>",
   "contributors": [
     {
-      "name": "Marcus Brandstaetter - Sovendus GmbH",
+      "name": "Technical Integration - Sovendus GmbH",
       "email": "techsupport@sovendus.com"
     }
   ],
   "dependencies": {
-    "sovendus-integration-types": "3.8.16"
+    "sovendus-integration-types": "3.9.3"
   },
   "optionalDependencies": {
     "react": ">=16.8",
