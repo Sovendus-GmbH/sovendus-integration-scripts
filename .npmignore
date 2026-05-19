@@ -1,0 +1,12 @@
+node_modules/
+tsconfig.json
+eslint.config.mjs
+next-env.d.ts
+next.config.js
+postcss.config.mjs
+sov_release.config.ts
+sov_build.config.ts
+.gitignore
+.vscode
+.next
+.github
