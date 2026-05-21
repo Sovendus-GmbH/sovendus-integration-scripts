@@ -4896,6 +4896,13 @@ sovendus-integration-types@3.8.16:
   optionalDependencies:
     zod "^4.0.15"
 
+sovendus-integration-types@3.9.4:
+  version "3.9.4"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-types/-/sovendus-integration-types-3.9.4.tgz#68d837c5dc6add00d6ee910063a908413f79d4b4"
+  integrity sha512-pWfXZXdj2d+wFRF7t3ZXHC4WUIgRmAF28mitpZkBH5d07yMOT5ZHqquAu+WblTektAOx9N6xs8jO7+wzKCVRfg==
+  optionalDependencies:
+    zod "^4.0.15"
+
 sovendus-release-tool@1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/sovendus-release-tool/-/sovendus-release-tool-1.5.3.tgz#58eb0e88f447fb19cfe4f8446e4769d86561f385"
