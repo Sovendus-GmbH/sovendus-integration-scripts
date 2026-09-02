@@ -4896,10 +4896,10 @@ sovendus-integration-types@3.8.16:
   optionalDependencies:
     zod "^4.0.15"
 
-sovendus-integration-types@3.9.4:
-  version "3.9.4"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-types/-/sovendus-integration-types-3.9.4.tgz#68d837c5dc6add00d6ee910063a908413f79d4b4"
-  integrity sha512-pWfXZXdj2d+wFRF7t3ZXHC4WUIgRmAF28mitpZkBH5d07yMOT5ZHqquAu+WblTektAOx9N6xs8jO7+wzKCVRfg==
+sovendus-integration-types@3.9.5:
+  version "3.9.5"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-types/-/sovendus-integration-types-3.9.5.tgz#3caf66f654db3ace247ad436d503438f49ecf169"
+  integrity sha512-o2hRKNSVQPN1kZnRgm85IV9Paq654ctMSzi7hwLEW7OKz5i0IHn2MPDrj5Wpf0A1A+otr4kCRsL7BipqptZUiA==
   optionalDependencies:
     zod "^4.0.15"
 
